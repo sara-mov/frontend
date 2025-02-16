@@ -9,12 +9,12 @@ const Footer = () => {
   const { theme } = useTheme();
 
   return (
-    <footer className="flex items-center justify-between pt-8">
+    <footer className="flex items-center justify-between py-4 pt-10">
       <div className="flex items-center gap-2">
         <Image
           src={theme === "light" ? saraMov : saraMovDark}
           alt="sara-mov-logo"
-          height={96}
+          height={28}
         />
       </div>
       <div className=" font-semibold text-sm">2025 | All rights reserved.</div>

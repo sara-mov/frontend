@@ -14,7 +14,7 @@ const Navbar = () => {
         <Image
           src={theme === "light" ? sara : saraDark}
           alt="sara-logo"
-          height={52}
+          height={24}
         />
       </div>
       <div className="flex gap-7">
