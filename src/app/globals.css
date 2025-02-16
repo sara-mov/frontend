@@ -267,6 +267,49 @@
     box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.2);
 }
 
+.tailored-container {
+  display: flex;
+  flex-direction: row;
+  padding-top: 80px;
+  padding-bottom: 80px;
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+.tailored-container-element {
+  display: flex;
+  flex-direction: row;
+  border-radius: 4px 4px 4px 4px;
+  box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.2);
+  padding: 48px;
+}
+
+.tailored-element-1 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px 20px;
+  padding: 0px;
+}
+
+.attachment-full {
+  max-width: 100%;
+  width: 100%;
+    height: calc(100% + 96px);
+    object-fit: cover;
+    object-position: center center;
+}
+
+.size-full {
+  vertical-align: middle;
+    display: inline-block;
+}
+
+.wp-image-25856 {
+  border-radius: 0px 4px 4px 0px;
+    box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.5);
+}
+
 @layer utilities {
   .animate-moveGradient {
     background: linear-gradient(90deg, #8b5cf6, #ec4899, #ef4444);
