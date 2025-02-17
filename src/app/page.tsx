@@ -15,7 +15,16 @@ import blockbuster from "../../public/blockbuster.png";
 import indieFilms from "../../public/indie-films.png";
 import hiddenGems from "../../public/hidden-gem.png";
 import discover from "../../public/discover.png";
+import action from "../../public/action.png";
+import romantic from "../../public/romantic.png";
+import sciFi from "../../public/sci-fi.png";
+import animated from "../../public/animated.png";
+import secretLife from "../../public/the-secret-life-of-walter-mitty.png";
+import pansLabyrinth from "../../public/pans-labyrinth.png";
+import lunchbox from "../../public/lunchbox.png";
+import goodNightGoodLuck from "../../public/good-night-and-good-luck.png";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Home() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -36,9 +45,9 @@ export default function Home() {
   return (
     <div>
       <div className="bg-gradient-to-br text-black dark:text-white from-neutral-100 dark:from-neutral-800 dark:to-neutral-900 to-neutral-200">
-        <div className="mx-20">
+        <div className="mx-16">
           {/* Header */}
-          <div className="fixed top-0 left-0 w-full pt-5 px-20 py-4 z-20">
+          <div className="fixed top-0 left-0 w-full pt-5 px-16 mr-0 py-4 z-20">
             {/* Default Background */}
 
             <div
@@ -50,6 +59,8 @@ export default function Home() {
                   ? theme === "light"
                     ? "linear-gradient(to bottom, #e5e5e5, rgba(229,229,229,0.8), transparent)"
                     : "linear-gradient(to bottom, #262626, rgba(38,38,38,0.8), transparent)"
+                  : theme === "light"
+                  ? "linear-gradient(to bottom, #e5e5e5,  transparent)"
                   : "linear-gradient(to bottom, #262626, transparent)",
               }}
             ></div>
@@ -119,7 +130,7 @@ export default function Home() {
             <div className="cinema-element-container">
               <div className="cinema-element"></div>
             </div>
-            <div className=" max-w-full w-[40%] ">
+            <div className=" max-w-full w-[50%] ">
               <div className=" h-full">
                 <h1 className="twbb-headline">
                   <span className="twbb-headline-plain-text twbb-headline-text-wrapper">
@@ -149,7 +160,7 @@ export default function Home() {
                 </h1>
               </div>
             </div>
-            <div className="max-w-full w-[50%] text-center text-xl z-10">
+            <div className="max-w-full w-[62%] text-center text-xl z-10">
               <div className="elementor-widget-container">
                 Welcome to sara, your gateway to a world of cinema. Explore
                 personalized movie recommendations, engage with a community of
@@ -157,16 +168,16 @@ export default function Home() {
                 hidden gems.{" "}
               </div>
             </div>
-            <div className="buttton-container z-10 max-w-full w-[50%]">
+            <div className="buttton-container z-10 max-w-full w-[58%]">
               <button
-                className="px-6 py-2 bg-white text-black border rounded-lg shadow-md hover:bg-gray-200 transition"
+                className="px-6 py-2 bg-white text-black border rounded-lg shadow-md hover:bg-gray-200 transition duration-300"
                 style={{ borderRadius: "4px" }}
               >
                 Learn More
               </button>
 
               <button
-                className="px-6 py-2 border border-white text-white rounded-md shadow-md hover:bg-white hover:text-black transition"
+                className="px-6 py-2 border border-white text-white rounded-md shadow-md  hover:bg-white hover:text-black transition duration-300"
                 style={{ borderRadius: "4px" }}
               >
                 Get Started
@@ -177,17 +188,17 @@ export default function Home() {
           {/* Section 2 */}
           <div className="discover-container">
             <div className="discover-container-inner">
-              <div className=" relative max-w-full w-[50%]">
+              <div className=" relative max-w-full w-[60%]">
                 <div className="elementor-widget-container h-full">
                   <h2 className="discover-heading-title ">Discover sara.</h2>
                 </div>
               </div>
-              <div className=" relative max-w-full w-[50%]">
+              <div className=" relative max-w-full w-[60%]">
                 <div className="discover-heading-paragraph h-full">
                   At sara, our mission is to revolutionize how movie lovers
-                  discover films. We provide personalized recommendations and
-                  foster a vibrant community of cinema enthusiasts, ensuring a
-                  unique viewing experience.
+                  discover films. <br /> We provide personalized recommendations
+                  and foster a vibrant community of cinema enthusiasts, ensuring
+                  a unique viewing experience.
                 </div>
               </div>
               <div className="discover-points-element">
@@ -284,8 +295,7 @@ export default function Home() {
                     recommendations. Whether you&apos;re in the mood for a
                     blockbuster, an indie film, or a hidden gem, our selection
                     is tailored to suit your unique tastes. Discover new
-                    favorites and enjoy a seamless viewing experience with
-                    CineSuggest.{" "}
+                    favorites and enjoy a seamless viewing experience with sara.{" "}
                   </div>
                 </div>
               </div>
@@ -308,7 +318,7 @@ export default function Home() {
                       </div>
                       <div className=" flex flex-col relative w-full text-left min-h-[100px] p-[26px]">
                         <div className="w-full">
-                          <h5 className=" mb-4 text-2xl font-bold">
+                          <h5 className=" mb-4 text-[22px] font-bold">
                             Blockbusters You Can&apos;t Miss
                           </h5>
                           <div className="text-sm mb-5">
@@ -323,7 +333,7 @@ export default function Home() {
                           <div className=" flex items-center">
                             <div className=" flex mt-5">
                               <button
-                                className="px-6 py-3 border-2 border-[#008080]  text-[#008080] rounded-lg shadow-lg hover:bg-teal-700 hover:text-white transition-colors"
+                                className="px-[20px] py-[10px] border-2 border-[#008080]  text-[#008080] rounded-lg shadow-lg hover:bg-teal-700 hover:text-white transition duration-300"
                                 style={{ borderRadius: "4px" }}
                               >
                                 Learn More
@@ -353,7 +363,7 @@ export default function Home() {
                       </div>
                       <div className=" flex flex-col relative w-full text-left min-h-[100px] p-[26px]">
                         <div className="w-full">
-                          <h5 className=" mb-4 text-2xl font-bold">
+                          <h5 className=" mb-4 text-[22px] font-bold">
                             Indie Films to Inspire{" "}
                           </h5>
                           <div className="text-sm mb-5">
@@ -367,7 +377,7 @@ export default function Home() {
                           <div className=" flex items-center">
                             <div className=" flex mt-5">
                               <button
-                                className="px-6 py-3 border-2 border-[#008080]  text-[#008080] rounded-lg shadow-lg hover:bg-teal-700 hover:text-white transition-colors"
+                                className="px-[20px] py-[10px] border-2 border-[#008080]  text-[#008080] rounded-lg shadow-lg hover:bg-teal-700 hover:text-white transition duration-300"
                                 style={{ borderRadius: "4px" }}
                               >
                                 Learn More
@@ -397,7 +407,7 @@ export default function Home() {
                       </div>
                       <div className=" flex flex-col relative w-full text-left min-h-[100px] p-[26px]">
                         <div className="w-full">
-                          <h5 className=" mb-4 text-2xl font-bold">
+                          <h5 className=" mb-4 text-[22px] font-bold">
                             Hidden Gems Await
                           </h5>
                           <div className="text-sm mb-5">
@@ -411,7 +421,7 @@ export default function Home() {
                           <div className=" flex items-center">
                             <div className=" flex mt-5">
                               <button
-                                className="px-6 py-3 border-2 border-[#008080]  text-[#008080] rounded-lg shadow-lg hover:bg-teal-700 hover:text-white transition-colors"
+                                className="px-[20px] py-[10px] border-2 border-[#008080]  text-[#008080] rounded-lg shadow-lg hover:bg-teal-700 hover:text-white transition duration-300"
                                 style={{ borderRadius: "4px" }}
                               >
                                 Learn More
@@ -441,8 +451,8 @@ export default function Home() {
                   </div>
                   <div className="max-w-[100%] w-[100%] discover-heading-paragraph">
                     <div className="h-full pb-[30px]">
-                      At CineSuggest, we use cutting-edge algorithms to analyze
-                      your viewing habits and provide personalized movie
+                      At sara, we use cutting-edge algorithms to analyze your
+                      viewing habits and provide personalized movie
                       recommendations. Whether you&apos;re a fan of blockbusters
                       or indie films, our platform ensures you find the perfect
                       match for your tastes.{" "}
@@ -508,8 +518,321 @@ export default function Home() {
             </div>
           </div>
 
+          {/* Section 5 */}
+          <div className="tailored-container bg-black text-white dark:bg-white dark:text-black -mx-16">
+            <div
+              className="discover-container-inner"
+              style={{ marginLeft: 80, marginRight: 80, flexDirection: "row" }}
+            >
+              <div className="relative max-w-full w-[25%]">
+                <div className="h-full">
+                  <a href="#" className="relative flex flex-wrap ">
+                    <div className="w-full relative min-h-[220px] z-10">
+                      <span className="absolute block z-20 top-0 bottom-0 left-0 right-0"></span>
+                      <div className=" justify-center">
+                        <Image alt="" src={action} className="image-movie" />
+                      </div>
+                    </div>
+                    <div className="text-center min-h-[100px] pt-4 ">
+                      <div className="w-full">
+                        <h5 className="mb-4 movie-title">
+                          Action-Packed Adventure Awaits
+                        </h5>
+                        <div className="relative movie-description mb-5">
+                          Dive into the latest action blockbuster that promises
+                          thrilling sequences and an unforgettable cinematic
+                          experience.
+                        </div>
+                      </div>
+                      <div className="flex justify-center items-center">
+                        <div className="flex items-center"></div>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+              </div>
+              <div className="relative max-w-full w-[25%]">
+                <div className="h-full">
+                  <a href="#" className="relative flex flex-wrap ">
+                    <div className="w-full relative min-h-[220px] z-10">
+                      <span className="absolute block z-20 top-0 bottom-0 left-0 right-0"></span>
+                      <div className=" justify-center">
+                        <Image alt="" src={romantic} className="image-movie" />
+                      </div>
+                    </div>
+                    <div className="text-center min-h-[100px] pt-4 ">
+                      <div className="w-full">
+                        <h5 className="mb-4 movie-title">
+                          Romantic Drama Unfolds{" "}
+                        </h5>
+                        <div className="relative movie-description mb-5">
+                          Experience the emotional journey of love and
+                          heartbreak in this beautifully crafted romantic drama.
+                        </div>
+                      </div>
+                      <div className="flex justify-center items-center">
+                        <div className="flex items-center"></div>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+              </div>
+              <div className="relative max-w-full w-[25%]">
+                <div className="h-full">
+                  <a href="#" className="relative flex flex-wrap ">
+                    <div className="w-full relative min-h-[220px] z-10">
+                      <span className="absolute block z-20 top-0 bottom-0 left-0 right-0"></span>
+                      <div className=" justify-center">
+                        <Image alt="" src={sciFi} className="image-movie" />
+                      </div>
+                    </div>
+                    <div className="text-center min-h-[100px] pt-4 ">
+                      <div className="w-full">
+                        <h5 className="mb-4 movie-title">
+                          Sci-Fi Epic of the Year{" "}
+                        </h5>
+                        <div className="relative movie-description mb-5">
+                          Embark on a journey through time and space in this
+                          groundbreaking sci-fi epic that challenges the
+                          boundaries of imagination.
+                        </div>
+                      </div>
+                      <div className="flex justify-center items-center">
+                        <div className="flex items-center"></div>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+              </div>
+              <div className="relative max-w-full w-[25%]">
+                <div className="h-full">
+                  <a href="#" className="relative flex flex-wrap ">
+                    <div className="w-full relative min-h-[220px] z-10">
+                      <span className="absolute block z-20 top-0 bottom-0 left-0 right-0"></span>
+                      <div className=" justify-center">
+                        <Image alt="" src={animated} className="image-movie" />
+                      </div>
+                    </div>
+                    <div className="text-center min-h-[100px] pt-4 ">
+                      <div className="w-full">
+                        <h5 className="mb-4 movie-title">
+                          Animated Magic for All Ages{" "}
+                        </h5>
+                        <div className="relative movie-description mb-5">
+                          Join the enchanting adventure in this animated film
+                          that delights audiences with its heartwarming story
+                          and stunning visuals.
+                        </div>
+                      </div>
+                      <div className="flex justify-center items-center">
+                        <div className="flex items-center"></div>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Section 6 */}
+          <div className="tailored-container">
+            <div
+              className="discover-container-inner"
+              style={{ flexDirection: "row" }}
+            >
+              <div className="relative max-w-full w-[25%]">
+                <div className="h-full">
+                  <a href="#" className="relative flex flex-wrap ">
+                    <div className="w-full relative min-h-[220px] z-10">
+                      <span className="absolute block z-20 top-0 bottom-0 left-0 right-0"></span>
+                      <div className=" justify-center w-full max-w-lg aspect-[2/3] overflow-hidden">
+                        <Image
+                          alt=""
+                          src={secretLife}
+                          className="image-movie"
+                          layout="fill"
+                          objectFit="cover"
+                        />
+                      </div>
+                    </div>
+                    <div className="text-center min-h-[100px] pt-4 ">
+                      <div className="w-full">
+                        <h5 className="mb-2 min-h-20 flex items-center justify-center movie-title">
+                          The Secret Life of Walter Mitty{" "}
+                        </h5>
+                        <div className="relative movie-description mb-5">
+                          An adventurous journey of self-discovery, this film
+                          blends fantasy and reality in a visually stunning
+                          narrative.
+                        </div>
+                      </div>
+                      <div className="flex justify-center items-center">
+                        <div className="flex items-center"></div>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+              </div>
+              <div className="relative max-w-full w-[25%]">
+                <div className="h-full">
+                  <a href="#" className="relative flex flex-wrap ">
+                    <div className="w-full relative min-h-[220px] z-10">
+                      <span className="absolute block z-20 top-0 bottom-0 left-0 right-0"></span>
+                      <div className=" justify-center w-full max-w-lg aspect-[2/3] overflow-hidden">
+                        <Image
+                          alt=""
+                          src={pansLabyrinth}
+                          className="image-movie"
+                          layout="fill"
+                          objectFit="cover"
+                        />
+                      </div>
+                    </div>
+                    <div className="text-center min-h-[100px] pt-4 ">
+                      <div className="w-full">
+                        <h5 className="mb-2 min-h-20 flex items-center justify-center movie-title">
+                          Pan&apos;s Labyrinth{" "}
+                        </h5>
+                        <div className="relative movie-description mb-5">
+                          A dark and enchanting tale set in post-Civil War
+                          Spain, where a young girl discovers a magical
+                          labyrinth.
+                        </div>
+                      </div>
+                      <div className="flex justify-center items-center">
+                        <div className="flex items-center"></div>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+              </div>
+              <div className="relative max-w-full w-[25%]">
+                <div className="h-full">
+                  <a href="#" className="relative flex flex-wrap ">
+                    <div className="w-full relative min-h-[220px] z-10">
+                      <span className="absolute block z-20 top-0 bottom-0 left-0 right-0"></span>
+                      <div className=" justify-center w-full max-w-lg aspect-[2/3] overflow-hidden">
+                        <Image
+                          alt=""
+                          src={lunchbox}
+                          className="image-movie"
+                          layout="fill"
+                          objectFit="fill"
+                        />
+                      </div>
+                    </div>
+                    <div className="text-center min-h-[100px] pt-4 ">
+                      <div className="w-full">
+                        <h5 className="mb-2 min-h-20 flex items-center justify-center movie-title">
+                          The Lunchbox{" "}
+                        </h5>
+                        <div className="relative movie-description mb-5">
+                          A heartwarming story of an unlikely friendship formed
+                          through a series of misdelivered lunchboxes in Mumbai.
+                        </div>
+                      </div>
+                      <div className="flex justify-center items-center">
+                        <div className="flex items-center"></div>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+              </div>
+              <div className="relative max-w-full w-[25%]">
+                <div className="h-full">
+                  <a href="#" className="relative flex flex-wrap ">
+                    <div className="w-full relative min-h-[220px] z-10">
+                      <span className="absolute block z-20 top-0 bottom-0 left-0 right-0"></span>
+                      <div className=" justify-center w-full max-w-lg aspect-[2/3] overflow-hidden">
+                        <Image
+                          alt=""
+                          src={goodNightGoodLuck}
+                          className="image-movie"
+                          layout="fill"
+                          objectFit="cover"
+                        />
+                      </div>
+                    </div>
+                    <div className="text-center min-h-[100px] pt-4 ">
+                      <div className="w-full">
+                        <h5 className="mb-2 min-h-20 flex items-center justify-center movie-title">
+                          Good Night, and Good Luck
+                        </h5>
+                        <div className="relative movie-description mb-5">
+                          A gripping historical drama about the battle between
+                          journalism and government during the McCarthy era.
+                        </div>
+                      </div>
+                      <div className="flex justify-center items-center">
+                        <div className="flex items-center"></div>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
           {/* Footer */}
-          <div className="py-5 w-full ">
+
+          <div className="flex flex-col gap-5">
+            <div
+              className="discover-points-element"
+              style={{ flexDirection: "column" }}
+            >
+              <div className="flex flex-row justify-center items-center">
+                <div className="flex flex-row"></div>
+                <div className="max-w-full ">
+                  <div className="flex flex-wrap flex-col mx-[10px] h-full">
+                    <nav className="">
+                      <ul className="flex flex-row relative z-50">
+                        <li className="block relative">
+                          <a
+                            href="#"
+                            className="px-5 transition duration-300 hover:text-[#008080]"
+                          >
+                            About Us
+                          </a>
+                        </li>
+                        <li className="block relative">
+                          <a
+                            href="#"
+                            className="px-5 transition duration-300 hover:text-[#008080]"
+                          >
+                            How It Works
+                          </a>
+                        </li>
+                        <li className="block relative">
+                          <a
+                            href="#"
+                            className="px-5 transition duration-300 hover:text-[#008080]"
+                          >
+                            Contact Us
+                          </a>
+                        </li>
+                        <li className="block relative">
+                          <Link
+                            href="/search"
+                            className="px-5 transition duration-300 hover:text-[#008080]"
+                          >
+                            Movies
+                          </Link>
+                        </li>
+                      </ul>{" "}
+                    </nav>
+                  </div>
+                </div>
+              </div>
+              <div className="max-w-full">
+                <div className="h-full">
+                  <div className="flex pt-5">
+                    <span className=" border-t border-solid border-black dark:border-white w-full flex"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="pb-5 w-full ">
             <Footer />
           </div>
         </div>

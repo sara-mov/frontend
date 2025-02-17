@@ -66,7 +66,9 @@ export default function Search() {
           </main>
 
           {/* Footer */}
-          <Footer />
+          <div className="mt-10">
+            <Footer />
+          </div>
         </div>
       </div>
     </div>
