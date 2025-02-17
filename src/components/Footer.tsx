@@ -17,7 +17,29 @@ const Footer = () => {
           height={28}
         />
       </div>
-      <div className=" font-semibold text-sm">2025 | All rights reserved.</div>
+      <nav className="max-w-full relative h-full flex flex-col text-sm">
+        <ul className="flex flex-wrap z-50">
+          <li className="block relative">
+            <a
+              href="#"
+              className="px-5 transition duration-300 hover:text-[#008080]"
+            >
+              Terms and Conditions
+            </a>
+          </li>
+          <li className="block relative">
+            <a
+              href="#"
+              className="px-5 transition duration-300 hover:text-[#008080]"
+            >
+              Privacy Policy
+            </a>
+          </li>
+        </ul>{" "}
+      </nav>
+      <div className=" font-semibold text-sm">
+        © 2025 | All rights reserved.
+      </div>
     </footer>
   );
 };
