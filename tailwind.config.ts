@@ -61,6 +61,13 @@ export default {
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
+      fontFamily: {
+        montserrat: ['Montserrat', 'sans-serif'],
+        cinzel: ['Cinzel', 'serif'],
+        barlow: ['Barlow', 'sans-serif'],
+        manrope: ['Manrope', 'sans-serif'],
+        worksans: ['Work Sans', 'sans-serif'],
+      },
     },
   },
   plugins: [],
