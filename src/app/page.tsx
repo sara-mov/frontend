@@ -66,17 +66,19 @@ export default function Home() {
             ></div>
             <header className="flex items-center justify-between py-4">
               <div className="flex items-center gap-2">
-                <Image
-                  src={
-                    theme === "light"
-                      ? isScrolled
-                        ? sara
+                <Link href="/">
+                  <Image
+                    src={
+                      theme === "light"
+                        ? isScrolled
+                          ? sara
+                          : saraDark
                         : saraDark
-                      : saraDark
-                  }
-                  alt="sara-logo"
-                  height={24}
-                />
+                    }
+                    alt="sara-logo"
+                    height={24}
+                  />
+                </Link>
               </div>
               <div className="flex gap-7">
                 <button onClick={toggleTheme} className="rounded-full">
@@ -111,7 +113,8 @@ export default function Home() {
                   )}
                 </button>
 
-                <button
+                <Link
+                  href="/sign-in"
                   className={`rounded-full px-6 py-2 font-semibold ${
                     isScrolled
                       ? "bg-black text-white dark:bg-white dark:text-black"
@@ -119,7 +122,7 @@ export default function Home() {
                   }`}
                 >
                   Sign in
-                </button>
+                </Link>
               </div>
             </header>
           </div>
@@ -649,9 +652,8 @@ export default function Home() {
                         <Image
                           alt=""
                           src={secretLife}
-                          className="image-movie"
+                          className="image-movie object-cover"
                           layout="fill"
-                          objectFit="cover"
                         />
                       </div>
                     </div>
@@ -682,9 +684,8 @@ export default function Home() {
                         <Image
                           alt=""
                           src={pansLabyrinth}
-                          className="image-movie"
+                          className="image-movie object-cover"
                           layout="fill"
-                          objectFit="cover"
                         />
                       </div>
                     </div>
@@ -716,8 +717,12 @@ export default function Home() {
                           alt=""
                           src={lunchbox}
                           className="image-movie"
-                          layout="fill"
-                          objectFit="fill"
+                          fill
+                          style={{
+                            objectFit: "contain",
+                            width: "100%",
+                            height: "100%",
+                          }}
                         />
                       </div>
                     </div>
@@ -747,9 +752,8 @@ export default function Home() {
                         <Image
                           alt=""
                           src={goodNightGoodLuck}
-                          className="image-movie"
+                          className="image-movie object-cover"
                           layout="fill"
-                          objectFit="cover"
                         />
                       </div>
                     </div>
@@ -774,67 +778,7 @@ export default function Home() {
           </div>
 
           {/* Footer */}
-
-          <div className="flex flex-col gap-5">
-            <div
-              className="discover-points-element"
-              style={{ flexDirection: "column" }}
-            >
-              <div className="flex flex-row justify-center items-center">
-                <div className="flex flex-row"></div>
-                <div className="max-w-full ">
-                  <div className="flex flex-wrap flex-col mx-[10px] h-full">
-                    <nav className="">
-                      <ul className="flex flex-row relative z-50">
-                        <li className="block relative">
-                          <a
-                            href="#"
-                            className="px-5 transition duration-300 hover:text-[#008080]"
-                          >
-                            About Us
-                          </a>
-                        </li>
-                        <li className="block relative">
-                          <a
-                            href="#"
-                            className="px-5 transition duration-300 hover:text-[#008080]"
-                          >
-                            How It Works
-                          </a>
-                        </li>
-                        <li className="block relative">
-                          <a
-                            href="#"
-                            className="px-5 transition duration-300 hover:text-[#008080]"
-                          >
-                            Contact Us
-                          </a>
-                        </li>
-                        <li className="block relative">
-                          <Link
-                            href="/search"
-                            className="px-5 transition duration-300 hover:text-[#008080]"
-                          >
-                            Movies
-                          </Link>
-                        </li>
-                      </ul>{" "}
-                    </nav>
-                  </div>
-                </div>
-              </div>
-              <div className="max-w-full">
-                <div className="h-full">
-                  <div className="flex pt-5">
-                    <span className=" border-t border-solid border-black dark:border-white w-full flex"></span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="pb-5 w-full ">
-            <Footer />
-          </div>
+          <Footer />
         </div>
       </div>
     </div>
