@@ -4,6 +4,7 @@ import React from "react";
 import sara from "../../public/sara.png";
 import saraDark from "../../public/sara-dark.png";
 import { useTheme } from "@/context/ThemeContext";
+import Link from "next/link";
 
 const Navbar = () => {
   const { theme, toggleTheme } = useTheme();
@@ -11,11 +12,13 @@ const Navbar = () => {
   return (
     <header className="flex items-center justify-between py-4">
       <div className="flex items-center gap-2">
-        <Image
-          src={theme === "light" ? sara : saraDark}
-          alt="sara-logo"
-          height={24}
-        />
+        <Link href="/">
+          <Image
+            src={theme === "light" ? sara : saraDark}
+            alt="sara-logo"
+            height={24}
+          />
+        </Link>
       </div>
       <div className="flex gap-7">
         <button onClick={toggleTheme} className="rounded-full">
@@ -46,9 +49,12 @@ const Navbar = () => {
           )}
         </button>
 
-        <button className="rounded-full bg-black dark:bg-white px-6 py-2 text-white dark:text-black font-semibold">
+        <Link
+          href="/sign-in"
+          className="rounded-full bg-black dark:bg-white px-6 py-2 text-white dark:text-black font-semibold"
+        >
           Sign in
-        </button>
+        </Link>
       </div>
     </header>
   );
