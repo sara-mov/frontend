@@ -5,9 +5,11 @@ import sara from "../../public/sara.png";
 import saraDark from "../../public/sara-dark.png";
 import { useTheme } from "@/context/ThemeContext";
 import Link from "next/link";
+import { useSession, signOut } from "next-auth/react";
 
 const Navbar = () => {
   const { theme, toggleTheme } = useTheme();
+  const { data: session } = useSession();
 
   return (
     <header className="flex items-center justify-between py-4">
@@ -49,12 +51,21 @@ const Navbar = () => {
           )}
         </button>
 
-        <Link
-          href="/sign-in"
-          className="rounded-full bg-black dark:bg-white px-6 py-2 text-white dark:text-black font-semibold"
-        >
-          Sign in
-        </Link>
+        {session ? (
+          <button
+            onClick={() => signOut()}
+            className="rounded-full px-6 py-2 font-semibold  bg-black text-white dark:bg-white dark:text-black"
+          >
+            Sign Out
+          </button>
+        ) : (
+          <Link
+            href="/sign-in"
+            className="rounded-full bg-black dark:bg-white px-6 py-2 text-white dark:text-black font-semibold"
+          >
+            Sign In
+          </Link>
+        )}
       </div>
     </header>
   );
