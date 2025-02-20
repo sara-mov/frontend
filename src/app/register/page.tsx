@@ -6,8 +6,17 @@ import sara from "../../../public/sara.png";
 import saraDark from "../../../public/sara-dark.png";
 import Link from "next/link";
 import Image from "next/image";
+import { signIn, useSession } from "next-auth/react";
+import { redirect } from "next/navigation";
+import SplashScreen from "@/components/SplashScreen";
 
 const Register = () => {
+  const { data: session } = useSession();
+
+  if (session) {
+    redirect("/");
+  }
+
   const [isScrolled, setIsScrolled] = useState(false);
   const { theme } = useTheme();
 
@@ -24,8 +33,8 @@ const Register = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const [firstName, setFirstName] = useState<string>("");
-  const [lastName, setLastName] = useState<string>("");
+  const [first_name, setFirstName] = useState<string>("");
+  const [last_name, setLastName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState<string>("");
@@ -38,8 +47,8 @@ const Register = () => {
 
   useEffect(() => {
     // Validate fields
-    const isFirstNameValid = firstName.trim().length > 0;
-    const isLastNameValid = lastName.trim().length > 0;
+    const isFirstNameValid = first_name.trim().length > 0;
+    const isLastNameValid = last_name.trim().length > 0;
     const isEmailValid = emailRegex.test(email);
     const isPasswordValid = passwordRegex.test(password);
     const isConfirmPasswordValid =
@@ -53,7 +62,7 @@ const Register = () => {
         isPasswordValid &&
         isConfirmPasswordValid
     );
-  }, [firstName, lastName, email, password, confirmPassword]);
+  }, [first_name, last_name, email, password, confirmPassword]);
 
   //   const handleSubmit = (e: React.FormEvent) => {
   //     e.preventDefault();
@@ -67,9 +76,26 @@ const Register = () => {
   //     }
   //   };
 
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    if (isValid) {
+      const res = await fetch("/api/auth/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ first_name, last_name, email, password }),
+      });
+      if (res.ok) {
+        alert("Registration Successful");
+        redirect("/sign-in");
+      } else {
+        alert("Invalid credentials");
+      }
+    }
+  }
+
   return (
-    <div>
-      <div className="bg-gradient-to-br text-black dark:text-white from-neutral-100 dark:from-neutral-800 dark:to-neutral-900 to-neutral-200">
+    <SplashScreen duration={2000}>
+      <div className="bg-gradient-to-br transition duration-200 text-black dark:text-white from-neutral-100 dark:from-neutral-800 dark:to-neutral-900 to-neutral-200">
         <div className="mx-16">
           {/* Header */}
           <div className="fixed top-0 left-0 w-full pt-5 px-16 mr-0 py-4 z-20">
@@ -111,7 +137,10 @@ const Register = () => {
                         </div>
                       </div>
                       <div className="flex h-9 w-full items-center justify-center">
-                        <button className="transition-all duration-200 ease-in-out rounded-[8px] relative overflow-hidden flex items-center justify-center w-full h-9 hover:scale-[98%] active:scale-100 bg-transparent hover:bg-[#4098ff]">
+                        <button
+                          onClick={() => signIn("google", { callbackUrl: "/" })}
+                          className="transition-all duration-200 ease-in-out rounded-[8px] relative overflow-hidden flex items-center justify-center w-full h-9 hover:scale-[98%] active:scale-100 bg-transparent hover:bg-[#4098ff]"
+                        >
                           <div className="flex w-full h-full items-center justify-center space-x-2 text-sm transition-all duration-200 ease-in-out bg-[#1f78ff] hover:bg-[#4891ff] text-white">
                             <svg
                               width="16px"
@@ -146,10 +175,7 @@ const Register = () => {
                       <div className="flex w-full items-center justify-center">
                         <hr className="my-6 w-60 border-[#181a1c] dark:border-white text-center text-white text-opacity-50" />
                       </div>
-                      <form
-                        //   onSubmit={handleSubmit}
-                        className="space-y-2"
-                      >
+                      <form onSubmit={handleSubmit} className="space-y-2">
                         <div className="flex flex-row gap-2">
                           <div className="_FormInput flex w-full items-center justify-start space-x-2 flex-col">
                             <input
@@ -157,7 +183,7 @@ const Register = () => {
                               id="first-name"
                               name="first-name"
                               placeholder="First Name"
-                              value={firstName}
+                              value={first_name}
                               onChange={(e) => setFirstName(e.target.value)}
                               autoComplete="off"
                               className="w-full rounded-[8px] text-[#333333] h-9 dark:text-[#686868] text-[12px] font-medium bg-[#e0e1e5] dark:bg-[#222327] appearance-none outline-none border-[1px] border-transparent focus:border-[#4891ff] dark:focus:text-white "
@@ -171,7 +197,7 @@ const Register = () => {
                               id="last-name"
                               name="last-name"
                               placeholder="Last Name"
-                              value={lastName}
+                              value={last_name}
                               onChange={(e) => setLastName(e.target.value)}
                               autoComplete="off"
                               className="w-full rounded-[8px] text-[#333333] h-9 dark:text-[#686868] text-[12px] font-medium bg-[#e0e1e5] dark:bg-[#222327] appearance-none outline-none border-[1px] border-transparent focus:border-[#4891ff] dark:focus:text-white "
@@ -280,7 +306,7 @@ const Register = () => {
           </div>
         </div>
       </div>
-    </div>
+    </SplashScreen>
   );
 };
 

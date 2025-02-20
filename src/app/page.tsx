@@ -25,8 +25,11 @@ import lunchbox from "../../public/lunchbox.png";
 import goodNightGoodLuck from "../../public/good-night-and-good-luck.png";
 import Image from "next/image";
 import Link from "next/link";
+import { useSession, signOut } from "next-auth/react";
+import SplashScreen from "@/components/SplashScreen";
 
 export default function Home() {
+  const { data: session } = useSession();
   const [isScrolled, setIsScrolled] = useState(false);
   const { theme, toggleTheme } = useTheme();
 
@@ -42,9 +45,10 @@ export default function Home() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
   return (
-    <div>
-      <div className="bg-gradient-to-br text-black dark:text-white from-neutral-100 dark:from-neutral-800 dark:to-neutral-900 to-neutral-200">
+    <SplashScreen duration={2000}>
+      <div className="bg-gradient-to-br transition duration-200 text-black dark:text-white from-neutral-100 dark:from-neutral-800 dark:to-neutral-900 to-neutral-200">
         <div className="mx-16">
           {/* Header */}
           <div className="fixed top-0 left-0 w-full pt-5 px-16 mr-0 py-4 z-20">
@@ -112,17 +116,29 @@ export default function Home() {
                     </div>
                   )}
                 </button>
-
-                <Link
-                  href="/sign-in"
-                  className={`rounded-full px-6 py-2 font-semibold ${
-                    isScrolled
-                      ? "bg-black text-white dark:bg-white dark:text-black"
-                      : "bg-white text-black"
-                  }`}
-                >
-                  Sign in
-                </Link>
+                {session ? (
+                  <button
+                    onClick={() => signOut()}
+                    className={`rounded-full px-6 py-2 font-semibold ${
+                      isScrolled
+                        ? "bg-black text-white dark:bg-white dark:text-black"
+                        : "bg-white text-black"
+                    }`}
+                  >
+                    Sign Out
+                  </button>
+                ) : (
+                  <Link
+                    href="/sign-in"
+                    className={`rounded-full px-6 py-2 font-semibold ${
+                      isScrolled
+                        ? "bg-black text-white dark:bg-white dark:text-black"
+                        : "bg-white text-black"
+                    }`}
+                  >
+                    Sign In
+                  </Link>
+                )}
               </div>
             </header>
           </div>
@@ -172,19 +188,31 @@ export default function Home() {
               </div>
             </div>
             <div className="buttton-container z-10 max-w-full w-[58%]">
-              <button
+              <Link
+                href="/how-it-works"
                 className="px-6 py-2 bg-white text-black border rounded-lg shadow-md hover:bg-gray-200 transition duration-300"
                 style={{ borderRadius: "4px" }}
               >
                 Learn More
-              </button>
+              </Link>
 
-              <button
-                className="px-6 py-2 border border-white text-white rounded-md shadow-md  hover:bg-white hover:text-black transition duration-300"
-                style={{ borderRadius: "4px" }}
-              >
-                Get Started
-              </button>
+              {session ? (
+                <Link
+                  href="/search"
+                  className="px-6 py-2 border border-white text-white rounded-md shadow-md  hover:bg-white hover:text-black transition duration-300"
+                  style={{ borderRadius: "4px" }}
+                >
+                  Get Started
+                </Link>
+              ) : (
+                <Link
+                  href="/sign-in"
+                  className="px-6 py-2 border border-white text-white rounded-md shadow-md  hover:bg-white hover:text-black transition duration-300"
+                  style={{ borderRadius: "4px" }}
+                >
+                  Get Started
+                </Link>
+              )}
             </div>
           </div>
 
@@ -653,7 +681,7 @@ export default function Home() {
                           alt=""
                           src={secretLife}
                           className="image-movie object-cover"
-                          layout="fill"
+                          fill
                         />
                       </div>
                     </div>
@@ -685,7 +713,7 @@ export default function Home() {
                           alt=""
                           src={pansLabyrinth}
                           className="image-movie object-cover"
-                          layout="fill"
+                          fill
                         />
                       </div>
                     </div>
@@ -753,7 +781,7 @@ export default function Home() {
                           alt=""
                           src={goodNightGoodLuck}
                           className="image-movie object-cover"
-                          layout="fill"
+                          fill
                         />
                       </div>
                     </div>
@@ -781,6 +809,6 @@ export default function Home() {
           <Footer />
         </div>
       </div>
-    </div>
+    </SplashScreen>
   );
 }

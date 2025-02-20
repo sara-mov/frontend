@@ -3,14 +3,23 @@ import ExampleQueries from "@/components/ExampleQueries";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import SearchBar from "@/components/SearchBar";
+import SplashScreen from "@/components/SplashScreen";
+import { useSession } from "next-auth/react";
+import { redirect } from "next/navigation";
 import { useState } from "react";
 
 export default function Search() {
   const [searchValue, setSearchValue] = useState("");
+  const { data: session, status } = useSession();
+
+  if (status === "loading") return <p className="text-black">Loading...</p>;
+  if (!session) {
+    redirect("/sign-in"); // Redirects unauthenticated users
+  }
 
   return (
-    <div>
-      <div className="bg-gradient-to-br text-black dark:text-white from-neutral-100 dark:from-neutral-800 dark:to-neutral-900 to-neutral-200">
+    <SplashScreen duration={2000}>
+      <div className="bg-gradient-to-br transition duration-200 text-black dark:text-white from-neutral-100 dark:from-neutral-800 dark:to-neutral-900 to-neutral-200">
         <div className="py-5 px-20">
           {/* Header */}
           <Navbar />
@@ -71,6 +80,6 @@ export default function Search() {
           </div>
         </div>
       </div>
-    </div>
+    </SplashScreen>
   );
 }

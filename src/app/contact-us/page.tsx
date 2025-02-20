@@ -9,6 +9,7 @@ import {
   faMapMarkerAlt,
   faPhoneAlt,
 } from "@fortawesome/free-solid-svg-icons";
+import SplashScreen from "@/components/SplashScreen";
 
 const ContactUs = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -27,8 +28,8 @@ const ContactUs = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
   return (
-    <div>
-      <div className="bg-gradient-to-br text-black dark:text-white from-neutral-100 dark:from-neutral-800 dark:to-neutral-900 to-neutral-200">
+    <SplashScreen duration={2000}>
+      <div className="bg-gradient-to-br transition duration-200 text-black dark:text-white from-neutral-100 dark:from-neutral-800 dark:to-neutral-900 to-neutral-200">
         <div className="mx-16">
           {/* Header */}
           <div className="fixed top-0 left-0 w-full pt-5 px-16 mr-0 py-4 z-20">
@@ -76,10 +77,10 @@ const ContactUs = () => {
                             For any inquiries or support, feel free to reach out
                             to us at{" "}
                             <a
-                              href="mailto:support@sara.com"
+                              href="mailto:contact.sara.team@gmail.com"
                               className=" text-[#008080]"
                             >
-                              support@sara.com
+                              contact.sara.team@gmail.com
                             </a>
                             . We are here to assist you with your movie
                             recommendations and any questions you may have.{" "}
@@ -150,7 +151,7 @@ const ContactUs = () => {
           <Footer />
         </div>
       </div>
-    </div>
+    </SplashScreen>
   );
 };
 

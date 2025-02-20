@@ -9,6 +9,8 @@ import streaming from "../../../public/movie-streaming-1.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFilm } from "@fortawesome/free-solid-svg-icons";
 import Footer from "@/components/Footer";
+import NumberCounter from "@/components/NumberCounter";
+import SplashScreen from "@/components/SplashScreen";
 
 const HowItWorks = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -26,9 +28,10 @@ const HowItWorks = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
   return (
-    <div>
-      <div className="bg-gradient-to-br text-black dark:text-white from-neutral-100 dark:from-neutral-800 dark:to-neutral-900 to-neutral-200">
+    <SplashScreen duration={2000}>
+      <div className="bg-gradient-to-br transition duration-200 text-black dark:text-white from-neutral-100 dark:from-neutral-800 dark:to-neutral-900 to-neutral-200">
         <div className="mx-16">
           {/* Header */}
           <div className="fixed top-0 left-0 w-full pt-5 px-16 mr-0 py-4 z-20">
@@ -132,13 +135,12 @@ const HowItWorks = () => {
                           <div className="flex justify-center items-stretch flex-col-reverse">
                             <div className=" text-3xl font-bold flex items-center">
                               <span className="  whitespace-pre-wrap flex-grow text-end"></span>
-                              <span
-                                className="flex flex-grow-0 text-center elementor-counter-number"
-                                data-duration="2000"
-                                data-to-value="95"
-                                data-from-value="0"
-                              >
-                                95
+                              <span className="flex flex-grow-0 text-center elementor-counter-number">
+                                <NumberCounter
+                                  from={0}
+                                  to={95}
+                                  duration={2000}
+                                />
                               </span>
                               <span className=" whitespace-pre-wrap text-start">
                                 {" "}
@@ -160,13 +162,12 @@ const HowItWorks = () => {
                           <div className="flex justify-center items-stretch flex-col-reverse">
                             <div className=" text-3xl font-bold flex items-center">
                               <span className="  whitespace-pre-wrap flex-grow text-end"></span>
-                              <span
-                                className="flex flex-grow-0 text-center elementor-counter-number"
-                                data-duration="2000"
-                                data-to-value="900"
-                                data-from-value="0"
-                              >
-                                900
+                              <span className="flex flex-grow-0 text-center elementor-counter-number">
+                                <NumberCounter
+                                  from={0}
+                                  to={900}
+                                  duration={2000}
+                                />
                               </span>
                               <span className=" whitespace-pre-wrap text-start">
                                 {" "}
@@ -277,7 +278,7 @@ const HowItWorks = () => {
           <Footer />
         </div>
       </div>
-    </div>
+    </SplashScreen>
   );
 };
 

@@ -6,8 +6,17 @@ import sara from "../../../public/sara.png";
 import saraDark from "../../../public/sara-dark.png";
 import Image from "next/image";
 import Link from "next/link";
+import { signIn, useSession } from "next-auth/react";
+import { redirect } from "next/navigation";
+import SplashScreen from "./../../components/SplashScreen";
 
 const SignIn = () => {
+  const { data: session } = useSession();
+
+  if (session) {
+    redirect("/");
+  }
+
   const [isScrolled, setIsScrolled] = useState(false);
   const { theme } = useTheme();
 
@@ -48,17 +57,26 @@ const SignIn = () => {
     }
   }, [email, password]);
 
-  //   const handleSubmit = (e: React.FormEvent) => {
-  //     e.preventDefault();
-  //     if (isValid) {
-  //        Handle login logic here (submit form)
-  //       console.log("Form submitted with", { email, password });
-  //     }
-  //   };
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    if (isValid) {
+      const result = await signIn("credentials", {
+        redirect: false,
+        email,
+        password,
+      });
+      if (result?.error) {
+        alert("Invalid credentials");
+      } else {
+        alert("Login Successful");
+        redirect("/");
+      }
+    }
+  }
 
   return (
-    <div>
-      <div className="bg-gradient-to-br text-black dark:text-white from-neutral-100 dark:from-neutral-800 dark:to-neutral-900 to-neutral-200">
+    <SplashScreen duration={2000}>
+      <div className="bg-gradient-to-br transition duration-200 text-black dark:text-white from-neutral-100 dark:from-neutral-800 dark:to-neutral-900 to-neutral-200">
         <div className="mx-16">
           {/* Header */}
           <div className="fixed top-0 left-0 w-full pt-5 px-16 mr-0 py-4 z-20">
@@ -100,7 +118,10 @@ const SignIn = () => {
                         </div>
                       </div>
                       <div className="flex h-9 w-full items-center justify-center">
-                        <button className="transition-all duration-200 ease-in-out rounded-[8px] relative overflow-hidden flex items-center justify-center w-full h-9 hover:scale-[98%] active:scale-100 bg-transparent hover:bg-[#4098ff]">
+                        <button
+                          onClick={() => signIn("google", { callbackUrl: "/" })}
+                          className="transition-all duration-200 ease-in-out rounded-[8px] relative overflow-hidden flex items-center justify-center w-full h-9 hover:scale-[98%] active:scale-100 bg-transparent hover:bg-[#4098ff]"
+                        >
                           <div className="flex w-full h-full items-center justify-center space-x-2 text-sm transition-all duration-200 ease-in-out bg-[#1f78ff] hover:bg-[#4891ff] text-white">
                             <svg
                               width="16px"
@@ -135,10 +156,7 @@ const SignIn = () => {
                       <div className="flex w-full items-center justify-center">
                         <hr className="my-6 w-60 border-[#181a1c] dark:border-white text-center text-white text-opacity-50" />
                       </div>
-                      <form
-                        //   onSubmit={handleSubmit}
-                        className="space-y-2"
-                      >
+                      <form onSubmit={handleSubmit} className="space-y-2">
                         <div className="_FormInput flex w-full items-center justify-start space-x-2 flex-col">
                           <input
                             type="email"
@@ -239,7 +257,7 @@ const SignIn = () => {
           </div>
         </div>
       </div>
-    </div>
+    </SplashScreen>
   );
 };
 
