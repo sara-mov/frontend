@@ -9,8 +9,11 @@ import Image from "next/image";
 import { signIn, useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
 import SplashScreen from "@/components/SplashScreen";
+import EyeIcon from "../../../public/eye.svg";
+import EyeOffIcon from "../../../public/eye-off.svg";
 
 const Register = () => {
+  // ??????????????????????????????????????????????????????????????????????
   const { data: session } = useSession();
 
   if (session) {
@@ -38,47 +41,44 @@ const Register = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState<string>("");
-  const [isValid, setIsValid] = useState<boolean>(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [showValidation, setShowValidation] = useState(false);
+  const [validations, setValidations] = useState({
+    length: false,
+    uppercase: false,
+    number: false,
+    specialChar: false,
+  });
 
   // Regular expressions for validation
   const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-  const passwordRegex =
-    /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d!@#$%^&*()_+]{8,}$/;
 
   useEffect(() => {
-    // Validate fields
-    const isFirstNameValid = first_name.trim().length > 0;
-    const isLastNameValid = last_name.trim().length > 0;
-    const isEmailValid = emailRegex.test(email);
-    const isPasswordValid = passwordRegex.test(password);
-    const isConfirmPasswordValid =
-      password === confirmPassword && password.length > 0;
+    setValidations({
+      length: password.length >= 8,
+      uppercase: /[A-Z]/.test(password),
+      number: /[0-9]/.test(password),
+      specialChar: /[^A-Za-z0-9]/.test(password),
+    });
+  }, [password]);
 
-    // Enable button only if all fields are valid
-    setIsValid(
-      isFirstNameValid &&
-        isLastNameValid &&
-        isEmailValid &&
-        isPasswordValid &&
-        isConfirmPasswordValid
-    );
-  }, [first_name, last_name, email, password, confirmPassword]);
+  const isPasswordValid =
+    validations.length &&
+    validations.uppercase &&
+    validations.number &&
+    validations.specialChar;
 
-  //   const handleSubmit = (e: React.FormEvent) => {
-  //     e.preventDefault();
-  //     if (isValid) {
-  //       console.log("Registered Successfully:", {
-  //         firstName,
-  //         lastName,
-  //         email,
-  //         password,
-  //       });
-  //     }
-  //   };
+  const isFormValid =
+    first_name.trim().length > 0 &&
+    last_name.trim().length > 0 &&
+    emailRegex.test(email) &&
+    isPasswordValid &&
+    password === confirmPassword;
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (isValid) {
+    if (isFormValid) {
       const res = await fetch("/api/auth/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -221,71 +221,156 @@ const Register = () => {
                           />
                         </div>{" "}
                         <div className="flex flex-row gap-2">
-                          <div className="_FormInput flex w-full items-center justify-start space-x-2 flex-col">
-                            <input
-                              type="password"
-                              id="password"
-                              name="password"
-                              placeholder="Password"
-                              value={password}
-                              onChange={(e) => setPassword(e.target.value)}
-                              autoComplete="off"
-                              className="w-full rounded-[8px] text-[#333333] h-9 dark:text-[#686868] text-[12px] font-medium bg-[#e0e1e5] dark:bg-[#222327] appearance-none outline-none border-[1px] border-transparent focus:border-[#4891ff] dark:focus:text-white "
-                              style={{ padding: "0px 12px" }}
-                              required
-                            />
-                          </div>{" "}
-                          <div className="_FormInput flex w-full items-center justify-start space-x-2 flex-col">
-                            <input
-                              type="password"
-                              id="confirm-password"
-                              name="confirm-password"
-                              placeholder="Confirm Password"
-                              value={confirmPassword}
-                              onChange={(e) =>
-                                setConfirmPassword(e.target.value)
-                              }
-                              autoComplete="off"
-                              className="w-full rounded-[8px] text-[#333333] h-9 dark:text-[#686868] text-[12px] font-medium bg-[#e0e1e5] dark:bg-[#222327] appearance-none outline-none border-[1px] border-transparent focus:border-[#4891ff] dark:focus:text-white "
-                              style={{ padding: "0px 12px" }}
-                              required
-                            />
+                          <div className="relative w-full">
+                            <div className="_FormInput flex w-full items-center justify-start space-x-2 flex-col">
+                              <input
+                                type={showPassword ? "text" : "password"}
+                                id="password"
+                                name="password"
+                                placeholder="Password"
+                                value={password}
+                                onChange={(e) => {
+                                  setPassword(e.target.value);
+                                  setShowValidation(true);
+                                }}
+                                onBlur={() => setShowValidation(false)}
+                                autoComplete="off"
+                                className="w-full rounded-[8px] text-[#333333] h-9 dark:text-[#686868] text-[12px] font-medium bg-[#e0e1e5] dark:bg-[#222327] appearance-none outline-none border-[1px] border-transparent focus:border-[#4891ff] dark:focus:text-white "
+                                style={{ padding: "0px 12px" }}
+                                required
+                              />
+                            </div>
+                            <button
+                              type="button"
+                              className="absolute inset-y-0 right-3"
+                              onClick={() => setShowPassword(!showPassword)}
+                            >
+                              {showPassword ? (
+                                <Image src={EyeIcon} alt="eye" width={20} />
+                              ) : (
+                                <Image
+                                  src={EyeOffIcon}
+                                  alt="eye-off"
+                                  width={20}
+                                />
+                              )}
+                            </button>
                           </div>
+                          <div className="relative w-full">
+                            <div className="_FormInput flex w-full items-center justify-start space-x-2 flex-col">
+                              <input
+                                type={showConfirmPassword ? "text" : "password"}
+                                id="confirm-password"
+                                name="confirm-password"
+                                placeholder="Confirm Password"
+                                value={confirmPassword}
+                                onChange={(e) =>
+                                  setConfirmPassword(e.target.value)
+                                }
+                                autoComplete="off"
+                                className="w-full rounded-[8px] text-[#333333] h-9 dark:text-[#686868] text-[12px] font-medium bg-[#e0e1e5] dark:bg-[#222327] appearance-none outline-none border-[1px] border-transparent focus:border-[#4891ff] dark:focus:text-white "
+                                style={{ padding: "0px 12px" }}
+                                required
+                              />
+                            </div>
+                            <button
+                              type="button"
+                              className="absolute inset-y-0 right-3"
+                              onClick={() =>
+                                setShowConfirmPassword(!showConfirmPassword)
+                              }
+                            >
+                              {showConfirmPassword ? (
+                                <Image src={EyeIcon} alt="eye" width={20} />
+                              ) : (
+                                <Image
+                                  src={EyeOffIcon}
+                                  alt="eye-off"
+                                  width={20}
+                                />
+                              )}
+                            </button>
+                          </div>
+                        </div>
+                        <div
+                          className={`mt-2 text-xs ${
+                            showValidation ? `block` : `hidden`
+                          }`}
+                        >
+                          <p
+                            className={
+                              validations.length
+                                ? "text-green-600"
+                                : "text-red-600"
+                            }
+                          >
+                            {validations.length ? "✔" : "✘"} Minimum 8
+                            characters
+                          </p>
+                          <p
+                            className={
+                              validations.uppercase
+                                ? "text-green-600"
+                                : "text-red-600"
+                            }
+                          >
+                            {validations.uppercase ? "✔" : "✘"} At least 1
+                            uppercase letter
+                          </p>
+                          <p
+                            className={
+                              validations.number
+                                ? "text-green-600"
+                                : "text-red-600"
+                            }
+                          >
+                            {validations.number ? "✔" : "✘"} At least 1 number
+                          </p>
+                          <p
+                            className={
+                              validations.specialChar
+                                ? "text-green-600"
+                                : "text-red-600"
+                            }
+                          >
+                            {validations.specialChar ? "✔" : "✘"} At least 1
+                            special character
+                          </p>
                         </div>
                         <div className="flex h-9 w-full items-center justify-center">
                           <button
-                            disabled={!isValid}
-                            className={`transition-all duration-200 ease-in-out rounded-[8px] relative overflow-hidden flex items-center justify-center w-full h-9 hover:scale-[98%] active:scale-100 
+                            disabled={!isFormValid}
+                            className={`transition-all duration-200 ease-in-out rounded-[8px] relative overflow-hidden flex items-center justify-center w-full h-9 hover:scale-[98%] active:scale-100
                                 ${
-                                  isValid
+                                  isFormValid
                                     ? "bg-blue-500 text-white cursor-pointer"
                                     : "bg-white/[9%] text-[#20202066] dark:text-[#e8e8e866] cursor-not-allowed"
                                 }
                                 `}
                           >
                             {/** Disabled Overlay */}
-                            {!isValid && (
+                            {!isFormValid && (
                               <div className="absolute z-[2] h-full w-full cursor-not-allowed bg-black/20 transition-all duration-200 ease-in-out" />
                             )}
 
                             {/** Button Content */}
                             <div
-                              className={`flex w-full h-full items-center justify-center space-x-2 text-[14px] transition-all duration-200 ease-in-out 
+                              className={`flex w-full h-full items-center justify-center space-x-2 text-[14px] transition-all duration-200 ease-in-out
                                 ${
-                                  isValid
+                                  isFormValid
                                     ? "bg-blue-500 hover:bg-blue-600 active:bg-blue-700"
                                     : "bg-transparent hover:bg-[#2c2c2c] active:bg-[#686868]"
                                 }
                                 `}
                             >
                               <span className="font-semibold">
-                                {isValid ? "Continue" : "Continue"}
+                                {isFormValid ? "Continue" : "Continue"}
                               </span>
                             </div>
                           </button>
                         </div>
                       </form>
-                      <div className="w-full pt-6 text-center text-[14px]">
+                      <div className="w-full text-center text-[14px]">
                         <div className="pt-10">
                           <span className="mr-1 text-black dark:text-[#92969a]">
                             Already have a SARA account?
