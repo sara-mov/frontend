@@ -58,7 +58,7 @@ const PrivacyPolicy = () => {
             <div className="element">
               <div className="flex flex-col items-center justify-start gap-5 w-full h-full">
                 <div className="max-w-full w-[66%] text-left text-lg">
-                  <div className="h-full">
+                  <div className="h-full text-justify">
                     <p className=" mb-5">
                       <b>SARA Privacy Policy</b>
                     </p>
@@ -72,10 +72,10 @@ const PrivacyPolicy = () => {
                     <p className=" mb-5">
                       <b>1. Information We Collect</b>
                     </p>
-                    <p className=" mb-5">
+                    <p className=" mb-5 ml-5">
                       We may collect the following information from you:
                     </p>
-                    <ul className=" block list-disc ml-14 mb-7">
+                    <ul className=" block list-disc ml-16 mb-7">
                       <li>
                         Information you provide directly, such as your name,
                         email address, and movie preferences.
@@ -88,19 +88,19 @@ const PrivacyPolicy = () => {
                     <p className=" mb-5">
                       <b>2. How We Use Your Information</b>
                     </p>
-                    <p className=" mb-5">
+                    <p className=" mb-5 ml-5">
                       We use the information we collect to:
                     </p>
-                    <ul className=" block list-disc ml-14 mb-7">
+                    <ul className=" block list-disc ml-16 mb-7">
                       <li>Provide and improve our services.</li>
                       <li>Personalize your experience.</li>
-                      <li>Communicate with you about sara.</li>
+                      <li>Communicate with you about SARA.</li>
                       <li>Comply with legal requirements.</li>
                     </ul>
                     <p className=" mb-5">
                       <b>3. Sharing Your Information</b>
                     </p>
-                    <p className=" mb-5">
+                    <p className=" mb-5 ml-5">
                       We do not sell or share your personal information with
                       third parties except as necessary for providing our
                       services or with your consent.
@@ -108,7 +108,7 @@ const PrivacyPolicy = () => {
                     <p className=" mb-5">
                       <b>4. Security</b>
                     </p>
-                    <p className=" mb-5">
+                    <p className=" mb-5 ml-5">
                       We implement reasonable security measures to protect your
                       personal information from unauthorized access, use, or
                       disclosure.
@@ -116,7 +116,7 @@ const PrivacyPolicy = () => {
                     <p className=" mb-5">
                       <b>5. Your Choices</b>
                     </p>
-                    <p className=" mb-5">
+                    <p className=" mb-5 ml-5">
                       You have the right to access, correct, or delete your
                       personal information. You can also opt out of receiving
                       certain communications from us.
@@ -124,7 +124,7 @@ const PrivacyPolicy = () => {
                     <p className=" mb-5">
                       <b>6. Contact Us</b>
                     </p>
-                    <p className=" mb-5">
+                    <p className=" mb-5 ml-5">
                       If you have any questions or concerns about this Privacy
                       Policy, please contact us at{" "}
                       <a

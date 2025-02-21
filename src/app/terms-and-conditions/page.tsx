@@ -58,7 +58,7 @@ const TermsAndConditions = () => {
             <div className="element">
               <div className="flex flex-col items-center justify-start gap-5 w-full h-full">
                 <div className="max-w-full w-[66%] text-left text-lg">
-                  <div className="h-full">
+                  <div className="h-full text-justify">
                     <p className=" mb-5">
                       <b>SARA Terms and Conditions</b>
                     </p>
@@ -71,7 +71,7 @@ const TermsAndConditions = () => {
                     <p className=" mb-5">
                       <b>1. Acceptance of Terms</b>
                     </p>
-                    <p className=" mb-5">
+                    <p className=" mb-5 ml-5">
                       By using SARA, you acknowledge that you have read,
                       understood, and agree to be bound by these Terms and
                       Conditions. If you do not agree to these terms, you are
@@ -80,7 +80,7 @@ const TermsAndConditions = () => {
                     <p className=" mb-5">
                       <b>2. User Accounts</b>
                     </p>
-                    <p className=" mb-5">
+                    <p className=" mb-5 ml-5">
                       If you create an account with SARA, you are responsible
                       for maintaining the confidentiality of your account
                       credentials. You agree to notify SARA immediately of any
@@ -89,7 +89,7 @@ const TermsAndConditions = () => {
                     <p className=" mb-5">
                       <b>3. Content</b>
                     </p>
-                    <p className=" mb-5">
+                    <p className=" mb-5 ml-5">
                       You are responsible for all content you submit or post to
                       SARA. You agree that your content will not violate any
                       applicable laws or regulations. SARA reserves the right to
@@ -98,7 +98,7 @@ const TermsAndConditions = () => {
                     <p className=" mb-5">
                       <b>4. Intellectual Property</b>
                     </p>
-                    <p className=" mb-5">
+                    <p className=" mb-5 ml-5">
                       All intellectual property rights, including copyrights and
                       trademarks, related to SARA and its content remain the
                       property of SARA or its licensors. You are granted a
@@ -109,7 +109,7 @@ const TermsAndConditions = () => {
                     <p className=" mb-5">
                       <b>5. Disclaimer of Warranties</b>
                     </p>
-                    <p className=" mb-5">
+                    <p className=" mb-5 ml-5">
                       SARA provides its services on an &apos;as is&apos; and
                       &apos;as available&apos; basis. SARA does not warrant the
                       accuracy, completeness, or reliability of any information
@@ -118,7 +118,7 @@ const TermsAndConditions = () => {
                     <p className=" mb-5">
                       <b>6. Limitation of Liability</b>
                     </p>
-                    <p className=" mb-5">
+                    <p className=" mb-5 ml-5">
                       In no event shall SARA be liable for any direct, indirect,
                       incidental, special, or consequential damages arising out
                       of or in connection with your use of SARA.
@@ -126,14 +126,14 @@ const TermsAndConditions = () => {
                     <p className=" mb-5">
                       <b>7. Governing Law These</b>
                     </p>
-                    <p className=" mb-5">
+                    <p className=" mb-5 ml-5">
                       Terms and Conditions shall be governed by and construed in
                       accordance with the laws of [State/Country].
                     </p>
                     <p className=" mb-5">
                       <b>8. Changes to Terms</b>
                     </p>
-                    <p className=" mb-5">
+                    <p className=" mb-5 ml-5">
                       SARA reserves the right to modify these Terms and
                       Conditions at any time. Any changes will be effective upon
                       posting on the website.
@@ -141,7 +141,7 @@ const TermsAndConditions = () => {
                     <p className=" mb-5">
                       <b>9. Contact Us</b>
                     </p>
-                    <p className=" mb-5">
+                    <p className=" mb-5 ml-5">
                       If you have any questions or concerns regarding these
                       Terms and Conditions, please contact us at{" "}
                       <a
