@@ -1,3 +1,4 @@
+/* eslint-disable prefer-const */
 /* eslint-disable react-hooks/rules-of-hooks */
 "use client";
 
@@ -12,7 +13,101 @@ import Link from "next/link";
 import { signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheck, faPlus } from "@fortawesome/free-solid-svg-icons";
+import {
+  faAngleLeft,
+  faAngleRight,
+  faCheck,
+  faPlus,
+} from "@fortawesome/free-solid-svg-icons";
+import ThumbnailItem from "@/components/ThumbnilItem";
+import CarouselItem from "@/components/Carousel";
+
+const movies = [
+  {
+    id: 1,
+    image: "/znmd-backdrop.png",
+    alt: "znmd-backdrop",
+    title: "Zindagi Na Milegi Dobara",
+    description: `Three friends who were inseparable in childhood decide to go on a three-week-long bachelor road trip to Spain, in order to re-establish their bond and explore thrilling adventures, before one of them gets married. What will they learn of themselves and each other during the adventure?`,
+    production_companies: "Excel Entertainment",
+    release_date: "2011",
+    adult: "U/A",
+    runtime: "2h 34m",
+    rating: "8.2",
+    language: "हिन्दी",
+    genres: ["Drama", "Comedy", "Romantic"],
+    imdb: "/imdb",
+    watch: "/watch",
+  },
+  {
+    id: 2,
+    image: "/dch-backdrop.png",
+    alt: "dch-backdrop",
+    title: "Dil Chahta Hai",
+    description:
+      "Three inseparable childhood friends Akash, Sameer and Sid navigate love, heartbreak, and personal growth as they transition into adulthood. A memorable trip to Goa becomes a turning point in their lives, testing the strength of their friendship.",
+    production_companies: "Excel Entertainment",
+    release_date: "2001",
+    adult: "U/A",
+    runtime: "3h 3m",
+    rating: "8.1",
+    language: "हिन्दी",
+    genres: ["Drama", "Comedy", "Romantic"],
+    imdb: "/imdb",
+    watch: "/watch",
+  },
+  {
+    id: 3,
+    image: "/yjhd-backdrop.png",
+    alt: "yjhd-backdrop",
+    title: "Yeh Jawaani Hai Deewani",
+    description:
+      "A free-spirited traveler, Bunny, reunites with his childhood friends on a trekking trip. As they explore the beauty of the mountains, love and ambitions intertwine, making them question their life choices.",
+    production_companies: "Dharma Productions",
+    release_date: "2013",
+    adult: "U/A",
+    runtime: "2h 40m",
+    rating: "7.2",
+    language: "हिन्दी",
+    genres: ["Drama", "Comedy", "Romantic"],
+    imdb: "/imdb",
+    watch: "/watch",
+  },
+  {
+    id: 4,
+    image: "/tamasha-backdrop.png",
+    alt: "tamasha-backdrop",
+    title: "Tamasha",
+    description:
+      "Ved and Tara meet in Corsica and decide to enjoy their vacation without revealing their real identities. Years later, their paths cross again, forcing Ved to confront his monotonous life and rediscover his passion for storytelling.",
+    production_companies: "Nadiadwala Grandson Entertainment",
+    release_date: "2015",
+    adult: "U/A",
+    runtime: "2h 19m",
+    rating: "7.3",
+    language: "हिन्दी",
+    genres: ["Drama", "Romance"],
+    imdb: "/imdb",
+    watch: "/watch",
+  },
+  {
+    id: 5,
+    image: "/queen-backdrop.png",
+    alt: "queen-backdrop",
+    title: "Queen",
+    description:
+      "After being left at the altar, a timid Delhi girl, Rani, embarks on a solo honeymoon trip across Europe. Along the way, she gains confidence, independence, and a new perspective on life.",
+    production_companies: "Viacom18 Studios",
+    release_date: "2014",
+    adult: "U/A",
+    runtime: "2h 26m",
+    rating: "8.2",
+    language: "हिन्दी",
+    genres: ["Drama", "Comedy"],
+    imdb: "/imdb",
+    watch: "/watch",
+  },
+];
 
 const RecommendPage = () => {
   const { data: session } = useSession();
@@ -40,6 +135,46 @@ const RecommendPage = () => {
   const backdrop = "/znmd-backdrop.png";
 
   const [scrollProgress, setScrollProgress] = useState(0);
+
+  // carousel handling
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > window.innerHeight * 0.01);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [progress, setProgress] = useState(0);
+
+  const nextSlide = () => {
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % movies.length);
+    setProgress(0); // Reset progress bar on manual change
+  };
+
+  const prevSlide = () => {
+    setCurrentIndex((prevIndex) =>
+      prevIndex === 0 ? movies.length - 1 : prevIndex - 1
+    );
+    setProgress(0);
+  };
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      nextSlide();
+    }, 10000); // Change to 10 seconds
+
+    const progressInterval = setInterval(() => {
+      setProgress((prev) => (prev < 100 ? prev + 0.5 : 0)); // 10s = 100%
+    }, 50); // Update every 100ms for smooth effect
+
+    return () => {
+      clearInterval(interval);
+      clearInterval(progressInterval);
+    };
+  }, [currentIndex]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -153,83 +288,76 @@ const RecommendPage = () => {
               </div>
             </header>
           </div>
-
-          {/* Hero Section */}
-          <div
-            className="element text-white"
-            style={{
-              alignItems: "flex-start",
-              justifyContent: "end",
-              minHeight: "auto",
-              paddingTop: 175,
-              paddingBottom: 50,
-            }}
-          >
-            <div className="cinema-element-container">
-              <div
-                className={`backdrop-element ${
-                  theme === "light" ? "" : "dark"
-                }`}
-                style={{
-                  backgroundImage: `url(${backdrop})`,
-                  backgroundSize: "cover",
-                  backgroundPosition: "center",
-                }}
-              ></div>
-            </div>
-            <div className=" max-w-full ">
-              <div className=" h-full">
-                <h1 className="text-left text-4xl font-bold leading-[120%] block my-4">
-                  <span className="twbb-headline-plain-text">
-                    Zindagi Na Milegi Dobara
-                  </span>
-                </h1>
-              </div>
-            </div>
-            <div className="max-w-full w-[50%] text-justify text-sm z-10">
-              <div className="elementor-widget-container">
-                Three friends who were inseparable in childhood decide to go on
-                a three-week-long bachelor road trip to Spain, in order to
-                re-establish their bond and explore thrilling adventures, before
-                one of them gets married. What will they learn of themselves and
-                each other during the adventure?
-              </div>
-              <div className="text-sm flex gap-4 font-bold mt-2">
-                <span>Excel Entertainment</span>
-                <span>2011</span>
-                <span className="bg-neutral-600 px-1 rounded-[2px]">U/A</span>
-                <span>2h 34m</span>
-                <span>
-                  <span className="bg-[#f3ce13] px-1 rounded-[2px] text-black mr-2">
-                    IMDb
-                  </span>
-                  8.2
-                </span>
-                <span>हिन्दी</span>
-              </div>
-              <div className="text-sm flex gap-3 font-bold mt-2">
-                <span className="text-green-500">
-                  Drama
-                  <span className="text-white mx-2">•</span>
-                  Comedy
-                  <span className="text-white mx-2">•</span>
-                  Romance
-                </span>
-              </div>
-            </div>
+          {/* Background Image */}
+          <div className="cinema-element-container img">
             <div
-              className="buttton-container z-10 max-w-full w-[55%]"
+              className={`backdrop-element ${theme === "light" ? "" : "dark"}`}
+            >
+              <Image
+                src={movies[currentIndex].image}
+                alt={movies[currentIndex].alt}
+                fill
+                className="object-cover object-center image-layer transition-all duration-500"
+              />
+            </div>
+          </div>
+
+          {/* Progress Bar at the Top */}
+          <div className="absolute top-0 left-0 w-full h-1 bg-transparent">
+            <div
+              className="h-1 bg-orange-500 transition-all duration-100"
+              style={{ width: `${progress}%` }}
+            />
+          </div>
+
+          {/* Content */}
+          <div className="absolute inset-0 flex flex-col justify-center px-20 text-white">
+            <h1 className="text-left text-4xl font-bold leading-[120%] block my-4">
+              {movies[currentIndex].title}
+            </h1>
+            <div className="max-w-full w-[50%] text-justify text-sm ">
+              {movies[currentIndex].description}
+            </div>
+            <div className="text-sm flex gap-4 font-bold mt-2 info">
+              <span>{movies[currentIndex].production_companies}</span>
+              <span>{movies[currentIndex].release_date}</span>
+              <span className="bg-neutral-600 px-1 rounded-[2px]">
+                {movies[currentIndex].adult}
+              </span>
+              <span>{movies[currentIndex].runtime}</span>
+              <span>
+                <span className="bg-[#f3ce13] px-1 rounded-[2px] text-black mr-2">
+                  IMDb
+                </span>
+                {movies[currentIndex].rating}
+              </span>
+              <span>{movies[currentIndex].language}</span>
+            </div>
+            <div className="text-sm flex font-bold mt-2 genres">
+              {movies[currentIndex].genres.map((g, i) => (
+                <span key={i} className="text-green-500">
+                  {g}
+                  {i !== movies[currentIndex].genres.length - 1 && (
+                    <span className="text-white mx-2">•</span>
+                  )}
+                </span>
+              ))}
+            </div>
+
+            {/* Buttons */}
+            <div
+              className="buttton-container z-10 relative max-w-full w-[55%] buttons"
               style={{ justifyContent: "flex-start", marginLeft: 0 }}
             >
               <Link
-                href="/imdb"
+                href={movies[currentIndex].imdb}
                 className="px-6 py-2 bg-[#f3ce13] text-black border border-[#f3ce13] font-semibold rounded-lg shadow-md hover:bg-[#f3ce13ab] transition duration-300 ease-in-out active:scale-95 text-center"
                 style={{ borderRadius: "4px" }}
               >
                 IMDb Page
               </Link>
               <Link
-                href="/watch"
+                href={movies[currentIndex].watch}
                 className="px-6 py-2 bg-white text-black border font-medium rounded-lg shadow-md hover:bg-gray-300 transition duration-300 ease-in-out active:scale-95 text-center w-[30%]"
                 style={{ borderRadius: "4px" }}
               >
@@ -241,8 +369,7 @@ const RecommendPage = () => {
                 </span>
                 <button
                   onClick={toggleWatchlist}
-                  className="relative flex items-center text-center min-h-full justify-center gap-2 px-4 py-2 text-white font-medium rounded-[4px] border border-blue-700 transition-all duration-300 ease-in-out shadow-md 
-        bg-blue-600 hover:bg-blue-700 active:scale-95 focus:outline-none focus:ring-2 focus:ring-blue-400 h-full"
+                  className="relative flex items-center text-center min-h-full justify-center gap-2 px-4 py-2 text-white font-medium rounded-[4px] border border-blue-700 transition-all duration-300 ease-in-out shadow-md bg-blue-600 hover:bg-blue-700 active:scale-95 focus:outline-none focus:ring-2 focus:ring-blue-400 h-full"
                 >
                   <FontAwesomeIcon
                     icon={added ? faCheck : faPlus}
@@ -252,14 +379,92 @@ const RecommendPage = () => {
               </div>
             </div>
           </div>
-          <div className="relative my-5 mb-96">
-            <span className="font-bold text-xl text-white">
-              Curated Just for You
-            </span>
+
+          {/* Next & Previous Buttons */}
+          <div className="absolute bottom-40 items-end right-[17px] w-[56.6vw] h-[100px] flex justify-between z-10">
+            {/* Left Button */}
+            <button
+              onClick={prevSlide}
+              style={{ height: currentIndex === 0 ? "89px" : "68px" }}
+              className="group relative w-10 flex items-center justify-center rounded-md bg-black/50 backdrop-blur-md transition-all duration-300 hover:bg-black/70 hover:scale-105 active:scale-95"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="white"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="w-6 h-6 group-hover:-translate-x-1 transition-transform"
+              >
+                <path d="M15 18l-6-6 6-6"></path>
+              </svg>
+            </button>
+
+            {/* Right Button */}
+            <button
+              onClick={nextSlide}
+              style={{ height: currentIndex === 4 ? "89px" : "68px" }}
+              className="group relative w-10 flex items-center justify-center rounded-md bg-black/50 backdrop-blur-md transition-all duration-300 hover:bg-black/70 hover:scale-105 active:scale-95"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="white"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="w-6 h-6 group-hover:translate-x-1 transition-transform"
+              >
+                <path d="M9 18l6-6-6-6"></path>
+              </svg>
+            </button>
           </div>
 
-          {/* Footer */}
-          <Footer />
+          {/* Thumbnails */}
+          {/* Thumbnails */}
+          <div className="absolute bottom-40 right-14 flex gap-3 items-end z-10">
+            {movies.map((movie, index) => (
+              <div
+                key={index}
+                className={`relative cursor-pointer rounded-[4px] overflow-hidden transition-all duration-300 ${
+                  currentIndex === index
+                    ? "scale-110 origin-bottom border-2 border-white z-10 mx-2"
+                    : "scale-100 opacity-80"
+                }`}
+                style={{
+                  width: currentIndex === index ? "140px" : "120px",
+                  height: currentIndex === index ? "80px" : "68px",
+                }}
+                onClick={() => {
+                  setCurrentIndex(index);
+                  setProgress(0);
+                }}
+              >
+                <Image
+                  src={movie.image}
+                  alt={movie.alt}
+                  fill
+                  className="object-cover"
+                />
+                {currentIndex !== index && (
+                  <div className="absolute inset-0 bg-[#00000068]"></div>
+                )}
+                <div className="absolute inset-0 bg-gradient-to-t from-[#000000bc] to-transparent rounded-[4px] img"></div>
+                <div className="absolute bottom-[10px] left-[10px] right-[10px] text-white">
+                  <div className="font-semibold text-[8px] truncate">
+                    {movie.title}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div className=" mt-[100vh] relative z-10">
+            <span className=" font-bold text-xl">Curated Just For You</span>
+            <Footer />
+          </div>
         </div>
       </div>
     </SplashScreen>
