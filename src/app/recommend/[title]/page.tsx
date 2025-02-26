@@ -19,93 +19,82 @@ import {
   faCheck,
   faPlus,
 } from "@fortawesome/free-solid-svg-icons";
-import ThumbnailItem from "@/components/ThumbnilItem";
-import CarouselItem from "@/components/Carousel";
+import { getGenresById } from "@/utils/genres";
 
 const movies = [
   {
-    id: 1,
-    image: "/znmd-backdrop.png",
-    alt: "znmd-backdrop",
+    id: 61202,
+    backdrop_path: "/z4k7b66jAHP8sQbEahxss6Ct8BW.jpg",
     title: "Zindagi Na Milegi Dobara",
-    description: `Three friends who were inseparable in childhood decide to go on a three-week-long bachelor road trip to Spain, in order to re-establish their bond and explore thrilling adventures, before one of them gets married. What will they learn of themselves and each other during the adventure?`,
+    overview: `Three friends who were inseparable in childhood decide to go on a three-week-long bachelor road trip to Spain, in order to re-establish their bond and explore thrilling adventures, before one of them gets married. What will they learn of themselves and each other during the adventure?`,
     production_companies: "Excel Entertainment",
-    release_date: "2011",
-    adult: "U/A",
-    runtime: "2h 34m",
+    release_date: "2011-07-15",
+    adult: false,
+    runtime: 154,
     rating: "8.2",
-    language: "हिन्दी",
+    original_language: "hi",
     genres: ["Drama", "Comedy", "Romantic"],
-    imdb: "/imdb",
-    watch: "/watch",
+    imdb_id: "tt1562872",
   },
   {
-    id: 2,
-    image: "/dch-backdrop.png",
-    alt: "dch-backdrop",
+    id: 14752,
+    backdrop_path: "/27dhih2lFlBl0oIUE9jFwIEBIMg.jpg",
     title: "Dil Chahta Hai",
-    description:
+    overview:
       "Three inseparable childhood friends Akash, Sameer and Sid navigate love, heartbreak, and personal growth as they transition into adulthood. A memorable trip to Goa becomes a turning point in their lives, testing the strength of their friendship.",
     production_companies: "Excel Entertainment",
-    release_date: "2001",
-    adult: "U/A",
-    runtime: "3h 3m",
+    release_date: "2001-07-24",
+    adult: false,
+    runtime: 183,
     rating: "8.1",
-    language: "हिन्दी",
+    original_language: "hi",
     genres: ["Drama", "Comedy", "Romantic"],
-    imdb: "/imdb",
-    watch: "/watch",
+    imdb_id: "tt0292490",
   },
   {
-    id: 3,
-    image: "/yjhd-backdrop.png",
-    alt: "yjhd-backdrop",
+    id: 185008,
+    backdrop_path: "/Wi9bgiwfJPYKFcJIiUqCNDFNtf.jpg",
     title: "Yeh Jawaani Hai Deewani",
-    description:
+    overview:
       "A free-spirited traveler, Bunny, reunites with his childhood friends on a trekking trip. As they explore the beauty of the mountains, love and ambitions intertwine, making them question their life choices.",
     production_companies: "Dharma Productions",
-    release_date: "2013",
-    adult: "U/A",
-    runtime: "2h 40m",
+    release_date: "2013-05-31",
+    adult: false,
+    runtime: 160,
     rating: "7.2",
-    language: "हिन्दी",
+    original_language: "hi",
     genres: ["Drama", "Comedy", "Romantic"],
-    imdb: "/imdb",
-    watch: "/watch",
+    imdb_id: "tt2178470",
   },
   {
-    id: 4,
-    image: "/tamasha-backdrop.png",
-    alt: "tamasha-backdrop",
+    id: 339274,
+    backdrop_path: "/1um3EJQlJoSiRI34MVIoG610OzR.jpg",
     title: "Tamasha",
-    description:
+    overview:
       "Ved and Tara meet in Corsica and decide to enjoy their vacation without revealing their real identities. Years later, their paths cross again, forcing Ved to confront his monotonous life and rediscover his passion for storytelling.",
     production_companies: "Nadiadwala Grandson Entertainment",
-    release_date: "2015",
-    adult: "U/A",
-    runtime: "2h 19m",
+    release_date: "2015-11-27",
+    adult: false,
+    runtime: 139,
     rating: "7.3",
-    language: "हिन्दी",
+    original_language: "hi",
     genres: ["Drama", "Romance"],
-    imdb: "/imdb",
-    watch: "/watch",
+    imdb_id: "tt3148502",
   },
   {
-    id: 5,
-    image: "/queen-backdrop.png",
-    alt: "queen-backdrop",
+    id: 247645,
+    backdrop_path: "/laKTtxs7jq64sDHzvbjeT7V2oBa.jpg",
     title: "Queen",
-    description:
+    overview:
       "After being left at the altar, a timid Delhi girl, Rani, embarks on a solo honeymoon trip across Europe. Along the way, she gains confidence, independence, and a new perspective on life.",
     production_companies: "Viacom18 Studios",
-    release_date: "2014",
-    adult: "U/A",
-    runtime: "2h 26m",
+    release_date: "2014-03-07",
+    adult: false,
+    runtime: 146,
     rating: "8.2",
-    language: "हिन्दी",
+    original_language: "हिन्दी",
     genres: ["Drama", "Comedy"],
-    imdb: "/imdb",
-    watch: "/watch",
+    imdb_id: "tt3322420",
   },
 ];
 
@@ -123,6 +112,35 @@ const RecommendPage = () => {
   // Handle cases where no movie title is found
   if (!movieTitle) return notFound();
 
+  interface Movie {
+    backdrop_path: string;
+    id: number;
+    title: string;
+    overview: string;
+    release_date: string;
+    runtime: string;
+    adult: boolean;
+    original_language: string;
+    genre_ids: number[];
+  }
+
+  const [trendingMovies, setTrendingMovies] = useState<Movie[]>([]);
+
+  useEffect(() => {
+    fetch("/api/movies/trending", { method: "GET" })
+      .then((res) => res.json())
+      .then((data) => setTrendingMovies(data.results))
+      .catch((err) => console.error("Error fetching movies:", err));
+  }, []);
+
+  //console.log(trendingMovies);
+
+  function convertMinutes(X: number) {
+    const hours = Math.floor(X / 60);
+    const minutes = X % 60;
+    return `${hours}h ${minutes}m`;
+  }
+
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > window.innerHeight * 0.01);
@@ -132,7 +150,7 @@ const RecommendPage = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const backdrop = "/znmd-backdrop.png";
+  // const backdrop = "/znmd-backdrop.png";
 
   const [scrollProgress, setScrollProgress] = useState(0);
 
@@ -148,17 +166,35 @@ const RecommendPage = () => {
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [progress, setProgress] = useState(0);
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  // const [animationClass, setAnimationClass] = useState("in");
 
   const nextSlide = () => {
+    // setAnimationClass("out");
     setCurrentIndex((prevIndex) => (prevIndex + 1) % movies.length);
-    setProgress(0); // Reset progress bar on manual change
+    setProgress(0);
+
+    // setTimeout(() => {
+    //   setCurrentIndex((prevIndex) => (prevIndex + 1) % movies.length);
+    //   setAnimationClass("in");
+    //   setProgress(0);
+    // }, 700);
   };
 
   const prevSlide = () => {
+    // setAnimationClass("out");
     setCurrentIndex((prevIndex) =>
       prevIndex === 0 ? movies.length - 1 : prevIndex - 1
     );
     setProgress(0);
+
+    // setTimeout(() => {
+    //   setCurrentIndex((prevIndex) =>
+    //     prevIndex === 0 ? movies.length - 1 : prevIndex - 1
+    //   );
+    //   setProgress(0);
+    //   setAnimationClass("in");
+    // }, 1000);
   };
 
   useEffect(() => {
@@ -167,8 +203,8 @@ const RecommendPage = () => {
     }, 10000); // Change to 10 seconds
 
     const progressInterval = setInterval(() => {
-      setProgress((prev) => (prev < 100 ? prev + 0.5 : 0)); // 10s = 100%
-    }, 50); // Update every 100ms for smooth effect
+      setProgress(100); // 10s = 100%
+    }, 10000); // Update every 100ms for smooth effect
 
     return () => {
       clearInterval(interval);
@@ -192,6 +228,21 @@ const RecommendPage = () => {
 
   const toggleWatchlist = () => {
     setAdded(!added);
+  };
+
+  const [startIndex, setStartIndex] = useState(0);
+  const visibleMovies = 5; // Adjust based on how many items you want to show at a time
+
+  const handleNext = () => {
+    if (startIndex + visibleMovies < trendingMovies.length) {
+      setStartIndex(startIndex + 5);
+    }
+  };
+
+  const handlePrev = () => {
+    if (startIndex > 0) {
+      setStartIndex(startIndex - 5);
+    }
   };
 
   return (
@@ -294,10 +345,10 @@ const RecommendPage = () => {
               className={`backdrop-element ${theme === "light" ? "" : "dark"}`}
             >
               <Image
-                src={movies[currentIndex].image}
-                alt={movies[currentIndex].alt}
+                src={`https://image.tmdb.org/t/p/w1280${movies[currentIndex].backdrop_path}`}
+                alt={`${movies[currentIndex].title}`}
                 fill
-                className="object-cover object-center image-layer transition-all duration-500"
+                className="object-cover object-top image-layer transition-all duration-500"
               />
             </div>
           </div>
@@ -312,28 +363,42 @@ const RecommendPage = () => {
 
           {/* Content */}
           <div className="absolute inset-0 flex flex-col justify-center px-20 text-white">
-            <h1 className="text-left text-4xl font-bold leading-[120%] block my-4">
+            <h1
+              className={`text-left text-4xl font-bold leading-[120%] block my-4 title `}
+            >
               {movies[currentIndex].title}
             </h1>
-            <div className="max-w-full w-[50%] text-justify text-sm ">
-              {movies[currentIndex].description}
+            <div
+              className={`max-w-full w-[50%] text-justify text-sm description `}
+            >
+              {movies[currentIndex].overview}
             </div>
-            <div className="text-sm flex gap-4 font-bold mt-2 info">
+            <div className={`text-sm flex gap-4 font-bold mt-2 info `}>
               <span>{movies[currentIndex].production_companies}</span>
-              <span>{movies[currentIndex].release_date}</span>
-              <span className="bg-neutral-600 px-1 rounded-[2px]">
-                {movies[currentIndex].adult}
+              <span>
+                {movies[currentIndex].release_date
+                  ? movies[currentIndex].release_date.slice(0, 4)
+                  : "N/A"}
               </span>
-              <span>{movies[currentIndex].runtime}</span>
+              <span className="bg-neutral-600 px-1 rounded-[2px]">
+                {movies[currentIndex].adult ? "A" : "U/A"}
+              </span>
+              <span>{convertMinutes(movies[currentIndex].runtime)}</span>
               <span>
                 <span className="bg-[#f3ce13] px-1 rounded-[2px] text-black mr-2">
                   IMDb
                 </span>
                 {movies[currentIndex].rating}
               </span>
-              <span>{movies[currentIndex].language}</span>
+              <span>
+                {movies[currentIndex].original_language === "en"
+                  ? "English"
+                  : movies[currentIndex].original_language === "hi"
+                  ? "हिन्दी"
+                  : movies[currentIndex].original_language.toUpperCase()}
+              </span>
             </div>
-            <div className="text-sm flex font-bold mt-2 genres">
+            <div className={`text-sm flex font-bold mt-2 genres `}>
               {movies[currentIndex].genres.map((g, i) => (
                 <span key={i} className="text-green-500">
                   {g}
@@ -346,18 +411,20 @@ const RecommendPage = () => {
 
             {/* Buttons */}
             <div
-              className="buttton-container z-10 relative max-w-full w-[55%] buttons"
+              className={`buttton-container z-10 relative max-w-full w-[55%] buttons `}
               style={{ justifyContent: "flex-start", marginLeft: 0 }}
             >
               <Link
-                href={movies[currentIndex].imdb}
+                href={`https://www.imdb.com/title/${movies[currentIndex].imdb_id}`}
+                target="_blank"
                 className="px-6 py-2 bg-[#f3ce13] text-black border border-[#f3ce13] font-semibold rounded-lg shadow-md hover:bg-[#f3ce13ab] transition duration-300 ease-in-out active:scale-95 text-center"
                 style={{ borderRadius: "4px" }}
               >
                 IMDb Page
               </Link>
               <Link
-                href={movies[currentIndex].watch}
+                href={`https://www.google.com/search?q=${movies[currentIndex].title} Watch Online`}
+                target="_blank"
                 className="px-6 py-2 bg-white text-black border font-medium rounded-lg shadow-md hover:bg-gray-300 transition duration-300 ease-in-out active:scale-95 text-center w-[30%]"
                 style={{ borderRadius: "4px" }}
               >
@@ -381,25 +448,14 @@ const RecommendPage = () => {
           </div>
 
           {/* Next & Previous Buttons */}
-          <div className="absolute bottom-40 items-end right-[17px] w-[56.6vw] h-[100px] flex justify-between z-10">
+          <div className="absolute bottom-40 items-end right-[17px] w-[56.6vw] h-[100px] flex justify-between z-10 ">
             {/* Left Button */}
             <button
               onClick={prevSlide}
               style={{ height: currentIndex === 0 ? "89px" : "68px" }}
               className="group relative w-10 flex items-center justify-center rounded-md bg-black/50 backdrop-blur-md transition-all duration-300 hover:bg-black/70 hover:scale-105 active:scale-95"
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="white"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="w-6 h-6 group-hover:-translate-x-1 transition-transform"
-              >
-                <path d="M15 18l-6-6 6-6"></path>
-              </svg>
+              <FontAwesomeIcon icon={faAngleLeft} />
             </button>
 
             {/* Right Button */}
@@ -408,22 +464,10 @@ const RecommendPage = () => {
               style={{ height: currentIndex === 4 ? "89px" : "68px" }}
               className="group relative w-10 flex items-center justify-center rounded-md bg-black/50 backdrop-blur-md transition-all duration-300 hover:bg-black/70 hover:scale-105 active:scale-95"
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="white"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="w-6 h-6 group-hover:translate-x-1 transition-transform"
-              >
-                <path d="M9 18l6-6-6-6"></path>
-              </svg>
+              <FontAwesomeIcon icon={faAngleRight} />
             </button>
           </div>
 
-          {/* Thumbnails */}
           {/* Thumbnails */}
           <div className="absolute bottom-40 right-14 flex gap-3 items-end z-10">
             {movies.map((movie, index) => (
@@ -444,8 +488,8 @@ const RecommendPage = () => {
                 }}
               >
                 <Image
-                  src={movie.image}
-                  alt={movie.alt}
+                  src={`https://image.tmdb.org/t/p/w1280${movie.backdrop_path}`}
+                  alt={`${movie.title}`}
                   fill
                   className="object-cover"
                 />
@@ -462,7 +506,197 @@ const RecommendPage = () => {
             ))}
           </div>
           <div className=" mt-[100vh] relative z-10">
-            <span className=" font-bold text-xl">Curated Just For You</span>
+            <div>
+              <span className=" font-bold text-xl">Curated Just For You</span>
+              <div className="flex gap-4 items-start my-5 w-full h-[180px]">
+                {movies.map((movie, index) => (
+                  <div key={index} className="flex flex-col items-center">
+                    <div
+                      className="relative cursor-pointer rounded-[4px] overflow-hidden transition-all duration-300 delay-100 ease-in-out group scale-100 hover:scale-150 w-[222px] h-[125px] hover:h-[180px] border-2 border-transparent hover:border-white hover:rounded-[6px] z-10 hover:z-50"
+                      onClick={() => {
+                        setCurrentIndex(index);
+                        setProgress(0);
+                      }}
+                      onMouseEnter={() => setHoveredIndex(index)}
+                      onMouseLeave={() => setHoveredIndex(null)}
+                    >
+                      {/* Image Container (Fixed at Top) */}
+                      <div className="w-full h-[125px] relative">
+                        <Image
+                          src={`https://image.tmdb.org/t/p/w1280${movie.backdrop_path}`}
+                          alt={`${movie.title}`}
+                          fill
+                          className="object-cover rounded-t-[4px]"
+                        />
+
+                        {/* Overlay Effect */}
+                        <div className="absolute inset-0 group-hover:bg-transparent bg-gradient-to-t from-[#000000bc] to-transparent rounded-t-[4px]"></div>
+                      </div>
+
+                      {/* Movie Title & Description */}
+                      <div
+                        className={`absolute  left-[10px] right-[10px] text-white ${
+                          hoveredIndex === index
+                            ? "bottom-[38%]"
+                            : "bottom-[10px]"
+                        }`}
+                      >
+                        <div className="font-semibold text-sm truncate">
+                          {movie.title}
+                        </div>
+                      </div>
+
+                      {/* Additional Movie Details (Expands on hover, placed at the bottom) */}
+                      <div className="absolute bottom-0 left-0 right-0 bg-[linear-gradient(to_top,#000000_20%,#000000_75%,transparent_100%)] text-white text-[10px] p-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 h-0 group-hover:h-auto">
+                        <div className="text-[8px] line-clamp-2 leading-tight overflow-hidden text-ellipsis ml-1">
+                          {movie.overview}
+                        </div>
+                        <div className=" flex gap-2 mt-1 ml-1 text-gray-300">
+                          <p>
+                            <strong>
+                              {movie.release_date
+                                ? movie.release_date.slice(0, 4)
+                                : "N/A"}
+                            </strong>
+                          </p>
+
+                          <p>
+                            <strong>{convertMinutes(movie.runtime)}</strong>
+                          </p>
+                          <strong className="bg-neutral-600 px-1 mb-1 rounded-[2px]">
+                            {movie.adult ? "A" : "U/A"}
+                          </strong>
+                          <p>
+                            <strong>
+                              {movie.original_language === "en"
+                                ? "English"
+                                : movie.original_language === "hi"
+                                ? "हिन्दी"
+                                : movie.original_language.toUpperCase()}
+                            </strong>
+                          </p>
+                        </div>
+                        <strong className="mt-1 ml-1 text-green-500">
+                          {movie.genres.join(" • ")}
+                        </strong>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div>
+              <span className=" font-bold text-xl">
+                Trending all over the Globe
+              </span>
+
+              <div className="relative w-full">
+                {/* Left Button */}
+                {startIndex > 0 && (
+                  <button
+                    className="absolute left-0 top-0 transform h-[69%] bg-gradient-to-r from-[#000000] via-[#000000bc] to-transparent text-white pl-3 pr-7 py-2 z-20"
+                    onClick={handlePrev}
+                  >
+                    <FontAwesomeIcon icon={faAngleLeft} />
+                  </button>
+                )}
+
+                {/* Movie Container */}
+                <div className="flex gap-4 items-start my-5 w-full h-[180px]">
+                  {trendingMovies
+                    .slice(startIndex, startIndex + visibleMovies)
+                    .map((movie) => (
+                      <div
+                        key={movie.id}
+                        className="flex flex-col items-center"
+                      >
+                        <div
+                          className="relative cursor-pointer rounded-[4px] overflow-hidden transition-all duration-300 delay-100 ease-in-out group scale-100 hover:scale-150 w-[222px] h-[125px] hover:h-[180px] border-2 border-transparent hover:border-white hover:rounded-[6px] z-10 hover:z-50"
+                          onClick={() => {
+                            setCurrentIndex(movie.id);
+                            setProgress(0);
+                          }}
+                          onMouseEnter={() => setHoveredIndex(movie.id)}
+                          onMouseLeave={() => setHoveredIndex(null)}
+                        >
+                          {/* Image Container (Fixed at Top) */}
+                          <div className="w-full h-[125px] relative">
+                            <Image
+                              src={`https://image.tmdb.org/t/p/w1280${movie.backdrop_path}`}
+                              alt={movie.title}
+                              fill
+                              className="object-cover rounded-t-[4px]"
+                            />
+
+                            {/* Overlay Effect */}
+                            <div className="absolute inset-0 group-hover:bg-transparent bg-gradient-to-t from-[#000000bc] to-transparent rounded-t-[4px]"></div>
+                          </div>
+
+                          {/* Movie Title & Description */}
+                          <div
+                            className={`absolute  left-[10px] right-[10px] text-white ${
+                              hoveredIndex === movie.id
+                                ? "bottom-[38%]"
+                                : "bottom-[10px]"
+                            }`}
+                          >
+                            <div className="font-semibold text-sm truncate">
+                              {movie.title}
+                            </div>
+                          </div>
+
+                          {/* Additional Movie Details (Expands on hover, placed at the bottom) */}
+                          <div className="absolute bottom-0 left-0 right-0 bg-[linear-gradient(to_top,#000000_20%,#000000_75%,transparent_100%)] text-white text-[10px] p-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 h-0 group-hover:h-auto">
+                            <div className="text-[8px] line-clamp-2 leading-tight overflow-hidden text-ellipsis ml-1">
+                              {movie.overview}
+                            </div>
+                            <div className=" flex gap-2 mt-1 ml-1 text-gray-300">
+                              <p>
+                                <strong>
+                                  {movie.release_date
+                                    ? movie.release_date.slice(0, 4)
+                                    : "N/A"}
+                                </strong>
+                              </p>
+
+                              {/* <p>
+                                <strong>{convertMinutes(movie.runtime)}</strong>
+                              </p> */}
+                              <strong className="bg-neutral-600 px-1 mb-1 rounded-[2px]">
+                                {movie.adult ? "A" : "U/A"}
+                              </strong>
+                              <p>
+                                <strong>
+                                  {movie.original_language === "en"
+                                    ? "English"
+                                    : movie.original_language === "hi"
+                                    ? "हिन्दी"
+                                    : movie.original_language.toUpperCase()}
+                                </strong>
+                              </p>
+                            </div>
+                            <strong className="mt-1 ml-1 text-green-500">
+                              {getGenresById(movie.genre_ids).join(" • ")}
+                            </strong>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                </div>
+
+                {/* Right Button */}
+                {startIndex + visibleMovies < trendingMovies.length && (
+                  <button
+                    className="absolute right-[-2px] top-0 transform h-[69%] bg-gradient-to-l from-[#000000] via-[#000000bc] to-transparent text-white pr-3 pl-7 py-2 z-20"
+                    onClick={handleNext}
+                  >
+                    <FontAwesomeIcon icon={faAngleRight} />
+                  </button>
+                )}
+              </div>
+            </div>
+
             <Footer />
           </div>
         </div>
