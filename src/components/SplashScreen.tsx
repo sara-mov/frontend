@@ -1,4 +1,3 @@
-// components/SplashScreen.tsx
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import sara from "../../public/sara.png";
@@ -6,11 +5,13 @@ import saraDark from "../../public/sara-dark.png";
 import { useTheme } from "@/context/ThemeContext";
 
 interface SplashScreenProps {
-  duration?: number; // Duration in milliseconds, default is 2000ms (2 seconds)
+  isLoading?: boolean;
+  duration?: number;
   children: React.ReactNode;
 }
 
 export default function SplashScreen({
+  isLoading,
   duration = 2000,
   children,
 }: SplashScreenProps) {
@@ -18,11 +19,14 @@ export default function SplashScreen({
   const { theme } = useTheme();
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setShowSplash(false);
-    }, duration);
-    return () => clearTimeout(timer);
-  }, [duration]);
+    if (isLoading === false) {
+      setShowSplash(false); // Hide splash immediately when isLoading becomes false
+    } else if (isLoading === undefined) {
+      // If isLoading is not provided, use duration instead
+      const timer = setTimeout(() => setShowSplash(false), duration);
+      return () => clearTimeout(timer);
+    }
+  }, [isLoading, duration]);
 
   if (showSplash) {
     return (
@@ -38,5 +42,6 @@ export default function SplashScreen({
       </div>
     );
   }
+
   return <>{children}</>;
 }
