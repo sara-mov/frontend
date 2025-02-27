@@ -83,6 +83,14 @@ const Footer = () => {
             <ul className="flex flex-wrap z-50">
               <li className="block relative">
                 <Link
+                  href="/disclaimer"
+                  className="px-5 transition duration-300 hover:text-[#008080]"
+                >
+                  Disclaimer
+                </Link>
+              </li>
+              <li className="block relative">
+                <Link
                   href="/terms-and-conditions"
                   className="px-5 transition duration-300 hover:text-[#008080]"
                 >
