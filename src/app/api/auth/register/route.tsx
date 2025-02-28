@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { supabase } from "@/lib/supabase";
+import { supabaseAdmin } from "@/lib/supabaseAdmin";
 import bcrypt from "bcryptjs";
 import { NextResponse } from "next/server";
 
@@ -20,15 +21,28 @@ export async function POST(req: Request) {
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
-    await supabase
-      .from("users")
-      .insert({
-        first_name,
-        last_name,
-        email,
+
+    const { data: userData, error } = await supabaseAdmin.auth.admin.createUser(
+      {
+        email: email,
         password: hashedPassword,
-        provider: "credentials",
-      });
+        email_confirm: true, // Automatically confirm the email
+      }
+    );
+
+    if (error) {
+      console.error("Supabase Auth Error:", error);
+      return false;
+    }
+
+    await supabase.from("users").insert({
+      id: userData.user.id,
+      first_name,
+      last_name,
+      email,
+      password: hashedPassword,
+      provider: "credentials",
+    });
 
     return NextResponse.json(
       { message: "User registered successfully" },

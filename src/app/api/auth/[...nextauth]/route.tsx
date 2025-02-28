@@ -8,9 +8,10 @@ import { Session } from "next-auth";
 import { supabase } from "@/lib/supabase";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+import { supabaseAdmin } from "@/lib/supabaseAdmin";
 
 // Define the NextAuth configuration
-const authOptions: NextAuthOptions = {
+export const authOptions: NextAuthOptions = {
   providers: [
     // Google OAuth Provider
     GoogleProvider({
@@ -62,7 +63,7 @@ const authOptions: NextAuthOptions = {
     async signIn({ user, account }) {
       if (account?.provider === "google") {
         // Look for the user in Supabase.
-        const { data, error } = await supabase
+        let { data, error } = await supabase
           .from("users")
           .select("*")
           .eq("email", user.email)
@@ -70,12 +71,44 @@ const authOptions: NextAuthOptions = {
 
         // If user doesn't exist, create a new record.
         if (!data) {
-          await supabase.from("users").insert({
-            name: user.name,
-            email: user.email,
-            provider: "google",
-          });
+          // console.log("user", user);
+          const { data: userData, error } =
+            await supabaseAdmin.auth.admin.createUser({
+              email: user.email,
+              password: Math.random().toString(36).slice(-8), // Generate a random password
+              email_confirm: true, // Automatically confirm the email
+            });
+
+          if (error) {
+            console.error("Supabase Auth Error:", error);
+            return false;
+          }
+
+          // console.log("userData", userData);
+
+          const namePart = user.name?.trim().split(/\s+/);
+          const { data: newUser, error: insertError } = await supabase
+            .from("users")
+            .insert({
+              id: userData.user.id,
+              first_name: namePart ? namePart[0] : "",
+              last_name: namePart ? namePart[1] : "",
+              email: user.email,
+              provider: "google",
+            })
+            .select("*")
+            .single(); // Fetch the newly inserted user
+
+          if (insertError) {
+            console.error("Error inserting user:", insertError);
+            return false;
+          }
+
+          data = newUser; // Assign newly created user to data
         }
+        user.first_name = data.first_name;
+        user.id = data.id;
+        user = data;
       }
       // For credentials-based sign in, errors are handled in authorize.
       return true;
@@ -84,7 +117,13 @@ const authOptions: NextAuthOptions = {
     // JWT callback: Generate a JWT on sign in.
     async jwt({ token, user }: { token: JWT; user?: any }) {
       if (user) {
-        const payload = { email: user.email };
+        const payload = {
+          email: user.email,
+          name: user.first_name,
+          id: user.id,
+        };
+        token.id = user.id;
+        token.name = user.first_name;
         token.jwt = jwt.sign(payload, process.env.JWT_SECRET!, {
           expiresIn: "1d",
         });
@@ -95,6 +134,9 @@ const authOptions: NextAuthOptions = {
     // Session callback: Attach the JWT token to the session.
     async session({ session, token }: { session: Session; token: JWT }) {
       session.jwt = token.jwt as string;
+      session.user.id = token.id as string;
+      session.user.name = token.name as string;
+      // console.log(session);
       return session;
     },
   },
