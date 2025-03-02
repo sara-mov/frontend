@@ -14,5 +14,5 @@ export const genresList = [
 export function getGenresById(ids: number[]): string[] {
     return ids
         .map((id) => genresList.find((genre) => genre.id === id)?.name || "Unknown")
-        .slice(0, 3); // Take only the first 3 genres
+        .slice(0, 3); 
 }
