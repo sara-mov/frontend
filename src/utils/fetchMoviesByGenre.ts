@@ -6,7 +6,7 @@ export async function fetchMoviesByGenre(genre: string) {
       .from('movies')
       .select('*')
       .contains('genres', [genre])
-      .order('popularity', { ascending: false })
+      // .order('popularity', { ascending: false })
       .limit(50);
   
     if (error) {
