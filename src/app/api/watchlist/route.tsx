@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
@@ -58,7 +59,7 @@ export async function POST(req: Request) {
         movie_id: Number(movie.id),
         title: movie.title,
         overview: movie.overview,
-        genres: movie.genres,
+        genre_ids: movie.genre_ids,
         original_language: movie.original_language,
         rating: movie.rating,
         release_date: movie.release_date,
