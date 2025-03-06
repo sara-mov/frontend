@@ -35,7 +35,6 @@ export default function WatchlistContainer() {
     setLoading(false);
   }
 
-  const [currentIndex, setCurrentIndex] = useState(0);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   const [startIndex, setStartIndex] = useState(0);
@@ -95,15 +94,16 @@ export default function WatchlistContainer() {
               {watchlistMovies
                 .slice(startIndex, startIndex + visibleMovies)
                 .map((movie) => (
-                  <div
+                  <Link
+                    href={`/movie/${movie.title
+                      .toLowerCase()
+                      .replace(/\s+/g, "-")
+                      .replace(/[^\w-]/g, "")}/${movie.movie_id}`}
                     key={movie.movie_id}
                     className="flex flex-col items-center"
                   >
                     <div
                       className="relative cursor-pointer rounded-[4px] overflow-hidden transition-all duration-300 delay-100 ease-in-out group scale-100 hover:scale-150 w-[222px] h-[125px] hover:h-[180px] border-2 border-transparent hover:border-white hover:rounded-[6px] z-10 hover:z-50"
-                      onClick={() => {
-                        setCurrentIndex(movie.movie_id);
-                      }}
                       onMouseEnter={() => setHoveredIndex(movie.movie_id)}
                       onMouseLeave={() => setHoveredIndex(null)}
                     >
@@ -168,7 +168,7 @@ export default function WatchlistContainer() {
                         </strong>
                       </div>
                     </div>
-                  </div>
+                  </Link>
                 ))}
             </div>
 
