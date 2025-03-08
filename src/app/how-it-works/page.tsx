@@ -5,7 +5,7 @@ import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import recommend from "../../../public/recommendation.png";
 import browsing from "../../../public/movie-browsing.png";
-import streaming from "../../../public/movie-streaming-1.png";
+import streaming from "../../../public/movie-streaming.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFilm } from "@fortawesome/free-solid-svg-icons";
 import Footer from "@/components/Footer";
