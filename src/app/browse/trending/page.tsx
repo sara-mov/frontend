@@ -134,8 +134,8 @@ const TrendingPage = () => {
                     <Link
                       href={`/movie/${movie.title
                         .toLowerCase()
-                        .replace(/\s+/g, "-")
-                        .replace(/[^\w-]/g, "")}/${movie.id}`}
+                        .replace(/[^\w]/g, " ")
+                        .replace(/\s+/g, "-")}/${movie.id}`}
                       className="relative cursor-pointer"
                     >
                       <Image
