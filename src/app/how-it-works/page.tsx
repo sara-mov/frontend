@@ -17,6 +17,10 @@ const HowItWorks = () => {
   const { theme } = useTheme();
 
   useEffect(() => {
+    document.title = "How It Works - SARA";
+  }, []);
+
+  useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > window.innerHeight * 0.01) {
         setIsScrolled(true);
