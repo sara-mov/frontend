@@ -10,6 +10,10 @@ const Disclaimer = () => {
   const { theme } = useTheme();
 
   useEffect(() => {
+    document.title = "Disclaimer - SARA";
+  }, []);
+
+  useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > window.innerHeight * 0.01) {
         setIsScrolled(true);
