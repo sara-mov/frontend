@@ -1,4 +1,3 @@
-/* eslint-disable prefer-const */
 /* eslint-disable react-hooks/rules-of-hooks */
 "use client";
 
@@ -27,6 +26,19 @@ const GenrePage = () => {
 
   // Handle cases where no movie query is found
   if (!name) return notFound();
+
+  useEffect(() => {
+    document.title = `${
+      typeof name.name === "string" && name.name.toLowerCase() === "tv-movie"
+        ? "TV Movie"
+        : typeof name.name === "string"
+        ? name.name
+            .toLowerCase()
+            .replace(/-/g, " ")
+            .replace(/\b\w/g, (char: string) => char.toUpperCase())
+        : ""
+    } | SARA`;
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -74,18 +86,6 @@ const GenrePage = () => {
 
   // console.log(moviesByGenre);
 
-  function convertMinutes(X: number) {
-    const hours = Math.floor(X / 60);
-    const minutes = X % 60;
-    return `${hours}h ${minutes}m`;
-  }
-
-  const [hoveredWatchlist, setHoveredWatchlist] = useState(0);
-  const [added, setAdded] = useState(false);
-
-  const toggleWatchlist = () => {
-    setAdded(!added);
-  };
   const [hoveredMovie, setHoveredMovie] = useState(0);
   return (
     <SplashScreen isLoading={loading}>
@@ -283,10 +283,7 @@ const GenrePage = () => {
                           Watch Now
                         </button>
                         <div className="relative flex flex-col items-center group min-h-full">
-                          <div
-                            onMouseEnter={() => setHoveredWatchlist(1)}
-                            onMouseLeave={() => setHoveredWatchlist(0)}
-                          >
+                          <div>
                             <WatchlistButton
                               movie={movie}
                               movieId={movie.id}
