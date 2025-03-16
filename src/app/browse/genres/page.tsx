@@ -1,5 +1,3 @@
-/* eslint-disable prefer-const */
-/* eslint-disable react-hooks/rules-of-hooks */
 "use client";
 
 import React, { useEffect, useState } from "react";
@@ -43,6 +41,10 @@ const GenresPage = () => {
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
+    document.title = "Genres - SARA";
+  }, []);
+
+  useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > window.innerHeight * 0.01) {
         setIsScrolled(true);
@@ -68,7 +70,6 @@ const GenresPage = () => {
     setLoading(false);
   }, []);
 
-  const [hoveredMovie, setHoveredMovie] = useState(0);
   return (
     <SplashScreen isLoading={loading}>
       <div className="bg-gradient-to-br transition duration-200 text-black dark:text-white from-neutral-100 dark:from-neutral-800 dark:to-neutral-900 to-neutral-200 min-h-screen">
@@ -164,7 +165,7 @@ const GenresPage = () => {
             <p className=" h-[80vh] text-center pt-10">Nothing to see here.</p>
           ) : (
             <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-5 gap-y-7 mb-10">
-              {genres.map((genre, index) => (
+              {genres.map((genre) => (
                 <Link
                   href={`/collections/genres/${genre.name
                     .toLowerCase()
@@ -172,8 +173,6 @@ const GenresPage = () => {
                     .replace(/[^\w-]/g, "")}`}
                   key={genre.id}
                   className="relative group cursor-pointer hover:scale-105 transition-transform duration-500"
-                  onMouseEnter={() => setHoveredMovie(genre.id)}
-                  onMouseLeave={() => setHoveredMovie(0)}
                 >
                   <div className="relative">
                     <Image

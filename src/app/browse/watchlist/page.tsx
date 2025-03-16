@@ -17,6 +17,10 @@ const WatchlistPage = () => {
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
+    document.title = "Watchlist - SARA";
+  }, []);
+
+  useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > window.innerHeight * 0.01) {
         setIsScrolled(true);
