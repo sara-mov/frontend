@@ -10,6 +10,10 @@ const AboutUs = () => {
   const { theme } = useTheme();
 
   useEffect(() => {
+    document.title = "About Us - SARA";
+  }, []);
+
+  useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > window.innerHeight * 0.01) {
         setIsScrolled(true);
