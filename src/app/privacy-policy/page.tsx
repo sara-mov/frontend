@@ -10,6 +10,10 @@ const PrivacyPolicy = () => {
   const { theme } = useTheme();
 
   useEffect(() => {
+    document.title = "Privacy Policy - SARA";
+  }, []);
+
+  useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > window.innerHeight * 0.01) {
         setIsScrolled(true);
