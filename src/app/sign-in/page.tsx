@@ -13,6 +13,10 @@ import SplashScreen from "./../../components/SplashScreen";
 const SignIn = () => {
   const { data: session } = useSession();
 
+  useEffect(() => {
+    document.title = "Login - SARA";
+  }, []);
+
   if (session) {
     redirect("/");
   }
