@@ -10,6 +10,10 @@ const TermsAndConditions = () => {
   const { theme } = useTheme();
 
   useEffect(() => {
+    document.title = "Terms and Conditions - SARA";
+  }, []);
+
+  useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > window.innerHeight * 0.01) {
         setIsScrolled(true);
