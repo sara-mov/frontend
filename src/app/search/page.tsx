@@ -6,11 +6,15 @@ import SearchBar from "@/components/SearchBar";
 import SplashScreen from "@/components/SplashScreen";
 import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function Search() {
   const [searchValue, setSearchValue] = useState("");
   const { data: session, status } = useSession();
+
+  useEffect(() => {
+    document.title = "Search - SARA";
+  }, []);
 
   if (status === "loading") return <p className="text-black">Loading...</p>;
   if (!session) {
