@@ -1,14 +1,13 @@
-/* eslint-disable prefer-const */
 /* eslint-disable react-hooks/rules-of-hooks */
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import SplashScreen from "@/components/SplashScreen";
 import Footer from "@/components/Footer";
-import sara from "../../../../public/sara.png";
-import saraDark from "../../../../public/sara-dark.png";
+import sara from "../../../public/sara.png";
+import saraDark from "../../../public/sara-dark.png";
 import { useTheme } from "@/context/ThemeContext";
-import { notFound, useParams } from "next/navigation";
+import { notFound, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { signOut, useSession } from "next-auth/react";
 import Image from "next/image";
@@ -16,10 +15,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faAngleLeft,
   faAngleRight,
-  faCheck,
-  faPlus,
+  faShapes,
 } from "@fortawesome/free-solid-svg-icons";
 import { getGenresById } from "@/utils/genres";
+import WatchlistButton from "@/components/WatchlistButton";
+import WatchlistContainer from "@/components/WatchlistContainer";
+import TrendingMovies from "@/components/TrendingMovies";
 
 const movies = [
   {
@@ -33,7 +34,7 @@ const movies = [
     runtime: 154,
     rating: "8.2",
     original_language: "hi",
-    genres: ["Drama", "Comedy", "Romantic"],
+    genre_ids: [18, 35, 10749],
     imdb_id: "tt1562872",
   },
   {
@@ -48,7 +49,7 @@ const movies = [
     runtime: 183,
     rating: "8.1",
     original_language: "hi",
-    genres: ["Drama", "Comedy", "Romantic"],
+    genre_ids: [18, 35, 10749],
     imdb_id: "tt0292490",
   },
   {
@@ -63,7 +64,7 @@ const movies = [
     runtime: 160,
     rating: "7.2",
     original_language: "hi",
-    genres: ["Drama", "Comedy", "Romantic"],
+    genre_ids: [18, 35, 10749],
     imdb_id: "tt2178470",
   },
   {
@@ -78,7 +79,7 @@ const movies = [
     runtime: 139,
     rating: "7.3",
     original_language: "hi",
-    genres: ["Drama", "Romance"],
+    genre_ids: [18, 10749],
     imdb_id: "tt3148502",
   },
   {
@@ -92,8 +93,8 @@ const movies = [
     adult: false,
     runtime: 146,
     rating: "8.2",
-    original_language: "हिन्दी",
-    genres: ["Drama", "Comedy"],
+    original_language: "hi",
+    genre_ids: [18, 35],
     imdb_id: "tt3322420",
   },
 ];
@@ -103,37 +104,16 @@ const RecommendPage = () => {
   const { theme, toggleTheme } = useTheme();
   const [isScrolled, setIsScrolled] = useState(false);
 
-  // Decode movie title from URL
-  const params = useParams();
-  const movieTitle = decodeURIComponent(
-    Array.isArray(params.title) ? params.title[0] : params.title || ""
-  );
+  // Decode movie query from URL
+  const searchParams = useSearchParams();
+  const query = searchParams.get("q");
 
-  // Handle cases where no movie title is found
-  if (!movieTitle) return notFound();
-
-  interface Movie {
-    backdrop_path: string;
-    id: number;
-    title: string;
-    overview: string;
-    release_date: string;
-    runtime: string;
-    adult: boolean;
-    original_language: string;
-    genre_ids: number[];
-  }
-
-  const [trendingMovies, setTrendingMovies] = useState<Movie[]>([]);
+  // Handle cases where no movie query is found
+  if (!query) return notFound();
 
   useEffect(() => {
-    fetch("/api/movies/trending", { method: "GET" })
-      .then((res) => res.json())
-      .then((data) => setTrendingMovies(data.results))
-      .catch((err) => console.error("Error fetching movies:", err));
+    document.title = `${query} - SARA`;
   }, []);
-
-  //console.log(trendingMovies);
 
   function convertMinutes(X: number) {
     const hours = Math.floor(X / 60);
@@ -152,8 +132,6 @@ const RecommendPage = () => {
 
   // const backdrop = "/znmd-backdrop.png";
 
-  const [scrollProgress, setScrollProgress] = useState(0);
-
   // carousel handling
   useEffect(() => {
     const handleScroll = () => {
@@ -165,14 +143,20 @@ const RecommendPage = () => {
   }, []);
 
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [progress, setProgress] = useState(0);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const progressRef = useRef(0);
+  const progressBarRef = useRef<HTMLDivElement | null>(null);
   // const [animationClass, setAnimationClass] = useState("in");
 
   const nextSlide = () => {
     // setAnimationClass("out");
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % movies.length);
-    setProgress(0);
+    setCurrentIndex((prevIndex) =>
+      prevIndex === movies.length - 1 ? 0 : prevIndex + 1
+    );
+    progressRef.current = 0; // Reset progress bar
+    if (progressBarRef.current) {
+      progressBarRef.current.style.width = "0%";
+    }
 
     // setTimeout(() => {
     //   setCurrentIndex((prevIndex) => (prevIndex + 1) % movies.length);
@@ -186,7 +170,9 @@ const RecommendPage = () => {
     setCurrentIndex((prevIndex) =>
       prevIndex === 0 ? movies.length - 1 : prevIndex - 1
     );
-    setProgress(0);
+    if (progressBarRef.current) {
+      progressBarRef.current.style.width = "0%";
+    }
 
     // setTimeout(() => {
     //   setCurrentIndex((prevIndex) =>
@@ -202,51 +188,24 @@ const RecommendPage = () => {
       nextSlide();
     }, 10000); // Change to 10 seconds
 
-    const progressInterval = setInterval(() => {
-      setProgress(100); // 10s = 100%
-    }, 10000); // Update every 100ms for smooth effect
-
     return () => {
       clearInterval(interval);
-      clearInterval(progressInterval);
     };
-  }, [currentIndex]);
+  }, [movies.length]);
 
   useEffect(() => {
-    const handleScroll = () => {
-      const scrollY = window.scrollY;
-      const maxScroll = window.innerHeight;
-      const progress = Math.min(scrollY / maxScroll, 1);
-      setScrollProgress(progress * 2);
-    };
+    const progressInterval = setInterval(() => {
+      progressRef.current += 0.5; // 10s = 100%
+      if (progressBarRef.current) {
+        progressBarRef.current.style.width = `${progressRef.current}%`;
+      }
+    }, 50);
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    return () => clearInterval(progressInterval);
   }, []);
 
-  const [added, setAdded] = useState(false);
-
-  const toggleWatchlist = () => {
-    setAdded(!added);
-  };
-
-  const [startIndex, setStartIndex] = useState(0);
-  const visibleMovies = 5; // Adjust based on how many items you want to show at a time
-
-  const handleNext = () => {
-    if (startIndex + visibleMovies < trendingMovies.length) {
-      setStartIndex(startIndex + 5);
-    }
-  };
-
-  const handlePrev = () => {
-    if (startIndex > 0) {
-      setStartIndex(startIndex - 5);
-    }
-  };
-
   return (
-    <SplashScreen duration={2000}>
+    <SplashScreen>
       <div className="bg-gradient-to-br transition-colors duration-500 text-black dark:text-white from-neutral-200 dark:from-neutral-900 dark:to-neutral-900 to-neutral-200">
         <div className="mx-20">
           {/* Header */}
@@ -282,6 +241,21 @@ const RecommendPage = () => {
                 </Link>
               </div>
               <div className="flex gap-7">
+                <Link
+                  href={"/browse/genres"}
+                  className={` py-2 px-3 rounded-full -mr-4 hover:bg-opacity-50 ${
+                    isScrolled
+                      ? "hover:bg-white dark:hover:bg-black"
+                      : "hover:bg-black"
+                  } `}
+                >
+                  <FontAwesomeIcon
+                    icon={faShapes}
+                    className={`font-semibold ${
+                      isScrolled ? " text-black dark:text-white" : " text-white"
+                    }`}
+                  />
+                </Link>
                 <button onClick={toggleTheme} className="rounded-full">
                   {theme === "light" ? (
                     <div
@@ -357,7 +331,8 @@ const RecommendPage = () => {
           <div className="absolute top-0 left-0 w-full h-1 bg-transparent">
             <div
               className="h-1 bg-orange-500 transition-all duration-100"
-              style={{ width: `${progress}%` }}
+              ref={progressBarRef}
+              style={{ width: "0%" }}
             />
           </div>
 
@@ -399,14 +374,18 @@ const RecommendPage = () => {
               </span>
             </div>
             <div className={`text-sm flex font-bold mt-2 genres `}>
-              {movies[currentIndex].genres.map((g, i) => (
-                <span key={i} className="text-green-500">
-                  {g}
-                  {i !== movies[currentIndex].genres.length - 1 && (
-                    <span className="text-white mx-2">•</span>
-                  )}
-                </span>
-              ))}
+              <span className="text-green-500">
+                {getGenresById(movies[currentIndex].genre_ids).map(
+                  (genre, index, array) => (
+                    <React.Fragment key={index}>
+                      {genre}
+                      {index < array.length - 1 && (
+                        <span className="text-white"> • </span>
+                      )}
+                    </React.Fragment>
+                  )
+                )}
+              </span>
             </div>
 
             {/* Buttons */}
@@ -431,18 +410,14 @@ const RecommendPage = () => {
                 Watch Now
               </Link>
               <div className="relative flex flex-col items-center group min-h-full">
-                <span className="absolute w-max text-col -top-9 px-2 py-1 text-sm text-white bg-[#000000ab] rounded-[4px] bg-opacity-80 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                {/* <span className="absolute w-max text-col -top-9 px-2 py-1 text-sm text-white bg-[#000000ab] rounded-[4px] bg-opacity-80 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                   {added ? "Remove from Watchlist" : "Add to Watchlist"}
-                </span>
-                <button
-                  onClick={toggleWatchlist}
-                  className="relative flex items-center text-center min-h-full justify-center gap-2 px-4 py-2 text-white font-medium rounded-[4px] border border-blue-700 transition-all duration-300 ease-in-out shadow-md bg-blue-600 hover:bg-blue-700 active:scale-95 focus:outline-none focus:ring-2 focus:ring-blue-400 h-full"
-                >
-                  <FontAwesomeIcon
-                    icon={added ? faCheck : faPlus}
-                    className="text-lg transition-transform duration-200 ease-out transform active:scale-90"
-                  />
-                </button>
+                </span> */}
+                <WatchlistButton
+                  movie={movies[currentIndex]}
+                  movieId={movies[currentIndex].id}
+                  className='"relative flex items-center text-center min-h-full justify-center gap-2 px-4 py-2 text-white font-medium rounded-[4px] border border-blue-700 transition-all duration-300 ease-in-out shadow-md bg-blue-600 hover:bg-blue-700 active:scale-95 focus:outline-none focus:ring-2 focus:ring-blue-400 h-full"'
+                />
               </div>
             </div>
           </div>
@@ -484,7 +459,10 @@ const RecommendPage = () => {
                 }}
                 onClick={() => {
                   setCurrentIndex(index);
-                  setProgress(0);
+                  progressRef.current = 0;
+                  if (progressBarRef.current) {
+                    progressBarRef.current.style.width = "0%";
+                  }
                 }}
               >
                 <Image
@@ -515,7 +493,11 @@ const RecommendPage = () => {
                       className="relative cursor-pointer rounded-[4px] overflow-hidden transition-all duration-300 delay-100 ease-in-out group scale-100 hover:scale-150 w-[222px] h-[125px] hover:h-[180px] border-2 border-transparent hover:border-white hover:rounded-[6px] z-10 hover:z-50"
                       onClick={() => {
                         setCurrentIndex(index);
-                        setProgress(0);
+                        progressRef.current = 0; // ✅ Use useRef to prevent re-render
+                        if (progressBarRef.current) {
+                          progressBarRef.current.style.width = "0%";
+                        }
+                        window.scrollTo({ top: 0, behavior: "smooth" });
                       }}
                       onMouseEnter={() => setHoveredIndex(index)}
                       onMouseLeave={() => setHoveredIndex(null)}
@@ -577,7 +559,16 @@ const RecommendPage = () => {
                           </p>
                         </div>
                         <strong className="mt-1 ml-1 text-green-500">
-                          {movie.genres.join(" • ")}
+                          {getGenresById(movies[currentIndex].genre_ids).map(
+                            (genre, index, array) => (
+                              <React.Fragment key={index}>
+                                {genre}
+                                {index < array.length - 1 && (
+                                  <span className="text-white"> • </span>
+                                )}
+                              </React.Fragment>
+                            )
+                          )}
                         </strong>
                       </div>
                     </div>
@@ -586,116 +577,9 @@ const RecommendPage = () => {
               </div>
             </div>
 
-            <div>
-              <span className=" font-bold text-xl">
-                Trending all over the Globe
-              </span>
+            <TrendingMovies />
 
-              <div className="relative w-full">
-                {/* Left Button */}
-                {startIndex > 0 && (
-                  <button
-                    className="absolute left-0 top-0 transform h-[69%] bg-gradient-to-r from-[#000000] via-[#000000bc] to-transparent text-white pl-3 pr-7 py-2 z-20"
-                    onClick={handlePrev}
-                  >
-                    <FontAwesomeIcon icon={faAngleLeft} />
-                  </button>
-                )}
-
-                {/* Movie Container */}
-                <div className="flex gap-4 items-start my-5 w-full h-[180px]">
-                  {trendingMovies
-                    .slice(startIndex, startIndex + visibleMovies)
-                    .map((movie) => (
-                      <div
-                        key={movie.id}
-                        className="flex flex-col items-center"
-                      >
-                        <div
-                          className="relative cursor-pointer rounded-[4px] overflow-hidden transition-all duration-300 delay-100 ease-in-out group scale-100 hover:scale-150 w-[222px] h-[125px] hover:h-[180px] border-2 border-transparent hover:border-white hover:rounded-[6px] z-10 hover:z-50"
-                          onClick={() => {
-                            setCurrentIndex(movie.id);
-                            setProgress(0);
-                          }}
-                          onMouseEnter={() => setHoveredIndex(movie.id)}
-                          onMouseLeave={() => setHoveredIndex(null)}
-                        >
-                          {/* Image Container (Fixed at Top) */}
-                          <div className="w-full h-[125px] relative">
-                            <Image
-                              src={`https://image.tmdb.org/t/p/w1280${movie.backdrop_path}`}
-                              alt={movie.title}
-                              fill
-                              className="object-cover rounded-t-[4px]"
-                            />
-
-                            {/* Overlay Effect */}
-                            <div className="absolute inset-0 group-hover:bg-transparent bg-gradient-to-t from-[#000000bc] to-transparent rounded-t-[4px]"></div>
-                          </div>
-
-                          {/* Movie Title & Description */}
-                          <div
-                            className={`absolute  left-[10px] right-[10px] text-white ${
-                              hoveredIndex === movie.id
-                                ? "bottom-[38%]"
-                                : "bottom-[10px]"
-                            }`}
-                          >
-                            <div className="font-semibold text-sm truncate">
-                              {movie.title}
-                            </div>
-                          </div>
-
-                          {/* Additional Movie Details (Expands on hover, placed at the bottom) */}
-                          <div className="absolute bottom-0 left-0 right-0 bg-[linear-gradient(to_top,#000000_20%,#000000_75%,transparent_100%)] text-white text-[10px] p-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 h-0 group-hover:h-auto">
-                            <div className="text-[8px] line-clamp-2 leading-tight overflow-hidden text-ellipsis ml-1">
-                              {movie.overview}
-                            </div>
-                            <div className=" flex gap-2 mt-1 ml-1 text-gray-300">
-                              <p>
-                                <strong>
-                                  {movie.release_date
-                                    ? movie.release_date.slice(0, 4)
-                                    : "N/A"}
-                                </strong>
-                              </p>
-
-                              {/* <p>
-                                <strong>{convertMinutes(movie.runtime)}</strong>
-                              </p> */}
-                              <strong className="bg-neutral-600 px-1 mb-1 rounded-[2px]">
-                                {movie.adult ? "A" : "U/A"}
-                              </strong>
-                              <p>
-                                <strong>
-                                  {movie.original_language === "en"
-                                    ? "English"
-                                    : movie.original_language === "hi"
-                                    ? "हिन्दी"
-                                    : movie.original_language.toUpperCase()}
-                                </strong>
-                              </p>
-                            </div>
-                            <strong className="mt-1 ml-1 text-green-500">
-                              {getGenresById(movie.genre_ids).join(" • ")}
-                            </strong>
-                          </div>
-                        </div>
-                      </div>
-                    ))}
-                </div>
-
-                {/* Right Button */}
-                {startIndex + visibleMovies < trendingMovies.length && (
-                  <button
-                    className="absolute right-[-2px] top-0 transform h-[69%] bg-gradient-to-l from-[#000000] via-[#000000bc] to-transparent text-white pr-3 pl-7 py-2 z-20"
-                    onClick={handleNext}
-                  >
-                    <FontAwesomeIcon icon={faAngleRight} />
-                  </button>
-                )}
-              </div>
-            </div>
+            <WatchlistContainer />
 
             <Footer />
           </div>
