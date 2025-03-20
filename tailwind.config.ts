@@ -67,9 +67,10 @@ export default {
         barlow: ['Barlow', 'sans-serif'],
         manrope: ['Manrope', 'sans-serif'],
         worksans: ['Work Sans', 'sans-serif'],
+        mentalMania: ['Metal Mania', 'sans-serif']
       },
     },
   },
-  plugins: [],
+  plugins: [require('tailwind-scrollbar-hide')],
 } satisfies Config
 
