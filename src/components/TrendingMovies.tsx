@@ -64,10 +64,8 @@ export default function TrendingMovies() {
 
   return (
     <>
-      {loading ? (
-        <p>Loading...</p>
-      ) : trendingMovies.length === 0 ? (
-        <p></p>
+      {trendingMovies.length === 0 ? (
+        ""
       ) : (
         <div
           onMouseEnter={() => setSeeAll(1)}
@@ -101,13 +99,14 @@ export default function TrendingMovies() {
             {/* Movie Container */}
             <div className="flex gap-4 items-start my-5 w-full h-[180px]">
               {trendingMovies
+                .filter((movie) => movie.backdrop_path)
                 .slice(startIndex, startIndex + visibleMovies)
                 .map((movie) => (
                   <Link
-                  href={`/movie/${movie.title
-                    .toLowerCase()
-                    .replace(/\s+/g, "-")
-                    .replace(/[^\w-]/g, "")}/${movie.id}`}
+                    href={`/movie/${movie.title
+                      .toLowerCase()
+                      .replace(/\s+/g, "-")
+                      .replace(/[^\w-]/g, "")}/${movie.id}`}
                     key={movie.id}
                     className="flex flex-col items-center"
                   >
