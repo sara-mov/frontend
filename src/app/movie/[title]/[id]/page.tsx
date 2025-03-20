@@ -71,6 +71,7 @@ const MoviePage = () => {
     }[];
     imdbRating: string;
     imdbVotes: string;
+    Response: string;
   }
 
   const [movies, setMovies] = useState<Movie[]>([]);
@@ -128,6 +129,10 @@ const MoviePage = () => {
     const minutes = X % 60;
     return `${hours}h ${minutes}m`;
   }
+
+  useEffect(() => {
+    document.title = `${movies[0]?.title || "Movie"} - SARA`;
+  }, [movies]);
 
   return (
     <SplashScreen isLoading={loading}>
@@ -252,6 +257,7 @@ const MoviePage = () => {
                     src={`https://image.tmdb.org/t/p/w1280${movies[0].backdrop_path}`}
                     alt={`${movies[0].title}`}
                     fill
+                    priority
                     className="object-cover object-top image-layer transition-all duration-500"
                   />
                 </div>
@@ -404,7 +410,7 @@ const MoviePage = () => {
                 {activeTab === "details" && (
                   <div>
                     <h2 className="text-lg font-semibold mb-2">More Details</h2>
-                    {moviesDetails.length === 0 ? (
+                    {moviesDetails[0].Response === "False" ? (
                       "Nothing to see here..."
                     ) : (
                       <>
