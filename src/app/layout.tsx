@@ -19,7 +19,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "sara.mov",
+  title: "SARA - Search Analysis Recommend Application",
   description:
     "SARA - Search Analysis Recommend Application is a personalized movie recommendation platform",
 };
