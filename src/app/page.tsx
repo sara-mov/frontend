@@ -27,11 +27,16 @@ import Image from "next/image";
 import Link from "next/link";
 import { useSession, signOut } from "next-auth/react";
 import SplashScreen from "@/components/SplashScreen";
+import DevelopmentBanner from "@/components/DevelopmentBanner";
 
 export default function Home() {
   const { data: session } = useSession();
   const [isScrolled, setIsScrolled] = useState(false);
   const { theme, toggleTheme } = useTheme();
+
+  useEffect(() => {
+    document.title = "SARA - Search Analysis Recommend Application";
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -142,6 +147,8 @@ export default function Home() {
               </div>
             </header>
           </div>
+
+          <DevelopmentBanner />
 
           {/* Hero Section */}
           {/* Section 1 */}
@@ -557,7 +564,10 @@ export default function Home() {
             >
               <div className="relative max-w-full w-[25%]">
                 <div className="h-full">
-                  <a href="#" className="relative flex flex-wrap ">
+                  <Link
+                    href={`/collections/genres/action`}
+                    className="relative flex flex-wrap "
+                  >
                     <div className="w-full relative min-h-[220px] z-10">
                       <span className="absolute block z-20 top-0 bottom-0 left-0 right-0"></span>
                       <div className=" justify-center">
@@ -579,12 +589,15 @@ export default function Home() {
                         <div className="flex items-center"></div>
                       </div>
                     </div>
-                  </a>
+                  </Link>
                 </div>
               </div>
               <div className="relative max-w-full w-[25%]">
                 <div className="h-full">
-                  <a href="#" className="relative flex flex-wrap ">
+                  <Link
+                    href={`/collections/genres/romance`}
+                    className="relative flex flex-wrap "
+                  >
                     <div className="w-full relative min-h-[220px] z-10">
                       <span className="absolute block z-20 top-0 bottom-0 left-0 right-0"></span>
                       <div className=" justify-center">
@@ -605,12 +618,15 @@ export default function Home() {
                         <div className="flex items-center"></div>
                       </div>
                     </div>
-                  </a>
+                  </Link>
                 </div>
               </div>
               <div className="relative max-w-full w-[25%]">
                 <div className="h-full">
-                  <a href="#" className="relative flex flex-wrap ">
+                  <Link
+                    href={`/collections/genres/science-fiction`}
+                    className="relative flex flex-wrap "
+                  >
                     <div className="w-full relative min-h-[220px] z-10">
                       <span className="absolute block z-20 top-0 bottom-0 left-0 right-0"></span>
                       <div className=" justify-center">
@@ -632,12 +648,15 @@ export default function Home() {
                         <div className="flex items-center"></div>
                       </div>
                     </div>
-                  </a>
+                  </Link>
                 </div>
               </div>
               <div className="relative max-w-full w-[25%]">
                 <div className="h-full">
-                  <a href="#" className="relative flex flex-wrap ">
+                  <Link
+                    href={`/collections/genres/animation`}
+                    className="relative flex flex-wrap "
+                  >
                     <div className="w-full relative min-h-[220px] z-10">
                       <span className="absolute block z-20 top-0 bottom-0 left-0 right-0"></span>
                       <div className=" justify-center">
@@ -659,7 +678,7 @@ export default function Home() {
                         <div className="flex items-center"></div>
                       </div>
                     </div>
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -673,7 +692,10 @@ export default function Home() {
             >
               <div className="relative max-w-full w-[25%]">
                 <div className="h-full">
-                  <a href="#" className="relative flex flex-wrap ">
+                  <Link
+                    href={`/movie/secret-life/116745`}
+                    className="relative flex flex-wrap "
+                  >
                     <div className="w-full relative min-h-[220px] z-10">
                       <span className="absolute block z-20 top-0 bottom-0 left-0 right-0"></span>
                       <div className=" justify-center w-full max-w-lg aspect-[2/3] overflow-hidden">
@@ -688,7 +710,7 @@ export default function Home() {
                     <div className="text-center min-h-[100px] pt-4 ">
                       <div className="w-full">
                         <h5 className="mb-2 min-h-20 flex items-center justify-center movie-title">
-                          The Secret Life of Walter Mitty{" "}
+                          The Secret Life of Walter Mitty
                         </h5>
                         <div className="relative movie-description mb-5">
                           An adventurous journey of self-discovery, this film
@@ -700,12 +722,15 @@ export default function Home() {
                         <div className="flex items-center"></div>
                       </div>
                     </div>
-                  </a>
+                  </Link>
                 </div>
               </div>
               <div className="relative max-w-full w-[25%]">
                 <div className="h-full">
-                  <a href="#" className="relative flex flex-wrap ">
+                  <Link
+                    href={`/movie/pans-labyrinth/1417`}
+                    className="relative flex flex-wrap "
+                  >
                     <div className="w-full relative min-h-[220px] z-10">
                       <span className="absolute block z-20 top-0 bottom-0 left-0 right-0"></span>
                       <div className=" justify-center w-full max-w-lg aspect-[2/3] overflow-hidden">
@@ -720,7 +745,7 @@ export default function Home() {
                     <div className="text-center min-h-[100px] pt-4 ">
                       <div className="w-full">
                         <h5 className="mb-2 min-h-20 flex items-center justify-center movie-title">
-                          Pan&apos;s Labyrinth{" "}
+                          Pan&apos;s Labyrinth
                         </h5>
                         <div className="relative movie-description mb-5">
                           A dark and enchanting tale set in post-Civil War
@@ -732,12 +757,15 @@ export default function Home() {
                         <div className="flex items-center"></div>
                       </div>
                     </div>
-                  </a>
+                  </Link>
                 </div>
               </div>
               <div className="relative max-w-full w-[25%]">
                 <div className="h-full">
-                  <a href="#" className="relative flex flex-wrap ">
+                  <Link
+                    href={`/movie/the-lunchbox/191714`}
+                    className="relative flex flex-wrap "
+                  >
                     <div className="w-full relative min-h-[220px] z-10">
                       <span className="absolute block z-20 top-0 bottom-0 left-0 right-0"></span>
                       <div className=" justify-center w-full max-w-lg aspect-[2/3] overflow-hidden">
@@ -757,7 +785,7 @@ export default function Home() {
                     <div className="text-center min-h-[100px] pt-4 ">
                       <div className="w-full">
                         <h5 className="mb-2 min-h-20 flex items-center justify-center movie-title">
-                          The Lunchbox{" "}
+                          The Lunchbox
                         </h5>
                         <div className="relative movie-description mb-5">
                           A heartwarming story of an unlikely friendship formed
@@ -768,12 +796,15 @@ export default function Home() {
                         <div className="flex items-center"></div>
                       </div>
                     </div>
-                  </a>
+                  </Link>
                 </div>
               </div>
               <div className="relative max-w-full w-[25%]">
                 <div className="h-full">
-                  <a href="#" className="relative flex flex-wrap ">
+                  <Link
+                    href={`/movie/good-night-and-good-luck/3291`}
+                    className="relative flex flex-wrap "
+                  >
                     <div className="w-full relative min-h-[220px] z-10">
                       <span className="absolute block z-20 top-0 bottom-0 left-0 right-0"></span>
                       <div className=" justify-center w-full max-w-lg aspect-[2/3] overflow-hidden">
@@ -788,7 +819,7 @@ export default function Home() {
                     <div className="text-center min-h-[100px] pt-4 ">
                       <div className="w-full">
                         <h5 className="mb-2 min-h-20 flex items-center justify-center movie-title">
-                          Good Night, and Good Luck
+                          Good Night, and Good Luck{" "}
                         </h5>
                         <div className="relative movie-description mb-5">
                           A gripping historical drama about the battle between
@@ -799,7 +830,7 @@ export default function Home() {
                         <div className="flex items-center"></div>
                       </div>
                     </div>
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
