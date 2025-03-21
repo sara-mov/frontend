@@ -1,16 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 
-export async function GET(
-  req: NextRequest,
-  { params }: { params: { id: string } }
-) {
-  const id = Number(params.id); 
+export async function GET(req: NextRequest) {
+  const url = new URL(req.url);
+  const id = Number(url.pathname.split("/").pop()); // Extract the last part of the path
 
   if (isNaN(id)) {
-    return NextResponse.json(
-      { error: "Invalid movie ID" },
-      { status: 400 }
-    );
+    return NextResponse.json({ error: "Invalid movie ID" }, { status: 400 });
   }
 
   try {
