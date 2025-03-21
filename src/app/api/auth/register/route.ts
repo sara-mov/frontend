@@ -6,13 +6,15 @@ import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
   try {
-    const { first_name, last_name, email, password } = await req.json();
+    const body = await req.json();
+    const { first_name, last_name, email, password } = body;
 
     const { data: existingUser } = await supabase
       .from("users")
       .select("*")
       .eq("email", email)
       .single();
+
     if (existingUser) {
       return NextResponse.json(
         { message: "User already exists" },
@@ -32,7 +34,7 @@ export async function POST(req: Request) {
 
     if (error) {
       console.error("Supabase Auth Error:", error);
-      return false;
+      return NextResponse.json({ message: "Error creating user" }, { status: 500 });
     }
 
     await supabase.from("users").insert({
