@@ -2,12 +2,15 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(
   req: NextRequest,
-  context: { params: { id: string } }
+  { params }: { params: { id: string } }
 ) {
-  const id = Number(context.params.id);
+  const id = Number(params.id); 
 
   if (isNaN(id)) {
-    return NextResponse.json({ error: "Invalid movie ID" }, { status: 400 });
+    return NextResponse.json(
+      { error: "Invalid movie ID" },
+      { status: 400 }
+    );
   }
 
   try {
