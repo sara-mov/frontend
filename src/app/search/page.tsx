@@ -17,6 +17,7 @@ export default function Search() {
   }, []);
 
   if (status === "loading") return <p className="text-black">Loading...</p>;
+  console.log(session);
   if (!session) {
     redirect("/sign-in"); // Redirects unauthenticated users
   }

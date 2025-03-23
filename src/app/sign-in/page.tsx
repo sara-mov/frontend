@@ -9,6 +9,8 @@ import Link from "next/link";
 import { signIn, useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
 import SplashScreen from "./../../components/SplashScreen";
+import EyeIcon from "../../../public/eye.svg";
+import EyeOffIcon from "../../../public/eye-off.svg";
 
 const SignIn = () => {
   const { data: session } = useSession();
@@ -40,6 +42,7 @@ const SignIn = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [isValid, setIsValid] = useState<boolean>(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   // Email validation regex (basic validation)
   const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -175,19 +178,35 @@ const SignIn = () => {
                             required
                           />
                         </div>
-                        <div className="_FormInput flex w-full items-center justify-start space-x-2 flex-col">
-                          <input
-                            type="password"
-                            id="password"
-                            name="password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            placeholder="Password"
-                            autoComplete="off"
-                            className="w-full rounded-[8px] text-[#333333] h-9 dark:text-[#686868] text-[12px] font-medium bg-[#e0e1e5] dark:bg-[#222327] appearance-none outline-none border-[1px] border-transparent focus:border-[#4891ff] dark:focus:text-white"
-                            style={{ padding: "0px 12px" }}
-                            required
-                          />
+
+                        <div className="relative w-full">
+                          <div className="_FormInput flex w-full items-center justify-start space-x-2 flex-col">
+                            <input
+                              type={showPassword ? "text" : "password"}
+                              id="password"
+                              name="password"
+                              placeholder="Password"
+                              value={password}
+                              onChange={(e) => {
+                                setPassword(e.target.value);
+                              }}
+                              autoComplete="off"
+                              className="w-full rounded-[8px] text-[#333333] h-9 dark:text-[#686868] text-[12px] font-medium bg-[#e0e1e5] dark:bg-[#222327] appearance-none outline-none border-[1px] border-transparent focus:border-[#4891ff] dark:focus:text-white"
+                              style={{ padding: "0px 12px" }}
+                              required
+                            />
+                          </div>
+                          <button
+                            type="button"
+                            className="absolute inset-y-0 right-3"
+                            onClick={() => setShowPassword(!showPassword)}
+                          >
+                            {showPassword ? (
+                              <EyeIcon className="text-black dark:text-white" />
+                            ) : (
+                              <EyeOffIcon className="text-black dark:text-white" />
+                            )}
+                          </button>
                         </div>
                         <div className="flex h-9 w-full items-center justify-center">
                           <button

@@ -63,6 +63,17 @@ div.dark {
   --end-color: #171717;     /* Tailwind neutral-800 1 */
 }
 
+input:-webkit-autofill {
+  background-color: #e0e1e5 !important;
+  -webkit-text-fill-color: #333 !important;
+  box-shadow: 0 0 0px 1000px #e0e1e5 inset !important;
+  border: 1px solid transparent !important;}
+.dark input:-webkit-autofill {
+  background-color: #222327 !important;
+  -webkit-text-fill-color: #686868 !important;
+  box-shadow: 0 0 0px 1000px #222327 inset !important;
+  border: 1px solid transparent !important;}
+
 .backdrop-element {
   position: relative; /* Create stacking context */
   background-repeat: no-repeat;

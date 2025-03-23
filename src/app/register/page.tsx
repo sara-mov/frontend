@@ -250,13 +250,9 @@ const Register = () => {
                               onClick={() => setShowPassword(!showPassword)}
                             >
                               {showPassword ? (
-                                <Image src={EyeIcon} alt="eye" width={20} />
+                                <EyeIcon className="text-black dark:text-white" />
                               ) : (
-                                <Image
-                                  src={EyeOffIcon}
-                                  alt="eye-off"
-                                  width={20}
-                                />
+                                <EyeOffIcon className="text-black dark:text-white" />
                               )}
                             </button>
                           </div>
@@ -284,14 +280,10 @@ const Register = () => {
                                 setShowConfirmPassword(!showConfirmPassword)
                               }
                             >
-                              {showConfirmPassword ? (
-                                <Image src={EyeIcon} alt="eye" width={20} />
+                              {showPassword ? (
+                                <EyeIcon className="text-black dark:text-white" />
                               ) : (
-                                <Image
-                                  src={EyeOffIcon}
-                                  alt="eye-off"
-                                  width={20}
-                                />
+                                <EyeOffIcon className="text-black dark:text-white" />
                               )}
                             </button>
                           </div>
