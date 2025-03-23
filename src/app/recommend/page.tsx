@@ -3,7 +3,7 @@ import { Suspense } from "react";
 
 export default function RecommendPage() {
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense>
       <RecommendComponent />
     </Suspense>
   );
