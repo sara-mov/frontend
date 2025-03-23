@@ -126,8 +126,11 @@ export default function TrendingMovies() {
                       <div className="w-full h-[125px] relative">
                         <Image
                           src={`https://image.tmdb.org/t/p/w1280${movie.backdrop_path}`}
-                          alt={movie.title}
+                          alt={`${movie.title}`}
                           fill
+                          priority
+                          placeholder="blur"
+                          blurDataURL={`https://image.tmdb.org/t/p/w185${movie.backdrop_path}`}
                           className="object-cover rounded-t-[4px]"
                         />
 

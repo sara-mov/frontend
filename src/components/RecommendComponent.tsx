@@ -322,6 +322,9 @@ const RecommendComponent = () => {
                 src={`https://image.tmdb.org/t/p/w1280${movies[currentIndex].backdrop_path}`}
                 alt={`${movies[currentIndex].title}`}
                 fill
+                priority
+                placeholder="blur"
+                blurDataURL={`https://image.tmdb.org/t/p/w185${movies[currentIndex].backdrop_path}`}
                 className="object-cover object-top image-layer transition-all duration-500"
               />
             </div>
@@ -469,8 +472,12 @@ const RecommendComponent = () => {
                   src={`https://image.tmdb.org/t/p/w1280${movie.backdrop_path}`}
                   alt={`${movie.title}`}
                   fill
+                  priority
+                  placeholder="blur"
+                  blurDataURL={`https://image.tmdb.org/t/p/w185${movie.backdrop_path}`}
                   className="object-cover"
                 />
+
                 {currentIndex !== index && (
                   <div className="absolute inset-0 bg-[#00000068]"></div>
                 )}
@@ -508,6 +515,9 @@ const RecommendComponent = () => {
                           src={`https://image.tmdb.org/t/p/w1280${movie.backdrop_path}`}
                           alt={`${movie.title}`}
                           fill
+                          priority
+                          placeholder="blur"
+                          blurDataURL={`https://image.tmdb.org/t/p/w185${movie.backdrop_path}`}
                           className="object-cover rounded-t-[4px]"
                         />
 
