@@ -16,7 +16,6 @@ export default function Search() {
     document.title = "Search - SARA";
   }, []);
 
-  if (status === "loading") return <p className="text-black">Loading...</p>;
   if (!session) {
     redirect("/sign-in"); // Redirects unauthenticated users
   }
