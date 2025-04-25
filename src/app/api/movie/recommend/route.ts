@@ -4,7 +4,7 @@ import { ChatGroq } from '@langchain/groq';
 import { setLatestResult, getLatestResult } from '@/lib/state';
 import Fuse from 'fuse.js';
 
-const apiKey = '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';
+const apiKey = process.env.NEXT_PUBLIC_GROQ_API_KEY;
 
 const llm = new ChatGroq({
   model: 'llama-3.3-70b-versatile',
