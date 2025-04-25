@@ -39,7 +39,7 @@ const instruction =
     }
   }
   
-  export async function fetchTmdbIds(movieNames: string[]): Promise<number[]> {
+  async function fetchTmdbIds(movieNames: string[]): Promise<number[]> {
     const idPromises = movieNames.map(getTmdbId);
     const ids = await Promise.all(idPromises);
     return ids.filter((id): id is number => id !== null); // Removes nulls
