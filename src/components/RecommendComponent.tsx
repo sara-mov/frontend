@@ -132,15 +132,12 @@ const RecommendComponent = () => {
   }, []);
 
   useEffect(() => {
-    fetch("/api/movie/input", {
-      method: "GET",
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        // console.log("output", data);
-        setMovieIds(data.movies);
-      })
-      .catch((err) => console.error("Error fetching movies:", err));
+    const savedMovies = localStorage.getItem("latestMovies");
+    if (savedMovies) {
+      const parsedMovies = JSON.parse(savedMovies);
+      setMovieIds(parsedMovies);
+      localStorage.removeItem("latestMovies");
+    }
   }, []);
 
   async function getMovieDetails(id: number): Promise<MovieDetails | null> {

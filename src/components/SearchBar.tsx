@@ -26,7 +26,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
   const fetchMovies = async () => {
     setLoading(true);
     try {
-      const res = await fetch("/api/movie/input", {
+      const res = await fetch("/api/movie/recommend", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ prompt: searchValue }),
@@ -35,7 +35,12 @@ const SearchBar: React.FC<SearchBarProps> = ({
 
       // console.log("data", data);
 
-      router.push(`/recommend?q=${searchValue}`);
+      if (data.movies) {
+        // Save to localStorage
+        localStorage.setItem('latestMovies', JSON.stringify(data.movies));
+        router.push(`/recommend?q=${searchValue}`);
+      }
+
       setLoading(true);
     } catch (err) {
       console.error("Error:", err);
