@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { NextResponse } from 'next/server';
 import { ChatGroq } from '@langchain/groq';
-import { setLatestResult, getLatestResult } from '@/lib/state';
 import Fuse from 'fuse.js';
 
 const apiKey = process.env.NEXT_PUBLIC_GROQ_API_KEY;
@@ -46,16 +45,6 @@ const instruction =
     return ids.filter((id): id is number => id !== null); // Removes nulls
   }
 
-export async function GET() {
-  const result = getLatestResult();
-
-  if (!result) {
-    return NextResponse.json({ message: 'No input has been processed yet' }, { status: 404 });
-  }
-
-  return NextResponse.json({ movies: result });
-}
-
 export async function POST(req: Request) {
   try {
     const body = await req.json();
@@ -74,8 +63,6 @@ export async function POST(req: Request) {
 
     const result = await fetchTmdbIds(parsed.map((item: { title: string }) => item.title));
     
-
-    setLatestResult(result);
     return NextResponse.json({ message: 'Input processed successfully', movies: result });
   } catch (err: any) {
     return NextResponse.json({ error: err.message || 'Internal Server Error' }, { status: 500 });
