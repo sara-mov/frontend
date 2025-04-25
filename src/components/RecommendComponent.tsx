@@ -22,87 +22,103 @@ import WatchlistButton from "@/components/WatchlistButton";
 import WatchlistContainer from "@/components/WatchlistContainer";
 import TrendingMovies from "@/components/TrendingMovies";
 
-const movies = [
-  {
-    id: 61202,
-    backdrop_path: "/z4k7b66jAHP8sQbEahxss6Ct8BW.jpg",
-    title: "Zindagi Na Milegi Dobara",
-    overview: `Three friends who were inseparable in childhood decide to go on a three-week-long bachelor road trip to Spain, in order to re-establish their bond and explore thrilling adventures, before one of them gets married. What will they learn of themselves and each other during the adventure?`,
-    production_companies: "Excel Entertainment",
-    release_date: "2011-07-15",
-    adult: false,
-    runtime: 154,
-    rating: "8.2",
-    original_language: "hi",
-    genre_ids: [18, 35, 10749],
-    imdb_id: "tt1562872",
-  },
-  {
-    id: 14752,
-    backdrop_path: "/27dhih2lFlBl0oIUE9jFwIEBIMg.jpg",
-    title: "Dil Chahta Hai",
-    overview:
-      "Three inseparable childhood friends Akash, Sameer and Sid navigate love, heartbreak, and personal growth as they transition into adulthood. A memorable trip to Goa becomes a turning point in their lives, testing the strength of their friendship.",
-    production_companies: "Excel Entertainment",
-    release_date: "2001-07-24",
-    adult: false,
-    runtime: 183,
-    rating: "8.1",
-    original_language: "hi",
-    genre_ids: [18, 35, 10749],
-    imdb_id: "tt0292490",
-  },
-  {
-    id: 185008,
-    backdrop_path: "/Wi9bgiwfJPYKFcJIiUqCNDFNtf.jpg",
-    title: "Yeh Jawaani Hai Deewani",
-    overview:
-      "A free-spirited traveler, Bunny, reunites with his childhood friends on a trekking trip. As they explore the beauty of the mountains, love and ambitions intertwine, making them question their life choices.",
-    production_companies: "Dharma Productions",
-    release_date: "2013-05-31",
-    adult: false,
-    runtime: 160,
-    rating: "7.2",
-    original_language: "hi",
-    genre_ids: [18, 35, 10749],
-    imdb_id: "tt2178470",
-  },
-  {
-    id: 339274,
-    backdrop_path: "/1um3EJQlJoSiRI34MVIoG610OzR.jpg",
-    title: "Tamasha",
-    overview:
-      "Ved and Tara meet in Corsica and decide to enjoy their vacation without revealing their real identities. Years later, their paths cross again, forcing Ved to confront his monotonous life and rediscover his passion for storytelling.",
-    production_companies: "Nadiadwala Grandson Entertainment",
-    release_date: "2015-11-27",
-    adult: false,
-    runtime: 139,
-    rating: "7.3",
-    original_language: "hi",
-    genre_ids: [18, 10749],
-    imdb_id: "tt3148502",
-  },
-  {
-    id: 247645,
-    backdrop_path: "/laKTtxs7jq64sDHzvbjeT7V2oBa.jpg",
-    title: "Queen",
-    overview:
-      "After being left at the altar, a timid Delhi girl, Rani, embarks on a solo honeymoon trip across Europe. Along the way, she gains confidence, independence, and a new perspective on life.",
-    production_companies: "Viacom18 Studios",
-    release_date: "2014-03-07",
-    adult: false,
-    runtime: 146,
-    rating: "8.2",
-    original_language: "hi",
-    genre_ids: [18, 35],
-    imdb_id: "tt3322420",
-  },
-];
+interface MovieDetails {
+  id: number;
+  backdrop_path: string;
+  title: string;
+  overview: string;
+  production_companies: { id: number; name: string }[];
+  release_date: string;
+  adult: boolean;
+  runtime: number;
+  rating: string;
+  original_language: string;
+  genres: { id: number; name: string }[];
+  imdb_id: string;
+}
+
+// const movies = [
+//   {
+//     id: 61202,
+//     backdrop_path: "/z4k7b66jAHP8sQbEahxss6Ct8BW.jpg",
+//     title: "Zindagi Na Milegi Dobara",
+//     overview: `Three friends who were inseparable in childhood decide to go on a three-week-long bachelor road trip to Spain, in order to re-establish their bond and explore thrilling adventures, before one of them gets married. What will they learn of themselves and each other during the adventure?`,
+//     production_companies: "Excel Entertainment",
+//     release_date: "2011-07-15",
+//     adult: false,
+//     runtime: 154,
+//     rating: "8.2",
+//     original_language: "hi",
+//     genre_ids: [18, 35, 10749],
+//     imdb_id: "tt1562872",
+//   },
+//   {
+//     id: 14752,
+//     backdrop_path: "/27dhih2lFlBl0oIUE9jFwIEBIMg.jpg",
+//     title: "Dil Chahta Hai",
+//     overview:
+//       "Three inseparable childhood friends Akash, Sameer and Sid navigate love, heartbreak, and personal growth as they transition into adulthood. A memorable trip to Goa becomes a turning point in their lives, testing the strength of their friendship.",
+//     production_companies: "Excel Entertainment",
+//     release_date: "2001-07-24",
+//     adult: false,
+//     runtime: 183,
+//     rating: "8.1",
+//     original_language: "hi",
+//     genre_ids: [18, 35, 10749],
+//     imdb_id: "tt0292490",
+//   },
+//   {
+//     id: 185008,
+//     backdrop_path: "/Wi9bgiwfJPYKFcJIiUqCNDFNtf.jpg",
+//     title: "Yeh Jawaani Hai Deewani",
+//     overview:
+//       "A free-spirited traveler, Bunny, reunites with his childhood friends on a trekking trip. As they explore the beauty of the mountains, love and ambitions intertwine, making them question their life choices.",
+//     production_companies: "Dharma Productions",
+//     release_date: "2013-05-31",
+//     adult: false,
+//     runtime: 160,
+//     rating: "7.2",
+//     original_language: "hi",
+//     genre_ids: [18, 35, 10749],
+//     imdb_id: "tt2178470",
+//   },
+//   {
+//     id: 339274,
+//     backdrop_path: "/1um3EJQlJoSiRI34MVIoG610OzR.jpg",
+//     title: "Tamasha",
+//     overview:
+//       "Ved and Tara meet in Corsica and decide to enjoy their vacation without revealing their real identities. Years later, their paths cross again, forcing Ved to confront his monotonous life and rediscover his passion for storytelling.",
+//     production_companies: "Nadiadwala Grandson Entertainment",
+//     release_date: "2015-11-27",
+//     adult: false,
+//     runtime: 139,
+//     rating: "7.3",
+//     original_language: "hi",
+//     genre_ids: [18, 10749],
+//     imdb_id: "tt3148502",
+//   },
+//   {
+//     id: 247645,
+//     backdrop_path: "/laKTtxs7jq64sDHzvbjeT7V2oBa.jpg",
+//     title: "Queen",
+//     overview:
+//       "After being left at the altar, a timid Delhi girl, Rani, embarks on a solo honeymoon trip across Europe. Along the way, she gains confidence, independence, and a new perspective on life.",
+//     production_companies: "Viacom18 Studios",
+//     release_date: "2014-03-07",
+//     adult: false,
+//     runtime: 146,
+//     rating: "8.2",
+//     original_language: "hi",
+//     genre_ids: [18, 35],
+//     imdb_id: "tt3322420",
+//   },
+// ];
 
 const RecommendComponent = () => {
   const { data: session } = useSession();
   const { theme, toggleTheme } = useTheme();
   const [isScrolled, setIsScrolled] = useState(false);
+  const [movieIds, setMovieIds] = useState<number[]>([]);
 
   // Decode movie query from URL
   const searchParams = useSearchParams();
@@ -114,6 +130,49 @@ const RecommendComponent = () => {
   useEffect(() => {
     document.title = `${query} - SARA`;
   }, []);
+
+  useEffect(() => {
+    fetch("/api/movie/input", {
+      method: "GET",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        // console.log("output", data);
+        setMovieIds(data.movies);
+      })
+      .catch((err) => console.error("Error fetching movies:", err));
+  }, []);
+
+  async function getMovieDetails(id: number): Promise<MovieDetails | null> {
+    try {
+      const response = await fetch(`/api/movies/detail/${id}`, {
+        method: "GET",
+      });
+      if (!response.ok) {
+        console.error("Error fetching movie details:", response.statusText);
+        return null;
+      }
+      const data = await response.json();
+      return data as MovieDetails;
+    } catch (error) {
+      console.error("API error:", error);
+      return null;
+    }
+  }
+
+  async function getAllMovieDetails(ids: number[]): Promise<MovieDetails[]> {
+    const promises = ids?.map(getMovieDetails);
+    const results = await Promise.all(promises);
+    return results.filter((movie): movie is MovieDetails => movie !== null);
+  }
+
+  const [movies, setMovies] = useState<MovieDetails[]>([]);
+  useEffect(() => {
+    getAllMovieDetails(movieIds).then((movieDetails) => {
+      setMovies(movieDetails);
+      // console.log(movieDetails);
+    });
+  }, [movieIds]);
 
   function convertMinutes(X: number) {
     const hours = Math.floor(X / 60);
@@ -205,7 +264,7 @@ const RecommendComponent = () => {
   }, []);
 
   return (
-    <SplashScreen>
+    <SplashScreen isLoading={movies.length === 0}>
       <div className="bg-gradient-to-br transition-colors duration-500 text-black dark:text-white from-neutral-200 dark:from-neutral-900 dark:to-neutral-900 to-neutral-200">
         <div className="mx-20">
           {/* Header */}
@@ -319,12 +378,12 @@ const RecommendComponent = () => {
               className={`backdrop-element ${theme === "light" ? "" : "dark"}`}
             >
               <Image
-                src={`https://image.tmdb.org/t/p/w1280${movies[currentIndex].backdrop_path}`}
-                alt={`${movies[currentIndex].title}`}
+                src={`https://image.tmdb.org/t/p/w1280${movies[currentIndex]?.backdrop_path}`}
+                alt={`${movies[currentIndex]?.title}`}
                 fill
                 priority
                 placeholder="blur"
-                blurDataURL={`https://image.tmdb.org/t/p/w185${movies[currentIndex].backdrop_path}`}
+                blurDataURL={`https://image.tmdb.org/t/p/w185${movies[currentIndex]?.backdrop_path}`}
                 className="object-cover object-top image-layer transition-all duration-500"
               />
             </div>
@@ -344,50 +403,51 @@ const RecommendComponent = () => {
             <h1
               className={`text-left text-4xl font-bold leading-[120%] block my-4 title `}
             >
-              {movies[currentIndex].title}
+              {movies[currentIndex]?.title}
             </h1>
             <div
               className={`max-w-full w-[50%] text-justify text-sm description `}
             >
-              {movies[currentIndex].overview}
+              {movies[currentIndex]?.overview}
             </div>
             <div className={`text-sm flex gap-4 font-bold mt-2 info `}>
-              <span>{movies[currentIndex].production_companies}</span>
+              <span>{movies[currentIndex]?.production_companies[0].name}</span>
               <span>
-                {movies[currentIndex].release_date
-                  ? movies[currentIndex].release_date.slice(0, 4)
+                {movies[currentIndex]?.release_date
+                  ? movies[currentIndex]?.release_date.slice(0, 4)
                   : "N/A"}
               </span>
               <span className="bg-neutral-600 px-1 rounded-[2px]">
-                {movies[currentIndex].adult ? "A" : "U/A"}
+                {movies[currentIndex]?.adult ? "A" : "U/A"}
               </span>
-              <span>{convertMinutes(movies[currentIndex].runtime)}</span>
+              <span>{convertMinutes(movies[currentIndex]?.runtime)}</span>
               <span>
                 <span className="bg-[#f3ce13] px-1 rounded-[2px] text-black mr-2">
                   IMDb
                 </span>
-                {movies[currentIndex].rating}
+                {movies[currentIndex]?.rating}
               </span>
               <span>
-                {movies[currentIndex].original_language === "en"
+                {movies[currentIndex]?.original_language === "en"
                   ? "English"
-                  : movies[currentIndex].original_language === "hi"
+                  : movies[currentIndex]?.original_language === "hi"
                   ? "हिन्दी"
-                  : movies[currentIndex].original_language.toUpperCase()}
+                  : movies[currentIndex]?.original_language.toUpperCase()}
               </span>
             </div>
             <div className={`text-sm flex font-bold mt-2 genres `}>
               <span className="text-green-500">
-                {getGenresById(movies[currentIndex].genre_ids).map(
-                  (genre, index, array) => (
+                {movies[currentIndex]?.genres &&
+                  getGenresById(
+                    movies[currentIndex].genres.map((genre) => genre.id)
+                  )?.map((genre, index, array) => (
                     <React.Fragment key={index}>
                       {genre}
                       {index < array.length - 1 && (
                         <span className="text-white"> • </span>
                       )}
                     </React.Fragment>
-                  )
-                )}
+                  ))}
               </span>
             </div>
 
@@ -397,7 +457,7 @@ const RecommendComponent = () => {
               style={{ justifyContent: "flex-start", marginLeft: 0 }}
             >
               <Link
-                href={`https://www.imdb.com/title/${movies[currentIndex].imdb_id}`}
+                href={`https://www.imdb.com/title/${movies[currentIndex]?.imdb_id}`}
                 target="_blank"
                 className="px-6 py-2 bg-[#f3ce13] text-black border border-[#f3ce13] font-semibold rounded-lg shadow-md hover:bg-[#f3ce13ab] transition duration-300 ease-in-out active:scale-95 text-center"
                 style={{ borderRadius: "4px" }}
@@ -405,7 +465,7 @@ const RecommendComponent = () => {
                 IMDb Page
               </Link>
               <Link
-                href={`https://www.google.com/search?q=${movies[currentIndex].title} Watch Online`}
+                href={`https://www.google.com/search?q=${movies[currentIndex]?.title} Watch Online`}
                 target="_blank"
                 className="px-6 py-2 bg-white text-black border font-medium rounded-lg shadow-md hover:bg-gray-300 transition duration-300 ease-in-out active:scale-95 text-center w-[30%]"
                 style={{ borderRadius: "4px" }}
@@ -418,7 +478,7 @@ const RecommendComponent = () => {
                 </span> */}
                 <WatchlistButton
                   movie={movies[currentIndex]}
-                  movieId={movies[currentIndex].id}
+                  movieId={movies[currentIndex]?.id}
                   className='"relative flex items-center text-center min-h-full justify-center gap-2 px-4 py-2 text-white font-medium rounded-[4px] border border-blue-700 transition-all duration-300 ease-in-out shadow-md bg-blue-600 hover:bg-blue-700 active:scale-95 focus:outline-none focus:ring-2 focus:ring-blue-400 h-full"'
                 />
               </div>
@@ -569,16 +629,19 @@ const RecommendComponent = () => {
                           </p>
                         </div>
                         <strong className="mt-1 ml-1 text-green-500">
-                          {getGenresById(movies[currentIndex].genre_ids).map(
-                            (genre, index, array) => (
+                          {movies[currentIndex]?.genres &&
+                            getGenresById(
+                              movies[currentIndex].genres.map(
+                                (genre) => genre.id
+                              )
+                            )?.map((genre, index, array) => (
                               <React.Fragment key={index}>
                                 {genre}
                                 {index < array.length - 1 && (
                                   <span className="text-white"> • </span>
                                 )}
                               </React.Fragment>
-                            )
-                          )}
+                            ))}
                         </strong>
                       </div>
                     </div>
