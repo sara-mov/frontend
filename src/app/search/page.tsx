@@ -10,7 +10,7 @@ import { useState, useEffect } from "react";
 
 export default function Search() {
   const [searchValue, setSearchValue] = useState("");
-  const { data: session, status } = useSession();
+  const { data: session } = useSession();
 
   useEffect(() => {
     document.title = "Search - SARA";
