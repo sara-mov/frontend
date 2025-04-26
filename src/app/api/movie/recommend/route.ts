@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { NextResponse } from 'next/server';
 import { ChatGroq } from '@langchain/groq';
-import Fuse from 'fuse.js';
 
 const apiKey = process.env.NEXT_PUBLIC_GROQ_API_KEY;
 
@@ -12,10 +11,20 @@ const llm = new ChatGroq({
 });
 
 const instruction =
-  "Return only a array of objects containing exactly 5 movie titles as strings and year as number. No IMDb IDs, no extra text, no explanation — just a list of 5 movie names and year. Now process this query: ";
+  "Return only a array of objects JSON string containing exactly 5 movie titles as strings and year as number. No IMDb IDs, no extra text, no explanation — just a list JSON string of 5 movie names and year. Now process this query: ";
   
-  async function getTmdbId(movieName: string): Promise<number | null> {
-    const url = `https://api.themoviedb.org/3/search/movie?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}&query=${encodeURIComponent(movieName)}`;
+  async function getTmdbId(movieName: string, year?: number): Promise<number | null> {
+    const baseUrl = `https://api.themoviedb.org/3/search/movie`;
+    const params = new URLSearchParams({
+      api_key: process.env.NEXT_PUBLIC_TMDB_API_KEY!,
+      query: movieName,
+    });
+  
+    if (year !== undefined) {
+      params.append('year', year.toString());
+    }
+  
+    const url = `${baseUrl}?${params.toString()}`;
   
     try {
       const response = await fetch(url);
@@ -25,26 +34,20 @@ const instruction =
       const results = data.results;
       if (!results || results.length === 0) return null;
   
-      const fuse = new Fuse(results, {
-        keys: ['title'],
-        threshold: 0.3,
-      });
-  
-      const [bestMatch] = fuse.search(movieName);
-      return bestMatch && typeof bestMatch.item === 'object' && bestMatch.item !== null && 'id' in bestMatch.item
-        ? (bestMatch.item as { id: number }).id
-        : null;
+      // Directly pick the first result (most relevant)
+      const bestMatch = results[0];
+      return bestMatch && typeof bestMatch.id === 'number' ? bestMatch.id : null;
     } catch {
       return null;
     }
   }
   
-  async function fetchTmdbIds(movieNames: string[]): Promise<number[]> {
-    const idPromises = movieNames.map(getTmdbId);
+  async function fetchTmdbIds(movieList: { title: string, year?: number }[]): Promise<number[]> {
+    const idPromises = movieList.map(movie => getTmdbId(movie.title, movie.year));
     const ids = await Promise.all(idPromises);
-    return ids.filter((id): id is number => id !== null); // Removes nulls
+    return ids.filter((id): id is number => id !== null);
   }
-
+  
 export async function POST(req: Request) {
   try {
     const body = await req.json();
@@ -56,13 +59,17 @@ export async function POST(req: Request) {
 
     const fullPrompt = instruction + prompt;
     const response = await llm.invoke(fullPrompt);
+    console.log(response.text)
 
     const responseText = response.text || '';
-    const parsed = JSON.parse(responseText.replace(/'/g, '"'));
-    // console.log(parsed)
+    const parsed = JSON.parse(responseText);
+    console.log(parsed)
 
-    const result = await fetchTmdbIds(parsed.map((item: { title: string }) => item.title));
-    
+    const result = await fetchTmdbIds(parsed.map((item: { title: string, year: number }) => ({
+      title: item.title,
+      year: item.year,
+    })));
+        
     return NextResponse.json({ message: 'Input processed successfully', movies: result });
   } catch (err: any) {
     return NextResponse.json({ error: err.message || 'Internal Server Error' }, { status: 500 });
