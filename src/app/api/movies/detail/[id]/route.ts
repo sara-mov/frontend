@@ -43,8 +43,12 @@ export async function GET(req: NextRequest) {
         'Content-Type': 'application/json',
       },
     });
-  } catch (error: any) {
-    return new NextResponse(JSON.stringify({ error: `Failed to fetch data: ${error.message}` }), {
+  } catch (error) {
+    const errorMessage =
+      error && typeof error === "object" && "message" in error
+        ? (error as { message: string }).message
+        : String(error);
+    return new NextResponse(JSON.stringify({ error: `Failed to fetch data: ${errorMessage}` }), {
       status: 500,
       headers: {
         'Access-Control-Allow-Origin': '*',
