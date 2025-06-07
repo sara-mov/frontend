@@ -65,7 +65,7 @@ const RecommendComponent = () => {
 
   async function getMovieDetails(id: number): Promise<MovieDetails | null> {
     try {
-      const response = await fetch(`/api/movies/detail/${id}`, {
+      const response = await fetch(`https://sara-mov.vercel.app/api/movies/detail/${id}`, {
         method: "GET",
       });
       if (!response.ok) {

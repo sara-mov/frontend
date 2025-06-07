@@ -26,10 +26,13 @@ export default function TrendingMovies() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        fetch("/api/movies/trending", { method: "GET" })
+        fetch("https://sara-mov.vercel.app/api/movies/trending", {
+          method: "GET",
+        })
           .then((res) => res.json())
           .then((data) => {
             setTrendingMovies(data.results);
+            console.log("Trending Movies:", data.results);
             setLoading(false);
           })
           .catch((err) => console.error("Error fetching movies:", err));

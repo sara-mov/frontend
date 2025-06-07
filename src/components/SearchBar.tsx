@@ -26,14 +26,14 @@ const SearchBar: React.FC<SearchBarProps> = ({
   const fetchMovies = async () => {
     setLoading(true);
     try {
-      const res = await fetch("/api/movie/recommend", {
+      const res = await fetch("https://sara-mov.vercel.app/api/movie/recommend", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ prompt: searchValue }),
       });
       const data = await res.json();
 
-      // console.log("data", data);
+      console.log("data", data);
 
       if (data.movies) {
         // Save to localStorage
