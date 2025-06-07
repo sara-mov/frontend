@@ -84,7 +84,7 @@ const MoviePage = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        fetch(`/api/movies/detail/${id}`, { method: "GET" })
+        fetch(`https://sara-mov.vercel.app/api/movies/detail/${id}`, { method: "GET" })
           .then((res) => res.json())
           .then((data) => {
             // console.log(data);
@@ -109,7 +109,7 @@ const MoviePage = () => {
     const fetchData = async () => {
       try {
         const res = await fetch(
-          `/api/movies/more-detail/${movies[0]?.imdb_id}`
+          `https://sara-mov.vercel.app/api/movies/more-detail/${movies[0]?.imdb_id}`
         );
         const data = await res.json();
         // console.log(data);

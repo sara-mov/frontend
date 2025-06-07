@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 import Footer from "@/components/Footer";
 import { useTheme } from "@/context/ThemeContext";
@@ -148,7 +149,7 @@ export default function Home() {
             </header>
           </div>
 
-          <DevelopmentBanner />
+          {/* <DevelopmentBanner /> */}
 
           {/* Hero Section */}
           {/* Section 1 */}
@@ -239,7 +240,7 @@ export default function Home() {
                   a unique viewing experience.
                 </div>
               </div>
-              <div className="discover-points-element">
+              <div className="discover-points-element flex-col lg:flex-row">
                 <div className="w-full">
                   <div className="max-w-full">
                     <div className="h-full">
@@ -337,7 +338,7 @@ export default function Home() {
                   </div>
                 </div>
               </div>
-              <div className="discover-points-element w-full ">
+              <div className="discover-points-element w-full flex-col md:flex-row ">
                 <div className="relative max-w-full w-[33%]">
                   <div className="explore-widget-container">
                     <div className=" flex flex-wrap relative">
