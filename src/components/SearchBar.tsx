@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import {
@@ -26,18 +27,21 @@ const SearchBar: React.FC<SearchBarProps> = ({
   const fetchMovies = async () => {
     setLoading(true);
     try {
-      const res = await fetch("https://sara-mov.vercel.app/api/movie/recommend", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ prompt: searchValue }),
-      });
+      const res = await fetch(
+        "https://sara-mov.vercel.app/api/movie/recommend",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ prompt: searchValue }),
+        }
+      );
       const data = await res.json();
 
       console.log("data", data);
 
       if (data.movies) {
         // Save to localStorage
-        localStorage.setItem('latestMovies', JSON.stringify(data.movies));
+        localStorage.setItem("latestMovies", JSON.stringify(data.movies));
         router.push(`/recommend?q=${searchValue}`);
       }
 
@@ -97,7 +101,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
             placeholder="What are you in the mood for? Type or speak…"
             value={searchValue}
             onChange={(e) => setSearchValue(e.target.value)}
-            className="w-full rounded-full border border-neutral-300 bg-neutral-100 px-6 py-4 pr-32 shadow-lg focus:outline-none dark:border-neutral-700 dark:bg-neutral-200 dark:text-black relative z-10"
+            className="w-full rounded-full border border-neutral-300 bg-neutral-100 px-6 py-4 pr-32 shadow-lg focus:outline-none dark:border-neutral-700 dark:bg-neutral-200 dark:text-black relative z-10 text-sm md:text-sm lg:text-base placeholder:text-[10px] sm:placeholder:text-sm"
           />
           <div
             className={`absolute inset-0 rounded-full bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 blur-xl opacity-0 transition-opacity duration-300 group-focus-within:opacity-60 animate-moveGradient z-0 ${
