@@ -57,10 +57,12 @@ export default function Home() {
       <div className="bg-gradient-to-br transition duration-200 text-black dark:text-white from-neutral-100 dark:from-neutral-800 dark:to-neutral-900 to-neutral-200">
         <div className="mx-16">
           {/* Header */}
-          <div className="fixed top-0 left-0 w-full pt-5 px-4 sm:px-8 md:px-16 mr-0 py-4 z-20">
+
+          <div className="fixed top-0 left-0 w-full pt-5 px-16 mr-0 py-4 z-20">
             {/* Default Background */}
+
             <div
-              className={`-z-10 absolute inset-0 transition-opacity duration-1000 ease-in-out ${
+              className={` -z-10 absolute inset-0 transition-opacity duration-1000 ease-in-out ${
                 isScrolled ? "opacity-100" : "opacity-0"
               }`}
               style={{
@@ -73,8 +75,7 @@ export default function Home() {
                   : "linear-gradient(to bottom, #262626, transparent)",
               }}
             ></div>
-
-            <header className="flex items-center justify-between py-2 sm:py-4">
+            <header className="flex items-center justify-between py-4">
               <div className="flex items-center gap-2">
                 <Link href="/">
                   <Image
@@ -87,11 +88,10 @@ export default function Home() {
                     }
                     alt="sara-logo"
                     height={24}
-                    className="w-auto h-6"
                   />
                 </Link>
               </div>
-              <div className="flex gap-4 sm:gap-7">
+              <div className="flex gap-7">
                 <button onClick={toggleTheme} className="rounded-full">
                   {theme === "light" ? (
                     <div
@@ -103,7 +103,7 @@ export default function Home() {
                         xmlns="http://www.w3.org/2000/svg"
                         x="0px"
                         y="0px"
-                        className="w-5 h-5 sm:w-6 sm:h-6"
+                        className="w-6 h-6"
                         viewBox="0 0 50 50"
                         fill="currentColor"
                       >
@@ -114,7 +114,7 @@ export default function Home() {
                     <div className="h-5 w-5 text-gray-100">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        className="w-5 h-5 sm:w-6 sm:h-6"
+                        className="w-6 h-6"
                         viewBox="0 0 24 24"
                         fill="currentColor"
                       >
@@ -126,7 +126,7 @@ export default function Home() {
                 {session ? (
                   <button
                     onClick={() => signOut()}
-                    className={`rounded-full px-4 py-1 sm:px-6 sm:py-2 text-sm sm:text-base font-semibold ${
+                    className={`rounded-full px-6 py-2 font-semibold ${
                       isScrolled
                         ? "bg-black text-white dark:bg-white dark:text-black"
                         : "bg-white text-black"
@@ -137,7 +137,7 @@ export default function Home() {
                 ) : (
                   <Link
                     href="/sign-in"
-                    className={`rounded-full px-4 py-1 sm:px-6 sm:py-2 text-sm sm:text-base font-semibold ${
+                    className={`rounded-full px-6 py-2 font-semibold ${
                       isScrolled
                         ? "bg-black text-white dark:bg-white dark:text-black"
                         : "bg-white text-black"
@@ -149,7 +149,6 @@ export default function Home() {
               </div>
             </header>
           </div>
-
           {/* <DevelopmentBanner /> */}
 
           {/* Hero Section */}
@@ -524,7 +523,10 @@ export default function Home() {
 
           {/* Section 5 */}
           <div className="tailored-container bg-black text-white dark:bg-white dark:text-black -mx-16">
-            <div className="discover-container-inner lg:flex-row" style={{ marginLeft: 80, marginRight: 80}}>
+            <div
+              className="discover-container-inner lg:flex-row"
+              style={{ marginLeft: 80, marginRight: 80 }}
+            >
               <div className="relative max-w-full lg:w-[25%]">
                 <div className="h-full">
                   <Link
@@ -649,7 +651,7 @@ export default function Home() {
 
           {/* Section 6 */}
           <div className="tailored-container">
-            <div              className="discover-container-inner lg:flex-row"            >
+            <div className="discover-container-inner lg:flex-row">
               <div className="relative max-w-full lg:w-[25%]">
                 <div className="h-full">
                   <Link

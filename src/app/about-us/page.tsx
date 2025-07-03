@@ -51,7 +51,7 @@ const AboutUs = () => {
           </div>
           <div className=" py-48 element">
             <div className="absolute h-full w-full overflow-hidden"></div>
-            <h1 className="text-[42px] font-bold text-center">
+            <h1 className="text-3xl md:text-4xl lg:text-[42px] font-bold text-center">
               sara - search analysis recommed application
             </h1>
           </div>
