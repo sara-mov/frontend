@@ -49,157 +49,133 @@ const Disclaimer = () => {
             ></div>
             <Navbar />
           </div>
-          <div className="pt-20">
+          <div className="pt-20 lg:px-16">
             <div className="discover-container-inner">
               <div className="flex flex-col items-center justify-start gap-5 w-full h-full">
-                <div className="max-w-full w-[66%] text-left">
-                  <div className="h-full">
-                    <h1 className="text-5xl font-bold">Disclaimer</h1>{" "}
-                  </div>
+                <div className="w-full max-w-4xl text-left">
+                  <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold">
+                    Disclaimer
+                  </h1>
                 </div>
               </div>
             </div>
+
             <div className="element">
               <div className="flex flex-col items-center justify-start gap-5 w-full h-full">
-                <div className="max-w-full w-[66%] text-left text-lg">
-                  <div className="h-full text-justify">
-                    <p className=" mb-5">
-                      <b>SARA Terms & Use</b>
-                    </p>
-                    <p className=" mb-5">Last Updated: February 14, 2025</p>
-                    <p className=" mb-5">
-                      SARA does not own or claim rights to any movie images,
-                      posters, or data displayed. All content is sourced from
-                      third-party providers and belongs to their respective
-                      owners, used solely for informational purposes under fair
-                      use.
-                    </p>
-                    <p className=" mb-5">
-                      <b>1. No Ownership of Images & Data</b>
-                    </p>
-                    <p className=" mb-5 ml-5">
-                      We do not own, claim ownership, or hold any rights to the
-                      movie images, posters, trailers, descriptions, metadata,
-                      or any related content displayed on this website.
-                    </p>
-                    <p className=" mb-5">
-                      <b>2. Source Attribution</b>
-                    </p>
-                    <p className=" mb-5 ml-5"></p>
-                    <ul className=" block list-disc ml-10 mb-7">
-                      <li>
-                        All movie-related content is sourced from third-party
-                        providers such as TMDb, IMDb, Open Movie Database, or
-                        other publicly available APIs.
-                      </li>
-                      <li>
-                        The respective content creators, production companies,
-                        and distributors own all rights to these materials.
-                      </li>
-                    </ul>
-                    <p className=" mb-5">
-                      <b>3. Fair Use & Informational Purpose</b>
-                    </p>
-                    <p className=" mb-5 ml-5"></p>
-                    <ul className=" block list-disc ml-10 mb-7">
-                      <li>
-                        The images and data provided on this website are used
-                        solely for informational, educational, and
-                        non-commercial purposes under the principles of Fair
-                        Use.
-                      </li>
-                      <li>
-                        Our goal is to help users discover and explore movies
-                        while promoting film appreciation.
-                      </li>
-                    </ul>
-                    <p className=" mb-5">
-                      <b>4. Copyright & Intellectual Property Rights</b>
-                    </p>
-                    <p className=" mb-5 ml-5"></p>
-                    <ul className=" block list-disc ml-10 mb-7">
-                      <li>
-                        All copyrights, trademarks, and intellectual property
-                        rights belong to their respective owners, including
-                        movie studios, production companies, and content
-                        creators.
-                      </li>
-                      <li>
-                        If any content on this website violates copyright laws,
-                        it is purely unintentional.
-                      </li>
-                    </ul>
-                    <p className=" mb-5">
-                      <b>5. No Commercial Use or Distribution</b>
-                    </p>
-                    <p className=" mb-5 ml-5"></p>
-                    <ul className=" block list-disc ml-10 mb-7">
-                      <li>
-                        This website does not sell, rent, distribute, or host
-                        any copyrighted content, including full movies, TV
-                        shows, or related media.
-                      </li>
-                      <li>
-                        We do not offer streaming or downloads of copyrighted
-                        content.
-                      </li>
-                    </ul>
-                    <p className=" mb-5">
-                      <b>6. Accuracy of Information</b>
-                    </p>
-                    <p className=" mb-5 ml-5"></p>
-                    <ul className=" block list-disc ml-10 mb-7">
-                      <li>
-                        While we strive to provide accurate and up-to-date movie
-                        information, we do not guarantee the completeness,
-                        reliability, or correctness of the data.
-                      </li>
-                      <li>
-                        Users should verify details from official sources.
-                      </li>
-                    </ul>
-                    <p className=" mb-5">
-                      <b>7. Third-Party Links & External Content</b>
-                    </p>
-                    <p className=" mb-5 ml-5">
-                      Our website may include links to third-party websites
-                      (e.g., streaming platforms, official movie websites). We
-                      do not endorse or take responsibility for the content,
-                      policies, or practices of these external sites.
-                    </p>
-                    <p className=" mb-5">
-                      <b>8. User Responsibility</b>
-                    </p>
-                    <p className=" mb-5 ml-5"></p>
-                    <ul className=" block list-disc ml-10 mb-7">
-                      <li>
-                        Users should ensure they comply with local copyright
-                        laws when using information from this website.
-                      </li>
-                      <li>
-                        We encourage users to support content creators by
-                        accessing movies through legal channels.
-                      </li>
-                    </ul>
-                    <p className=" mb-5">
-                      <b>9. Content Removal Requests</b>
-                    </p>
-                    <p className=" mb-5 ml-5">
-                      If you are a copyright owner or representative and believe
-                      that your content is used improperly, please contact us at{" "}
-                      <a
-                        href="mailto:contact.sara.team@gmail.com"
-                        className=" text-[#008080]"
-                      >
-                        contact.sara.team@gmail.com
-                      </a>
-                      , and we will promptly review and address your request.
-                    </p>{" "}
-                  </div>
+                <div className="w-full max-w-4xl text-base sm:text-lg leading-relaxed text-justify">
+                  <p className="mb-5 font-semibold">SARA Terms & Use</p>
+                  <p className="mb-5">Last Updated: February 14, 2025</p>
+
+                  <p className="mb-5">
+                    SARA does not own or claim rights to any movie images,
+                    posters, or data displayed. All content is sourced from
+                    third-party providers and belongs to their respective
+                    owners, used solely for informational purposes under fair
+                    use.
+                  </p>
+
+                  <p className="mb-3 font-semibold">
+                    1. No Ownership of Images & Data
+                  </p>
+                  <ul className="list-disc ml-5 mb-5">
+                    <li>
+                      We do not own or hold any rights to movie images,
+                      trailers, or descriptions.
+                    </li>
+                  </ul>
+
+                  <p className="mb-3 font-semibold">2. Source Attribution</p>
+                  <ul className="list-disc ml-5 mb-5">
+                    <li>
+                      Content is sourced from APIs like TMDb, IMDb, OMDb, etc.
+                    </li>
+                    <li>
+                      All rights belong to the original creators and
+                      distributors.
+                    </li>
+                  </ul>
+
+                  <p className="mb-3 font-semibold">
+                    3. Fair Use & Informational Purpose
+                  </p>
+                  <ul className="list-disc ml-5 mb-5">
+                    <li>
+                      Used solely for informational and educational purposes.
+                    </li>
+                    <li>Promotes film appreciation and discovery.</li>
+                  </ul>
+
+                  <p className="mb-3 font-semibold">
+                    4. Copyright & Intellectual Property Rights
+                  </p>
+                  <ul className="list-disc ml-5 mb-5">
+                    <li>
+                      All trademarks and copyrights belong to their respective
+                      owners.
+                    </li>
+                    <li>Any violation is purely unintentional.</li>
+                  </ul>
+
+                  <p className="mb-3 font-semibold">
+                    5. No Commercial Use or Distribution
+                  </p>
+                  <ul className="list-disc ml-5 mb-5">
+                    <li>
+                      This website does not host, stream, or sell copyrighted
+                      media.
+                    </li>
+                    <li>
+                      No downloads or rentals of full movies or TV shows are
+                      provided.
+                    </li>
+                  </ul>
+
+                  <p className="mb-3 font-semibold">
+                    6. Accuracy of Information
+                  </p>
+                  <ul className="list-disc ml-5 mb-5">
+                    <li>
+                      While we aim for accuracy, we cannot guarantee full
+                      correctness.
+                    </li>
+                    <li>Users should confirm details from official sources.</li>
+                  </ul>
+
+                  <p className="mb-3 font-semibold">
+                    7. Third-Party Links & External Content
+                  </p>
+                  <p className="mb-5 ml-5">
+                    Links to external websites may be included. We are not
+                    responsible for their content or policies.
+                  </p>
+
+                  <p className="mb-3 font-semibold">8. User Responsibility</p>
+                  <ul className="list-disc ml-5 mb-5">
+                    <li>Users must comply with local copyright laws.</li>
+                    <li>
+                      We encourage legal access to movies to support creators.
+                    </li>
+                  </ul>
+
+                  <p className="mb-3 font-semibold">
+                    9. Content Removal Requests
+                  </p>
+                  <p className="mb-5 ml-5">
+                    If you are a copyright owner and believe your content is
+                    misused, please contact us at{" "}
+                    <a
+                      href="mailto:contact.sara.team@gmail.com"
+                      className="text-[#008080] underline"
+                    >
+                      contact.sara.team@gmail.com
+                    </a>
+                    . We will address your concerns promptly.
+                  </p>
                 </div>
               </div>
             </div>
           </div>
+
           <Footer />
         </div>
       </div>

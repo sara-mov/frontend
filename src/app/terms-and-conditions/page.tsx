@@ -49,114 +49,98 @@ const TermsAndConditions = () => {
             ></div>
             <Navbar />
           </div>
-          <div className="pt-20">
+          <div className="pt-20 lg:px-16">
             <div className="discover-container-inner">
               <div className="flex flex-col items-center justify-start gap-5 w-full h-full">
-                <div className="max-w-full w-[66%] text-left">
-                  <div className="h-full">
-                    <h1 className="text-5xl font-bold">Terms and Conditions</h1>{" "}
-                  </div>
+                <div className="w-full max-w-4xl text-left">
+                  <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold">
+                    Terms and Conditions
+                  </h1>
                 </div>
               </div>
             </div>
+
             <div className="element">
               <div className="flex flex-col items-center justify-start gap-5 w-full h-full">
-                <div className="max-w-full w-[66%] text-left text-lg">
-                  <div className="h-full text-justify">
-                    <p className=" mb-5">
-                      <b>SARA Terms and Conditions</b>
-                    </p>
-                    <p className=" mb-5">Last Updated: February 14, 2025</p>
-                    <p className=" mb-5">
-                      Welcome to SARA! These Terms and Conditions govern your
-                      use of our website and services. By accessing or using
-                      SARA, you agree to be bound by these terms.
-                    </p>
-                    <p className=" mb-5">
-                      <b>1. Acceptance of Terms</b>
-                    </p>
-                    <p className=" mb-5 ml-5">
-                      By using SARA, you acknowledge that you have read,
-                      understood, and agree to be bound by these Terms and
-                      Conditions. If you do not agree to these terms, you are
-                      prohibited from using SARA.
-                    </p>
-                    <p className=" mb-5">
-                      <b>2. User Accounts</b>
-                    </p>
-                    <p className=" mb-5 ml-5">
-                      If you create an account with SARA, you are responsible
-                      for maintaining the confidentiality of your account
-                      credentials. You agree to notify SARA immediately of any
-                      unauthorized use of your account.
-                    </p>
-                    <p className=" mb-5">
-                      <b>3. Content</b>
-                    </p>
-                    <p className=" mb-5 ml-5">
-                      You are responsible for all content you submit or post to
-                      SARA. You agree that your content will not violate any
-                      applicable laws or regulations. SARA reserves the right to
-                      remove any content that violates these terms.
-                    </p>
-                    <p className=" mb-5">
-                      <b>4. Intellectual Property</b>
-                    </p>
-                    <p className=" mb-5 ml-5">
-                      All intellectual property rights, including copyrights and
-                      trademarks, related to SARA and its content remain the
-                      property of SARA or its licensors. You are granted a
-                      limited, non-exclusive, non-transferable license to use
-                      SARA&apos;s services in accordance with these Terms and
-                      Conditions.
-                    </p>
-                    <p className=" mb-5">
-                      <b>5. Disclaimer of Warranties</b>
-                    </p>
-                    <p className=" mb-5 ml-5">
-                      SARA provides its services on an &apos;as is&apos; and
-                      &apos;as available&apos; basis. SARA does not warrant the
-                      accuracy, completeness, or reliability of any information
-                      provided on the website.
-                    </p>
-                    <p className=" mb-5">
-                      <b>6. Limitation of Liability</b>
-                    </p>
-                    <p className=" mb-5 ml-5">
-                      In no event shall SARA be liable for any direct, indirect,
-                      incidental, special, or consequential damages arising out
-                      of or in connection with your use of SARA.
-                    </p>
-                    <p className=" mb-5">
-                      <b>7. Governing Law These</b>
-                    </p>
-                    <p className=" mb-5 ml-5">
-                      Terms and Conditions shall be governed by and construed in
-                      accordance with the laws of [State/Country].
-                    </p>
-                    <p className=" mb-5">
-                      <b>8. Changes to Terms</b>
-                    </p>
-                    <p className=" mb-5 ml-5">
-                      SARA reserves the right to modify these Terms and
-                      Conditions at any time. Any changes will be effective upon
-                      posting on the website.
-                    </p>
-                    <p className=" mb-5">
-                      <b>9. Contact Us</b>
-                    </p>
-                    <p className=" mb-5 ml-5">
-                      If you have any questions or concerns regarding these
-                      Terms and Conditions, please contact us at{" "}
-                      <a
-                        href="mailto:contact.sara.team@gmail.com"
-                        className=" text-[#008080]"
-                      >
-                        contact.sara.team@gmail.com
-                      </a>
-                      .
-                    </p>{" "}
-                  </div>
+                <div className="w-full max-w-4xl text-left text-base sm:text-lg leading-relaxed text-justify">
+                  <p className="mb-5 font-semibold">
+                    SARA Terms and Conditions
+                  </p>
+                  <p className="mb-5">Last Updated: February 14, 2025</p>
+
+                  <p className="mb-5">
+                    Welcome to SARA! These Terms and Conditions govern your use
+                    of our website and services. By accessing or using SARA, you
+                    agree to be bound by these terms.
+                  </p>
+
+                  <p className="mb-3 font-semibold">1. Acceptance of Terms</p>
+                  <p className="mb-5 ml-5">
+                    By using SARA, you acknowledge that you have read,
+                    understood, and agree to be bound by these Terms and
+                    Conditions. If you do not agree, you may not use SARA.
+                  </p>
+
+                  <p className="mb-3 font-semibold">2. User Accounts</p>
+                  <p className="mb-5 ml-5">
+                    If you create an account, you are responsible for
+                    maintaining its confidentiality. Notify SARA of any
+                    unauthorized access to your account immediately.
+                  </p>
+
+                  <p className="mb-3 font-semibold">3. Content</p>
+                  <p className="mb-5 ml-5">
+                    You are responsible for the content you share on SARA. Do
+                    not post anything unlawful or inappropriate. We reserve the
+                    right to remove such content.
+                  </p>
+
+                  <p className="mb-3 font-semibold">4. Intellectual Property</p>
+                  <p className="mb-5 ml-5">
+                    All copyrights and trademarks remain with SARA or its
+                    licensors. You are granted limited usage rights as per these
+                    terms.
+                  </p>
+
+                  <p className="mb-3 font-semibold">
+                    5. Disclaimer of Warranties
+                  </p>
+                  <p className="mb-5 ml-5">
+                    SARA is provided “as is” without warranties of any kind. We
+                    do not guarantee accuracy or completeness of information.
+                  </p>
+
+                  <p className="mb-3 font-semibold">
+                    6. Limitation of Liability
+                  </p>
+                  <p className="mb-5 ml-5">
+                    SARA is not liable for any damages arising from your use of
+                    the platform.
+                  </p>
+
+                  <p className="mb-3 font-semibold">7. Governing Law</p>
+                  <p className="mb-5 ml-5">
+                    These terms shall be governed in accordance with the laws of
+                    [State/Country].
+                  </p>
+
+                  <p className="mb-3 font-semibold">8. Changes to Terms</p>
+                  <p className="mb-5 ml-5">
+                    We may update these Terms at any time. Continued use implies
+                    acceptance of the updated terms.
+                  </p>
+
+                  <p className="mb-3 font-semibold">9. Contact Us</p>
+                  <p className="mb-5 ml-5">
+                    For any questions, contact us at{" "}
+                    <a
+                      href="mailto:contact.sara.team@gmail.com"
+                      className="text-[#008080] underline"
+                    >
+                      contact.sara.team@gmail.com
+                    </a>
+                    .
+                  </p>
                 </div>
               </div>
             </div>
