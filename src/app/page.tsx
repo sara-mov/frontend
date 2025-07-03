@@ -57,11 +57,10 @@ export default function Home() {
       <div className="bg-gradient-to-br transition duration-200 text-black dark:text-white from-neutral-100 dark:from-neutral-800 dark:to-neutral-900 to-neutral-200">
         <div className="mx-16">
           {/* Header */}
-          <div className="fixed top-0 left-0 w-full pt-5 px-16 mr-0 py-4 z-20">
+          <div className="fixed top-0 left-0 w-full pt-5 px-4 sm:px-8 md:px-16 mr-0 py-4 z-20">
             {/* Default Background */}
-
             <div
-              className={` -z-10 absolute inset-0 transition-opacity duration-1000 ease-in-out ${
+              className={`-z-10 absolute inset-0 transition-opacity duration-1000 ease-in-out ${
                 isScrolled ? "opacity-100" : "opacity-0"
               }`}
               style={{
@@ -74,7 +73,8 @@ export default function Home() {
                   : "linear-gradient(to bottom, #262626, transparent)",
               }}
             ></div>
-            <header className="flex items-center justify-between py-4">
+
+            <header className="flex items-center justify-between py-2 sm:py-4">
               <div className="flex items-center gap-2">
                 <Link href="/">
                   <Image
@@ -87,10 +87,11 @@ export default function Home() {
                     }
                     alt="sara-logo"
                     height={24}
+                    className="w-auto h-6"
                   />
                 </Link>
               </div>
-              <div className="flex gap-7">
+              <div className="flex gap-4 sm:gap-7">
                 <button onClick={toggleTheme} className="rounded-full">
                   {theme === "light" ? (
                     <div
@@ -102,7 +103,7 @@ export default function Home() {
                         xmlns="http://www.w3.org/2000/svg"
                         x="0px"
                         y="0px"
-                        className="w-6 h-6"
+                        className="w-5 h-5 sm:w-6 sm:h-6"
                         viewBox="0 0 50 50"
                         fill="currentColor"
                       >
@@ -113,7 +114,7 @@ export default function Home() {
                     <div className="h-5 w-5 text-gray-100">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        className="w-6 h-6"
+                        className="w-5 h-5 sm:w-6 sm:h-6"
                         viewBox="0 0 24 24"
                         fill="currentColor"
                       >
@@ -125,7 +126,7 @@ export default function Home() {
                 {session ? (
                   <button
                     onClick={() => signOut()}
-                    className={`rounded-full px-6 py-2 font-semibold ${
+                    className={`rounded-full px-4 py-1 sm:px-6 sm:py-2 text-sm sm:text-base font-semibold ${
                       isScrolled
                         ? "bg-black text-white dark:bg-white dark:text-black"
                         : "bg-white text-black"
@@ -136,7 +137,7 @@ export default function Home() {
                 ) : (
                   <Link
                     href="/sign-in"
-                    className={`rounded-full px-6 py-2 font-semibold ${
+                    className={`rounded-full px-4 py-1 sm:px-6 sm:py-2 text-sm sm:text-base font-semibold ${
                       isScrolled
                         ? "bg-black text-white dark:bg-white dark:text-black"
                         : "bg-white text-black"
@@ -157,13 +158,14 @@ export default function Home() {
             <div className="cinema-element-container">
               <div className="cinema-element"></div>
             </div>
-            <div className=" max-w-full w-[50%] ">
-              <div className=" h-full">
-                <h1 className="twbb-headline">
+
+            <div className="w-full md:w-[80%] lg:w-[50%] mx-auto text-center">
+              <div className="h-full">
+                <h1 className="twbb-headline text-3xl sm:text-4xl md:text-5xl leading-tight">
                   <span className="twbb-headline-plain-text twbb-headline-text-wrapper">
                     Discover{" "}
                   </span>
-                  <span className="twbb-headline-dynamic-wrapper twbb-headline-text-wrapper">
+                  <span className="twbb-headline-dynamic-wrapper twbb-headline-text-wrapper relative inline-block">
                     <span className="twbb-headline-dynamic-text twbb-headline-text-active">
                       Movies
                     </span>
@@ -187,18 +189,20 @@ export default function Home() {
                 </h1>
               </div>
             </div>
-            <div className="max-w-full w-[62%] text-center text-xl z-10">
+
+            <div className="max-w-full w-full md:w-[80%] lg:w-[62%] mx-auto text-center text-base sm:text-lg md:text-xl z-10">
               <div className="elementor-widget-container">
                 Welcome to sara, your gateway to a world of cinema. Explore
                 personalized movie recommendations, engage with a community of
                 film enthusiasts, and never miss out on the latest releases or
-                hidden gems.{" "}
+                hidden gems.
               </div>
             </div>
-            <div className="buttton-container z-10 max-w-full w-[58%]">
+
+            <div className="buttton-container z-10 max-w-full w-full sm:w-[80%] md:w-[70%] lg:w-[58%] mx-auto flex flex-col sm:flex-row justify-center gap-4 mt-8 sm:mt-10">
               <Link
                 href="/how-it-works"
-                className="px-6 py-2 bg-white text-black border rounded-lg shadow-md hover:bg-gray-200 transition duration-300"
+                className="px-4 sm:px-6 py-2 bg-white text-black border rounded-lg shadow-md hover:bg-gray-200 transition duration-300 text-sm sm:text-base"
                 style={{ borderRadius: "4px" }}
               >
                 Learn More
@@ -207,7 +211,7 @@ export default function Home() {
               {session ? (
                 <Link
                   href="/search"
-                  className="px-6 py-2 border border-white text-white rounded-md shadow-md  hover:bg-white hover:text-black transition duration-300"
+                  className="px-4 sm:px-6 py-2 border border-white text-white rounded-md shadow-md hover:bg-white hover:text-black transition duration-300 text-sm sm:text-base"
                   style={{ borderRadius: "4px" }}
                 >
                   Get Started
@@ -215,7 +219,7 @@ export default function Home() {
               ) : (
                 <Link
                   href="/sign-in"
-                  className="px-6 py-2 border border-white text-white rounded-md shadow-md  hover:bg-white hover:text-black transition duration-300"
+                  className="px-4 sm:px-6 py-2 border border-white text-white rounded-md shadow-md hover:bg-white hover:text-black transition duration-300 text-sm sm:text-base"
                   style={{ borderRadius: "4px" }}
                 >
                   Get Started
@@ -227,30 +231,35 @@ export default function Home() {
           {/* Section 2 */}
           <div className="discover-container">
             <div className="discover-container-inner">
-              <div className=" relative max-w-full w-[60%]">
+              <div className="relative w-full md:w-[80%] lg:w-[60%]">
                 <div className="elementor-widget-container h-full">
-                  <h2 className="discover-heading-title ">Discover sara.</h2>
+                  <h2 className="discover-heading-title text-3xl sm:text-4xl md:text-5xl font-bold text-center md:text-left">
+                    Discover sara.
+                  </h2>
                 </div>
               </div>
-              <div className=" relative max-w-full w-[60%]">
-                <div className="discover-heading-paragraph h-full">
+
+              <div className="relative w-full md:w-[80%] lg:w-[60%]">
+                <div className="discover-heading-paragraph h-full text-base sm:text-lg text-center md:text-left">
                   At sara, our mission is to revolutionize how movie lovers
-                  discover films. <br /> We provide personalized recommendations
-                  and foster a vibrant community of cinema enthusiasts, ensuring
-                  a unique viewing experience.
+                  discover films.
+                  <br className="hidden sm:block" /> We provide personalized
+                  recommendations and foster a vibrant community of cinema
+                  enthusiasts, ensuring a unique viewing experience.
                 </div>
               </div>
+
               <div className="discover-points-element flex-col lg:flex-row">
                 <div className="w-full">
                   <div className="max-w-full">
                     <div className="h-full">
-                      <div className="block text-left mb-4">
+                      <div className="block text-center lg:text-left mb-4">
                         <span className=" text-3xl text-[#ff6f61]">
                           <FontAwesomeIcon icon={faLightbulb} />{" "}
                         </span>
                       </div>
 
-                      <div className="text-left">
+                      <div className="text-center lg:text-left">
                         <h4 className="elementor-icon-box-title">
                           <span>Innovative Algorithms </span>
                         </h4>
@@ -265,16 +274,16 @@ export default function Home() {
                     </div>
                   </div>
                 </div>
-                <div className="w-full">
+                <div className="w-full pt-7">
                   <div className="max-w-full">
                     <div className="h-full">
-                      <div className="block text-left mb-4">
+                      <div className="block text-center lg:text-left mb-4">
                         <span className=" text-3xl text-[#ff6f61]">
                           <FontAwesomeIcon icon={faUsers} />{" "}
                         </span>
                       </div>
 
-                      <div className="text-left">
+                      <div className="text-center lg:text-left">
                         <h4 className="elementor-icon-box-title">
                           <span>Community Engagement </span>
                         </h4>
@@ -289,16 +298,16 @@ export default function Home() {
                     </div>
                   </div>
                 </div>
-                <div className="w-full">
+                <div className="w-full pt-7">
                   <div className="max-w-full">
                     <div className="h-full">
-                      <div className="block text-left mb-4">
-                        <span className=" text-3xl text-[#ff6f61]">
+                      <div className="block text-center lg:text-left mb-4">
+                        <span className="text-3xl text-[#ff6f61]">
                           <FontAwesomeIcon icon={faStar} />{" "}
                         </span>
                       </div>
 
-                      <div className="text-left">
+                      <div className="text-center lg:text-left">
                         <h4 className="elementor-icon-box-title">
                           <span>Diverse Selection </span>
                         </h4>
@@ -320,15 +329,15 @@ export default function Home() {
           {/* Section 3 */}
           <div className="discover-container">
             <div className="discover-container-inner">
-              <div className="explore-element">
-                <div className="max-w-full w-[50%] text-left">
+              <div className=" flex flex-col lg:flex-row gap-[22px]">
+                <div className="max-w-full lg:w-[50%] text-left">
                   <div className="h-full">
-                    <h2 className="discover-heading-title">
+                    <h2 className="text-[36px] font-bold lg:discover-heading-title">
                       Explore Our Curated Movie Picks
                     </h2>{" "}
                   </div>
                 </div>
-                <div className="max-w-full w-[50%] discover-heading-paragraph">
+                <div className="max-w-full lg:w-[50%] discover-heading-paragraph">
                   <div className="h-full">
                     Dive into a world of cinema with our expertly curated movie
                     recommendations. Whether you&apos;re in the mood for a
@@ -338,135 +347,107 @@ export default function Home() {
                   </div>
                 </div>
               </div>
-              <div className="discover-points-element w-full flex-col md:flex-row ">
-                <div className="relative max-w-full w-[33%]">
+              <div className="discover-points-element w-full flex flex-col lg:flex-row gap-6">
+                <div className="relative w-full lg:w-1/3">
                   <div className="explore-widget-container">
-                    <div className=" flex flex-wrap relative">
+                    <div className="flex flex-wrap relative">
                       <div className="w-full min-h-[220px] relative z-10">
-                        <span className="absolute block z-20 top-0 bottom-0 left-0 right-0"></span>
-                        <div className=" flex justify-start">
+                        <span className="absolute block z-20 inset-0"></span>
+                        <div className="flex justify-start">
                           <Image
                             alt=""
                             src={blockbuster}
-                            style={{
-                              borderTopRightRadius: 4,
-                              borderTopLeftRadius: 4,
-                            }}
+                            className="rounded-t-md w-full h-auto object-cover"
                           />
                         </div>
                       </div>
-                      <div className=" flex flex-col relative w-full text-left min-h-[100px] p-[26px]">
+                      <div className="flex flex-col w-full text-left min-h-[100px] p-6">
                         <div className="w-full">
-                          <h5 className=" mb-4 text-[22px] font-bold">
+                          <h5 className="mb-4 text-[22px] font-bold">
                             Blockbusters You Can&apos;t Miss
                           </h5>
-                          <div className="text-sm mb-5">
+                          <p className="text-sm mb-5">
                             Experience the thrill of the latest blockbusters
                             that have taken the world by storm. From
                             action-packed adventures to heartwarming dramas,
                             these films are a must-watch for any movie
                             enthusiast.
-                          </div>
+                          </p>
                         </div>
-                        <div className=" flex relative items-start justify-start">
-                          <div className=" flex items-center">
-                            <div className=" flex mt-5">
-                              <button
-                                className="px-[20px] py-[10px] border-2 border-[#008080]  text-[#008080] rounded-lg shadow-lg hover:bg-teal-700 hover:text-white transition duration-300"
-                                style={{ borderRadius: "4px" }}
-                              >
-                                Learn More
-                              </button>
-                            </div>
-                          </div>
+                        <div className="mt-5">
+                          <button className="px-5 py-2 border-2 border-[#008080] text-[#008080] rounded-lg shadow-lg hover:bg-teal-700 hover:text-white transition duration-300">
+                            Learn More
+                          </button>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-                <div className="relative max-w-full w-[33%]">
+
+                <div className="relative w-full lg:w-1/3">
                   <div className="explore-widget-container">
-                    <div className=" flex flex-wrap relative">
+                    <div className="flex flex-wrap relative">
                       <div className="w-full min-h-[220px] relative z-10">
-                        <span className="absolute block z-20 top-0 bottom-0 left-0 right-0"></span>
-                        <div className=" flex justify-start">
+                        <span className="absolute block z-20 inset-0"></span>
+                        <div className="flex justify-start">
                           <Image
                             alt=""
                             src={indieFilms}
-                            style={{
-                              borderTopRightRadius: 4,
-                              borderTopLeftRadius: 4,
-                            }}
+                            className="rounded-t-md w-full h-auto object-cover"
                           />
                         </div>
                       </div>
-                      <div className=" flex flex-col relative w-full text-left min-h-[100px] p-[26px]">
+                      <div className="flex flex-col w-full text-left min-h-[100px] p-6">
                         <div className="w-full">
-                          <h5 className=" mb-4 text-[22px] font-bold">
-                            Indie Films to Inspire{" "}
+                          <h5 className="mb-4 text-[22px] font-bold">
+                            Indie Films to Inspire
                           </h5>
-                          <div className="text-sm mb-5">
+                          <p className="text-sm mb-5">
                             Discover the magic of indie films that push the
                             boundaries of storytelling. These unique and
                             thought-provoking movies offer fresh perspectives
                             and are sure to leave a lasting impression.
-                          </div>
+                          </p>
                         </div>
-                        <div className=" flex relative items-start justify-start">
-                          <div className=" flex items-center">
-                            <div className=" flex mt-5">
-                              <button
-                                className="px-[20px] py-[10px] border-2 border-[#008080]  text-[#008080] rounded-lg shadow-lg hover:bg-teal-700 hover:text-white transition duration-300"
-                                style={{ borderRadius: "4px" }}
-                              >
-                                Learn More
-                              </button>
-                            </div>
-                          </div>
+                        <div className="mt-5">
+                          <button className="px-5 py-2 border-2 border-[#008080] text-[#008080] rounded-lg shadow-lg hover:bg-teal-700 hover:text-white transition duration-300">
+                            Learn More
+                          </button>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-                <div className="relative max-w-full w-[33%] ">
+
+                <div className="relative w-full lg:w-1/3">
                   <div className="explore-widget-container">
-                    <div className=" flex flex-wrap relative">
-                      <div className="w-full min-h-[220px] relative overflow-hidden z-10">
-                        <span className="absolute block z-20 top-0 bottom-0 left-0 right-0"></span>
-                        <div className=" flex justify-start">
+                    <div className="flex flex-wrap relative">
+                      <div className="w-full min-h-[220px] relative z-10">
+                        <span className="absolute block z-20 inset-0"></span>
+                        <div className="flex justify-start">
                           <Image
                             alt=""
                             src={hiddenGems}
-                            style={{
-                              borderTopRightRadius: 4,
-                              borderTopLeftRadius: 4,
-                            }}
+                            className="rounded-t-md w-full h-auto object-cover"
                           />
                         </div>
                       </div>
-                      <div className=" flex flex-col relative w-full text-left min-h-[100px] p-[26px]">
+                      <div className="flex flex-col w-full text-left min-h-[100px] p-6">
                         <div className="w-full">
-                          <h5 className=" mb-4 text-[22px] font-bold">
+                          <h5 className="mb-4 text-[22px] font-bold">
                             Hidden Gems Await
                           </h5>
-                          <div className="text-sm mb-5">
+                          <p className="text-sm mb-5">
                             Uncover hidden gems that may have slipped under your
                             radar. These underrated films offer captivating
                             stories and unforgettable performances, perfect for
                             those seeking something different.
-                          </div>
+                          </p>
                         </div>
-                        <div className=" flex relative items-start justify-start">
-                          <div className=" flex items-center">
-                            <div className=" flex mt-5">
-                              <button
-                                className="px-[20px] py-[10px] border-2 border-[#008080]  text-[#008080] rounded-lg shadow-lg hover:bg-teal-700 hover:text-white transition duration-300"
-                                style={{ borderRadius: "4px" }}
-                              >
-                                Learn More
-                              </button>
-                            </div>
-                          </div>
+                        <div className="mt-5">
+                          <button className="px-5 py-2 border-2 border-[#008080] text-[#008080] rounded-lg shadow-lg hover:bg-teal-700 hover:text-white transition duration-300">
+                            Learn More
+                          </button>
                         </div>
                       </div>
                     </div>
@@ -477,81 +458,65 @@ export default function Home() {
           </div>
 
           {/* Section 4 */}
-          <div className="tailored-container">
-            <div className="discover-container-inner">
-              <div className="tailored-container-element bg-white dark:bg-black">
-                <div className="tailored-element-1 w-[50%]">
-                  <div className=" max-w-[100%] w-[100%] text-left">
-                    <div className="h-[100%]">
-                      <h2 className="discover-heading-title">
-                        Discover Movies Tailored Just for You
-                      </h2>{" "}
-                    </div>
-                  </div>
-                  <div className="max-w-[100%] w-[100%] discover-heading-paragraph">
-                    <div className="h-full pb-[30px]">
+          <div className="tailored-container px-4 -mx-16 lg:mx-0">
+            <div className="discover-container-inner max-w-7xl mx-auto">
+              <div className="tailored-container-element bg-white dark:bg-black flex flex-col md:flex-row items-center gap-8 w-full">
+                {/* Text Section */}
+                <div className="tailored-element-1 w-full md:w-1/2">
+                  <div className="text-left w-full">
+                    <h2 className="discover-heading-title mb-4">
+                      Discover Movies Tailored Just for You
+                    </h2>
+                    <p className="discover-heading-paragraph mb-6">
                       At sara, we use cutting-edge algorithms to analyze your
                       viewing habits and provide personalized movie
                       recommendations. Whether you&apos;re a fan of blockbusters
                       or indie films, our platform ensures you find the perfect
-                      match for your tastes.{" "}
-                    </div>
-                  </div>
-                  <div className="max-w-full">
-                    <div className="h-full">
-                      <ul className="block list-none">
-                        <li className="relative flex pb-[4px] mt-[4px] text-left justify-start items-center">
-                          <span className=" pr-4 flex relative ">
-                            <FontAwesomeIcon
-                              icon={faFilm}
-                              className="text-[#ff6f61]"
-                            />{" "}
-                          </span>
-                          <span className="ps-[5px] discover-heading-paragraph">
-                            Receive tailored movie suggestions that align with
-                            your unique tastes.
-                          </span>
-                        </li>
+                      match for your tastes.
+                    </p>
 
-                        <li className="relative flex pb-[4px] mt-[4px] text-left justify-start items-center">
-                          <span className=" pr-4 flex relative ">
-                            <FontAwesomeIcon
-                              icon={faFilm}
-                              className="text-[#ff6f61]"
-                            />{" "}
-                          </span>
-                          <span className="ps-[5px] discover-heading-paragraph">
-                            {" "}
-                            Discover new films you might not have found on your
-                            own.
-                          </span>
-                        </li>
-                        <li className="relative flex pb-[4px] mt-[4px] text-left justify-start items-center">
-                          <span className=" pr-4 flex relative ">
-                            <FontAwesomeIcon
-                              icon={faFilm}
-                              className="text-[#ff6f61]"
-                            />{" "}
-                          </span>
-                          <span className="ps-[5px] discover-heading-paragraph">
-                            Enjoy a seamless and enjoyable decision-making
-                            process when choosing what to watch.
-                          </span>
-                        </li>
-                      </ul>
-                    </div>
+                    {/* Features */}
+                    <ul className="space-y-4">
+                      <li className="flex items-start text-left">
+                        <span className="text-[#ff6f61] pr-3 pt-1">
+                          <FontAwesomeIcon icon={faFilm} />
+                        </span>
+                        <span className="discover-heading-paragraph">
+                          Receive tailored movie suggestions that align with
+                          your unique tastes.
+                        </span>
+                      </li>
+                      <li className="flex items-start text-left">
+                        <span className="text-[#ff6f61] pr-3 pt-1">
+                          <FontAwesomeIcon icon={faFilm} />
+                        </span>
+                        <span className="discover-heading-paragraph">
+                          Discover new films you might not have found on your
+                          own.
+                        </span>
+                      </li>
+                      <li className="flex items-start text-left">
+                        <span className="text-[#ff6f61] pr-3 pt-1">
+                          <FontAwesomeIcon icon={faFilm} />
+                        </span>
+                        <span className="discover-heading-paragraph">
+                          Enjoy a seamless and enjoyable decision-making process
+                          when choosing what to watch.
+                        </span>
+                      </li>
+                    </ul>
                   </div>
                 </div>
-                <div className="max-w-full w-[50%] text-center relative">
-                  <div className=" my-[-48px] ml-[10px] mr-[-48px] h-full text-center">
-                    <Image
-                      width="1024"
-                      height="1024"
-                      src={discover}
-                      className="attachment-full size-full wp-image-25856"
-                      alt=""
-                    />{" "}
-                  </div>
+
+                {/* Image Section */}
+                <div className="w-full md:w-1/2 hidden md:flex justify-center ">
+                  <Image
+                    src={discover}
+                    width={600}
+                    height={600}
+                    alt="Discover Movies"
+                    className="w-full h-auto max-w-[500px] rounded-md"
+                  />
                 </div>
               </div>
             </div>
@@ -559,11 +524,8 @@ export default function Home() {
 
           {/* Section 5 */}
           <div className="tailored-container bg-black text-white dark:bg-white dark:text-black -mx-16">
-            <div
-              className="discover-container-inner"
-              style={{ marginLeft: 80, marginRight: 80, flexDirection: "row" }}
-            >
-              <div className="relative max-w-full w-[25%]">
+            <div className="discover-container-inner lg:flex-row" style={{ marginLeft: 80, marginRight: 80}}>
+              <div className="relative max-w-full lg:w-[25%]">
                 <div className="h-full">
                   <Link
                     href={`/collections/genres/action`}
@@ -593,7 +555,7 @@ export default function Home() {
                   </Link>
                 </div>
               </div>
-              <div className="relative max-w-full w-[25%]">
+              <div className="relative max-w-full lg:w-[25%]">
                 <div className="h-full">
                   <Link
                     href={`/collections/genres/romance`}
@@ -622,7 +584,7 @@ export default function Home() {
                   </Link>
                 </div>
               </div>
-              <div className="relative max-w-full w-[25%]">
+              <div className="relative max-w-full lg:w-[25%]">
                 <div className="h-full">
                   <Link
                     href={`/collections/genres/science-fiction`}
@@ -652,7 +614,7 @@ export default function Home() {
                   </Link>
                 </div>
               </div>
-              <div className="relative max-w-full w-[25%]">
+              <div className="relative max-w-full lg:w-[25%]">
                 <div className="h-full">
                   <Link
                     href={`/collections/genres/animation`}
@@ -687,11 +649,8 @@ export default function Home() {
 
           {/* Section 6 */}
           <div className="tailored-container">
-            <div
-              className="discover-container-inner"
-              style={{ flexDirection: "row" }}
-            >
-              <div className="relative max-w-full w-[25%]">
+            <div              className="discover-container-inner lg:flex-row"            >
+              <div className="relative max-w-full lg:w-[25%]">
                 <div className="h-full">
                   <Link
                     href={`/movie/secret-life/116745`}
@@ -726,7 +685,7 @@ export default function Home() {
                   </Link>
                 </div>
               </div>
-              <div className="relative max-w-full w-[25%]">
+              <div className="relative max-w-full lg:w-[25%]">
                 <div className="h-full">
                   <Link
                     href={`/movie/pans-labyrinth/1417`}
@@ -761,7 +720,7 @@ export default function Home() {
                   </Link>
                 </div>
               </div>
-              <div className="relative max-w-full w-[25%]">
+              <div className="relative max-w-full lg:w-[25%]">
                 <div className="h-full">
                   <Link
                     href={`/movie/the-lunchbox/191714`}
@@ -800,7 +759,7 @@ export default function Home() {
                   </Link>
                 </div>
               </div>
-              <div className="relative max-w-full w-[25%]">
+              <div className="relative max-w-full lg:w-[25%]">
                 <div className="h-full">
                   <Link
                     href={`/movie/good-night-and-good-luck/3291`}
