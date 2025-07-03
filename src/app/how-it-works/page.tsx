@@ -59,221 +59,166 @@ const HowItWorks = () => {
           </div>
 
           <div className="pt-20">
-            <div className="max-w-full">
+            <div className="max-w-full px-4 sm:px-6 lg:px-16">
               <div className="discover-container-inner">
-                <div className="flex flex-row items-center gap-5">
-                  <div className="flex flex-row items-center gap-5 h-full w-full">
-                    <div className=" w-1/2 flex flex-col items-start gap-5">
-                      <div className=" max-w-full relative">
-                        <div className="h-full">
-                          <h5 className="text-lg">SARA.</h5>{" "}
-                        </div>
-                      </div>
-                      <div className="max-w-full">
-                        <div className="h-full">
-                          <h3 className=" text-4xl font-bold">
-                            Discover How Our Recommendations Work
-                          </h3>{" "}
-                        </div>
-                      </div>
+                <div className="flex flex-col lg:flex-row items-start lg:items-center gap-8">
+                  <div className="w-full lg:w-1/2 flex flex-col items-start gap-4">
+                    <div className="relative">
+                      <h5 className="text-xl sm:text-2xl font-semibold">
+                        SARA.
+                      </h5>
                     </div>
-                    <div className="w-1/2 flex flex-col items-start gap-5">
-                      <div className=" max-w-full relative h-full">
-                        <div className=" text-base">
-                          SARA&apos;s movie recommendation system uses advanced
-                          algorithms to analyze your viewing habits and
-                          preferences. By understanding your unique tastes, we
-                          provide personalized movie suggestions that ensure you
-                          never miss out on the latest blockbusters or hidden
-                          gems. Our intuitive interface makes exploring new
-                          films a seamless and enjoyable experience.{" "}
-                        </div>
-                      </div>
-                      <div className="max-w-full w-[33%]">
-                        <div className="h-full">
-                          <button
-                            className="px-[20px] py-[10px] border-2 border-[#008080]  text-[#008080] rounded-lg shadow-lg hover:bg-teal-700 hover:text-white transition duration-300"
-                            style={{ borderRadius: "4px" }}
-                          >
-                            Learn
-                          </button>
-                        </div>
-                      </div>
+                    <div className="relative">
+                      <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold">
+                        Discover How Our Recommendations Work
+                      </h3>
+                    </div>
+                  </div>
+
+                  <div className="w-full lg:w-1/2 flex flex-col items-start gap-4">
+                    <div className="relative">
+                      <p className="text-base sm:text-lg leading-relaxed">
+                        SARA&apos;s movie recommendation system uses advanced
+                        algorithms to analyze your viewing habits and
+                        preferences. By understanding your unique tastes, we
+                        provide personalized movie suggestions that ensure you
+                        never miss out on the latest blockbusters or hidden
+                        gems. Our intuitive interface makes exploring new films
+                        a seamless and enjoyable experience.
+                      </p>
+                    </div>
+                    <div>
+                      <button className="px-5 py-2 border-2 border-[#008080] text-[#008080] rounded-lg shadow-lg hover:bg-teal-700 hover:text-white transition duration-300">
+                        Learn
+                      </button>
                     </div>
                   </div>
                 </div>
-                <div className="max-w-full">
-                  <div className=" mt-5 ">
-                    <Image
-                      src={streaming}
-                      className="attachment-full size-full rounded shadow "
-                      alt=""
-                    />{" "}
-                  </div>
+
+                <div className="mt-8">
+                  <Image
+                    src={streaming}
+                    alt="Streaming Illustration"
+                    className="w-full h-auto rounded shadow"
+                  />
                 </div>
               </div>
             </div>
-            <div className="discover-container-inner">
-              <div className="flex flex-row items-center gap-5">
-                <div className="w-1/2 flex flex-col items-start gap-5">
-                  <div className="max-w-full relative ">
-                    <div className="h-full">
-                      <h2 className=" text-[42px] leading-[120%] font-bold mb-3">
-                        Understanding sara&apos;s Recommendation Algorithm
-                      </h2>{" "}
-                    </div>
+
+            <div className="discover-container-inner px-4 sm:px-6 lg:px-16">
+              <div className="flex flex-col-reverse lg:flex-row items-center gap-10">
+                <div className="w-full lg:w-1/2 flex flex-col items-start gap-6">
+                  <div className="w-full">
+                    <h2 className="text-2xl sm:text-3xl lg:text-[42px] leading-snug font-bold mb-3">
+                      Understanding SARA&apos;s Recommendation Algorithm
+                    </h2>
                   </div>
-                  <div className=" max-w-full relative h-full">
-                    <div className=" text-base my-2 pb-7">
-                      sara&apos;s recommendation engine analyzes your viewing
-                      history, preferences, and ratings to suggest movies
-                      you&apos;ll love. By considering factors like genre,
-                      director, and user reviews, our algorithm ensures
-                      personalized and accurate movie recommendations.{" "}
-                    </div>
+
+                  <div className="w-full text-base leading-relaxed text-justify">
+                    SARA&apos;s recommendation engine analyzes your viewing
+                    history, preferences, and ratings to suggest movies
+                    you&apos;ll love. By considering factors like genre,
+                    director, and user reviews, our algorithm ensures
+                    personalized and accurate movie recommendations.
                   </div>
-                  <div className="w-full flex flex-row gap-5">
-                    <div className="w-1/2 flex flex-col gap-5">
-                      <div className="max-w-full self-start">
-                        <div className="h-full">
-                          <div className="flex justify-center items-stretch flex-col-reverse">
-                            <div className=" text-3xl font-bold flex items-center">
-                              <span className="  whitespace-pre-wrap flex-grow text-end"></span>
-                              <span className="flex flex-grow-0 text-center elementor-counter-number">
-                                <NumberCounter
-                                  from={0}
-                                  to={95}
-                                  duration={2000}
-                                />
-                              </span>
-                              <span className=" whitespace-pre-wrap text-start">
-                                {" "}
-                                %
-                              </span>
-                            </div>
-                          </div>
-                        </div>
+
+                  <div className="w-full flex flex-col sm:flex-row gap-5">
+                    <div className="w-full sm:w-1/2 flex flex-col gap-2">
+                      <div className="text-3xl font-bold flex items-center">
+                        <span className="text-center elementor-counter-number">
+                          <NumberCounter from={0} to={95} duration={2000} />
+                        </span>
+                        <span className="ml-1">%</span>
                       </div>
-                      <div className=" max-w-full w-full text-sm">
-                        <div className="h-full">
-                          Accuracy rate of our movie <br /> suggestions.{" "}
-                        </div>
-                      </div>
+                      <p className="text-sm">
+                        Accuracy rate of our movie suggestions.
+                      </p>
                     </div>
-                    <div className="w-1/2 flex flex-col gap-5">
-                      <div className="max-w-full self-start">
-                        <div className="h-full">
-                          <div className="flex justify-center items-stretch flex-col-reverse">
-                            <div className=" text-3xl font-bold flex items-center">
-                              <span className="  whitespace-pre-wrap flex-grow text-end"></span>
-                              <span className="flex flex-grow-0 text-center elementor-counter-number">
-                                <NumberCounter
-                                  from={0}
-                                  to={900}
-                                  duration={2000}
-                                />
-                              </span>
-                              <span className=" whitespace-pre-wrap text-start">
-                                {" "}
-                                ms
-                              </span>
-                            </div>
-                          </div>
-                        </div>
+
+                    <div className="w-full sm:w-1/2 flex flex-col gap-2">
+                      <div className="text-3xl font-bold flex items-center">
+                        <span className="text-center elementor-counter-number">
+                          <NumberCounter from={0} to={900} duration={2000} />
+                        </span>
+                        <span className="ml-1">ms</span>
                       </div>
-                      <div className=" max-w-full w-full text-sm">
-                        <div className="h-full">
-                          Average time to generate recommendations.{" "}
-                        </div>
-                      </div>
+                      <p className="text-sm">
+                        Average time to generate recommendations.
+                      </p>
                     </div>
                   </div>
                 </div>
-                <div className="w-1/2 ">
-                  <div className="elementor-widget-container">
+
+                <div className="w-full lg:w-1/2">
+                  <div className="w-full h-auto">
                     <Image
-                      width="1024"
-                      height="1024"
                       src={recommend}
-                      className="attachment-full size-full wp-image-25868"
-                      alt=""
-                    />{" "}
+                      width={1024}
+                      height={1024}
+                      alt="Recommendation Illustration"
+                      className="rounded shadow w-full h-auto object-contain"
+                    />
                   </div>
                 </div>
               </div>
             </div>
 
-            <div className="discover-container-inner">
-              <div className="flex flex-row items-center gap-5">
-                <div className="w-1/2 flex flex-col items-start gap-5">
-                  <div className="max-w-full relative ">
-                    <div className="h-full">
-                      <h2 className=" text-[42px] leading-[120%] font-bold mb-3">
-                        Influence Your Movie Suggestions with sara{" "}
-                      </h2>{" "}
-                    </div>
+            <div className="discover-container-inner px-4 sm:px-6 lg:px-16">
+              <div className="flex flex-col-reverse lg:flex-row items-center gap-10">
+                <div className="w-full lg:w-1/2 flex flex-col items-start gap-6">
+                  <div className="w-full">
+                    <h2 className="text-2xl sm:text-3xl lg:text-[42px] leading-snug font-bold mb-3">
+                      Influence Your Movie Suggestions with SARA
+                    </h2>
                   </div>
-                  <div className=" max-w-full relative h-full">
-                    <div className=" text-base my-2 pb-7">
-                      At sara, your viewing habits and preferences play a
-                      crucial role in shaping the movie recommendations you
-                      receive. By engaging with our platform, you help refine
-                      the suggestions, ensuring they align with your unique
-                      tastes and interests.{" "}
-                    </div>
-                  </div>
-                  <div className="w-full flex flex-row gap-5">
-                    <div className="max-w-full">
-                      <div className="h-full">
-                        <ul className="block list-none">
-                          <li className="relative flex pb-[4px] mt-[4px] text-left justify-start items-center">
-                            <span className=" pr-4 flex relative ">
-                              <FontAwesomeIcon
-                                icon={faFilm}
-                                className="text-[#ff6f61]"
-                              />{" "}
-                            </span>
-                            <span className="ps-[5px] text-base ">
-                              Rate movies to improve suggestions
-                            </span>
-                          </li>
 
-                          <li className="relative flex pb-[4px] mt-[4px] text-left justify-start items-center">
-                            <span className=" pr-4 flex relative ">
-                              <FontAwesomeIcon
-                                icon={faFilm}
-                                className="text-[#ff6f61]"
-                              />{" "}
-                            </span>
-                            <span className="ps-[5px] text-base ">
-                              Create watchlists for tailored recommendations
-                            </span>
-                          </li>
-                          <li className="relative flex pb-[4px] mt-[4px] text-left justify-start items-center">
-                            <span className=" pr-4 flex relative ">
-                              <FontAwesomeIcon
-                                icon={faFilm}
-                                className="text-[#ff6f61]"
-                              />{" "}
-                            </span>
-                            <span className="ps-[5px] text-base ">
-                              Engage with community reviews
-                            </span>
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
+                  <div className="w-full text-base leading-relaxed text-justify">
+                    At SARA, your viewing habits and preferences play a crucial
+                    role in shaping the movie recommendations you receive. By
+                    engaging with our platform, you help refine the suggestions,
+                    ensuring they align with your unique tastes and interests.
                   </div>
+
+                  <ul className="list-none space-y-3">
+                    <li className="flex items-start gap-3">
+                      <FontAwesomeIcon
+                        icon={faFilm}
+                        className="text-[#ff6f61] mt-1"
+                      />
+                      <span className="text-base">
+                        Rate movies to improve suggestions
+                      </span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <FontAwesomeIcon
+                        icon={faFilm}
+                        className="text-[#ff6f61] mt-1"
+                      />
+                      <span className="text-base">
+                        Create watchlists for tailored recommendations
+                      </span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <FontAwesomeIcon
+                        icon={faFilm}
+                        className="text-[#ff6f61] mt-1"
+                      />
+                      <span className="text-base">
+                        Engage with community reviews
+                      </span>
+                    </li>
+                  </ul>
                 </div>
-                <div className="w-1/2 ">
-                  <div className="elementor-widget-container">
+
+                <div className="w-full lg:w-1/2">
+                  <div className="w-full h-auto">
                     <Image
-                      width="1024"
-                      height="1024"
                       src={browsing}
-                      className="attachment-full size-full wp-image-25868"
-                      alt=""
-                    />{" "}
+                      width={1024}
+                      height={1024}
+                      alt="Browsing Recommendations"
+                      className="w-full h-auto object-contain rounded shadow"
+                    />
                   </div>
                 </div>
               </div>
