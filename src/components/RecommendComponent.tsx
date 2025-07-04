@@ -495,7 +495,7 @@ const RecommendComponent = () => {
                   {movies.map((movie, index) => (
                     <div key={index} className="flex flex-col items-center">
                       <div
-                        className={`relative cursor-pointer rounded-[4px] overflow-hidden transition-all duration-300 delay-100 ease-in-out group w-[16.5vw] aspect-[222/125] border-2 border-transparent z-10              ${
+                        className={`relative cursor-pointer rounded-[4px] overflow-hidden transition-all duration-300 delay-100 ease-in-out group w-[122px] h-[200px] md:h-[125px] md:w-[222px] lg:w-[16.5vw] md:aspect-[222/125] border-2 border-transparent z-10              ${
                           hoveredIndex === index ? "hover:z-50" : ""
                         }              ${
                           // Only apply hover effects on lg and above
@@ -518,7 +518,7 @@ const RecommendComponent = () => {
                         }
                       >
                         {/* Image Container */}
-                        <div className="w-full h-[125px] relative">
+                        <div className="w-full h-[200px] md:h-[125px] relative">
                           <Image
                             src={
                               movie.backdrop_path
@@ -544,7 +544,7 @@ const RecommendComponent = () => {
                         <div
                           className={`absolute left-[10px] right-[10px] text-white ${
                             hoveredIndex === index
-                              ? "bottom-[38%]"
+                              ? "bottom-[10px] lg:bottom-[38%]"
                               : "bottom-[10px]"
                           }`}
                         >

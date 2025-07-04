@@ -99,7 +99,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
             placeholder="What are you in the mood for? Type or speak…"
             value={searchValue}
             onChange={(e) => setSearchValue(e.target.value)}
-            className="w-full rounded-full border border-neutral-300 bg-neutral-100 px-6 py-4 pr-32 shadow-lg focus:outline-none dark:border-neutral-700 dark:bg-neutral-200 dark:text-black relative z-10 text-sm md:text-sm lg:text-base placeholder:text-[10px] sm:placeholder:text-sm"
+            className="w-full rounded-full border border-neutral-300 bg-neutral-100 px-6 py-4 pr-32 shadow-lg focus:outline-none dark:border-neutral-700 dark:bg-neutral-200 dark:text-black relative z-10 text-xs md:text-sm lg:text-base placeholder:text-xs sm:placeholder:text-sm"
           />
           <div
             className={`absolute inset-0 rounded-full bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 blur-xl opacity-0 transition-opacity duration-300 group-focus-within:opacity-60 animate-moveGradient z-0 ${
