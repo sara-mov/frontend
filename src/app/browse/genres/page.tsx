@@ -73,8 +73,8 @@ const GenresPage = () => {
   return (
     <SplashScreen isLoading={loading}>
       <div className="bg-gradient-to-br transition duration-200 text-black dark:text-white from-neutral-100 dark:from-neutral-800 dark:to-neutral-900 to-neutral-200 min-h-screen">
-        <div className="mx-20 pt-32">
-          <div className="fixed top-0 left-0 w-full pt-5 px-16 mr-0 py-4 z-20">
+        <div className="mx-5 md:mx-20 pt-32">
+          <div className="fixed top-0 left-0 w-full pt-5 px-5 md:px-16 mr-0 py-4 z-20">
             {/* Default Background */}
 
             <div
@@ -157,7 +157,7 @@ const GenresPage = () => {
               </div>
             </header>
           </div>
-          <h2 className="text-2xl pb-10 text-center font-bold ">
+          <h2 className="text-xl sm:text-2xl pb-6 text-center font-bold">
             <FontAwesomeIcon icon={faMasksTheater} className="pr-3" />
             Popular Genres
           </h2>
@@ -172,7 +172,7 @@ const GenresPage = () => {
                     .replace(/\s+/g, "-")
                     .replace(/[^\w-]/g, "")}`}
                   key={genre.id}
-                  className="relative group cursor-pointer hover:scale-105 transition-transform duration-500"
+                  className="relative group cursor-pointer hover:scale-[1.02] md:hover:scale-105 transition-transform duration-500"
                 >
                   <div className="relative">
                     <Image
