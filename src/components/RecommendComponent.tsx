@@ -20,6 +20,7 @@ import { getGenresById } from "@/utils/genres";
 import WatchlistButton from "@/components/WatchlistButton";
 import WatchlistContainer from "@/components/WatchlistContainer";
 import TrendingMovies from "@/components/TrendingMovies";
+import ExpandableText from "@/components/ExpandableText";
 
 interface MovieDetails {
   id: number;
@@ -328,13 +329,13 @@ const RecommendComponent = () => {
           </div>
 
           {/* Content */}
-          <div className="absolute inset-0 flex flex-col justify-center px-5 md:px-20 text-white">
+          <div className="absolute inset-0 flex flex-col justify-end mb-[20vh] md:mb-0 md:justify-center px-5 md:px-20 text-white">
             <h1 className="text-left text-2xl md:text-4xl font-bold leading-snug block my-4 title">
               {movies[currentIndex]?.title || " "}
             </h1>
 
             <div className="max-w-full w-full lg:w-[50%] text-justify text-sm md:text-base description">
-              {movies[currentIndex]?.overview || " "}
+              <ExpandableText text={movies[currentIndex]?.overview || " "} />
             </div>
 
             <div className="text-xs md:text-sm flex flex-wrap gap-x-4 gap-y-1 font-bold mt-3 info">
@@ -487,21 +488,17 @@ const RecommendComponent = () => {
             </button>
           </div>
 
-          <div className=" mt-[100vh] relative z-10">
+          <div className="mt-[100vh] relative z-10">
             <div>
-              <span className="font-bold text-xl">Curated Just For You</span>
+              <span className="font-bold text-lg lg:text-xl">Curated Just For You</span>
               <div className="my-5 w-full lg:h-[180px] overflow-x-auto scrollbar-hide lg:overflow-visible">
-                <div className="flex gap-4 items-start min-w-fit lg:min-w-0">
+                <div className="flex mb-5 gap-1 md:gap-2 lg:gap-4 items-start min-w-fit lg:min-w-0">
                   {movies.map((movie, index) => (
                     <div key={index} className="flex flex-col items-center">
                       <div
-                        className={`relative cursor-pointer rounded-[4px] overflow-hidden transition-all duration-300 delay-100 ease-in-out group w-[122px] h-[200px] md:h-[125px] md:w-[222px] lg:w-[16.5vw] md:aspect-[222/125] border-2 border-transparent z-10              ${
+                        className={`relative cursor-pointer rounded-[4px] overflow-hidden transition-all duration-300 delay-100 ease-in-out group w-[178px] h-[100px] md:h-[125px] md:w-[222px] lg:w-[16.5vw] md:aspect-[222/125] border-2 border-transparent z-10              ${
                           hoveredIndex === index ? "hover:z-50" : ""
-                        }              ${
-                          // Only apply hover effects on lg and above
-                          "lg:hover:scale-150 lg:hover:h-[180px] lg:hover:border-white lg:hover:rounded-[6px]"
-                        }
-            `}
+                        } ${"lg:hover:scale-150 lg:hover:h-[180px] lg:hover:border-white lg:hover:rounded-[6px]"}`}
                         onClick={() => {
                           setCurrentIndex(index);
                           progressRef.current = 0;
@@ -518,7 +515,7 @@ const RecommendComponent = () => {
                         }
                       >
                         {/* Image Container */}
-                        <div className="w-full h-[200px] md:h-[125px] relative">
+                        <div className="w-full h-[100px] md:h-[125px] relative">
                           <Image
                             src={
                               movie.backdrop_path
