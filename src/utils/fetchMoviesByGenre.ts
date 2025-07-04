@@ -1,7 +1,6 @@
 import { supabase } from "@/lib/supabase";
 
 export async function fetchMoviesByGenre(genre: string) {
-    console.log(genre)
     const { data, error } = await supabase
       .from('movies')
       // .from('hi_mr_movies')
