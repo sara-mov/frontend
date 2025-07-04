@@ -52,7 +52,7 @@ export default function WatchlistButton({
   }
 
   return (
-    <div className="relative flex flex-col items-center group min-h-full">
+    <div className="relative flex flex-col items-center group h-full">
       <button
         onClick={toggleWatchlist}
         className={className}

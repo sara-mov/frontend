@@ -32,7 +32,6 @@ export default function TrendingMovies() {
           .then((res) => res.json())
           .then((data) => {
             setTrendingMovies(data.results);
-            console.log("Trending Movies:", data.results);
             setLoading(false);
           })
           .catch((err) => console.error("Error fetching movies:", err));

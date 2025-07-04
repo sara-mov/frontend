@@ -55,7 +55,7 @@ const RecommendComponent = () => {
 
   useEffect(() => {
     const savedMovies = localStorage.getItem("latestMovies");
-    console.log(savedMovies);
+    // console.log(savedMovies);
     if (savedMovies) {
       const parsedMovies = JSON.parse(savedMovies);
       setMovieIds(parsedMovies);
@@ -65,9 +65,12 @@ const RecommendComponent = () => {
 
   async function getMovieDetails(id: number): Promise<MovieDetails | null> {
     try {
-      const response = await fetch(`https://sara-mov.vercel.app/api/movies/detail/${id}`, {
-        method: "GET",
-      });
+      const response = await fetch(
+        `https://sara-mov.vercel.app/api/movies/detail/${id}`,
+        {
+          method: "GET",
+        }
+      );
       if (!response.ok) {
         console.error("Error fetching movie details:", response.statusText);
         return null;
@@ -192,9 +195,9 @@ const RecommendComponent = () => {
   return (
     <SplashScreen isLoading={movies.length === 0}>
       <div className="bg-gradient-to-br transition-colors duration-500 text-black dark:text-white from-neutral-200 dark:from-neutral-900 dark:to-neutral-900 to-neutral-200">
-        <div className="mx-20">
+        <div className="mx-5 md:mx-20">
           {/* Header */}
-          <div className="fixed top-0 left-0 w-full pt-5 px-16 py-4 z-20">
+          <div className="fixed top-0 left-0 w-full pt-5 px-5 md:px-16 py-4 z-20">
             <div
               className={`-z-10 absolute inset-0 transition-opacity duration-1000 ease-in-out ${
                 isScrolled ? "opacity-100" : "opacity-0"
@@ -325,18 +328,16 @@ const RecommendComponent = () => {
           </div>
 
           {/* Content */}
-          <div className="absolute inset-0 flex flex-col justify-center px-20 text-white">
-            <h1
-              className={`text-left text-4xl font-bold leading-[120%] block my-4 title `}
-            >
+          <div className="absolute inset-0 flex flex-col justify-center px-5 md:px-20 text-white">
+            <h1 className="text-left text-2xl md:text-4xl font-bold leading-snug block my-4 title">
               {movies[currentIndex]?.title || " "}
             </h1>
-            <div
-              className={`max-w-full w-[50%] text-justify text-sm description `}
-            >
+
+            <div className="max-w-full w-full lg:w-[50%] text-justify text-sm md:text-base description">
               {movies[currentIndex]?.overview || " "}
             </div>
-            <div className={`text-sm flex gap-4 font-bold mt-2 info `}>
+
+            <div className="text-xs md:text-sm flex flex-wrap gap-x-4 gap-y-1 font-bold mt-3 info">
               <span>
                 {movies[currentIndex]?.production_companies[0]?.name || " "}
               </span>
@@ -352,7 +353,7 @@ const RecommendComponent = () => {
                 {convertMinutes(movies[currentIndex]?.runtime) || " "}
               </span>
               <span>
-                <span className="bg-[#f3ce13] px-1 rounded-[2px] text-black mr-2">
+                <span className="bg-[#f3ce13] px-1 rounded-[2px] text-black mr-1">
                   IMDb
                 </span>
                 {movies[currentIndex]?.rating || " "}
@@ -365,7 +366,8 @@ const RecommendComponent = () => {
                   : movies[currentIndex]?.original_language.toUpperCase()}
               </span>
             </div>
-            <div className={`text-sm flex font-bold mt-2 genres `}>
+
+            <div className="text-sm flex font-bold mt-2 genres">
               <span className="text-green-500">
                 {movies[currentIndex]?.genres &&
                   getGenresById(
@@ -382,217 +384,229 @@ const RecommendComponent = () => {
             </div>
 
             {/* Buttons */}
-            <div
-              className={`buttton-container z-10 relative max-w-full w-[55%] buttons `}
-              style={{ justifyContent: "flex-start", marginLeft: 0 }}
-            >
+            <div className="z-10 relative w-full sm:w-[90%] lg:w-[55%] mt-6 flex flex-row items-start gap-4">
               <Link
                 href={`https://www.imdb.com/title/${movies[currentIndex]?.imdb_id}`}
                 target="_blank"
-                className="px-6 py-2 bg-[#f3ce13] text-black border border-[#f3ce13] font-semibold rounded-lg shadow-md hover:bg-[#f3ce13ab] transition duration-300 ease-in-out active:scale-95 text-center"
-                style={{ borderRadius: "4px" }}
+                className="px-6 py-2 bg-[#f3ce13] text-black font-semibold rounded-md shadow-md hover:bg-[#f3ce13ab] transition duration-300 active:scale-95 text-center w-full sm:w-auto"
               >
                 IMDb Page
               </Link>
+
               <Link
                 href={`https://www.google.com/search?q=${movies[currentIndex]?.title} Watch Online`}
                 target="_blank"
-                className="px-6 py-2 bg-white text-black border font-medium rounded-lg shadow-md hover:bg-gray-300 transition duration-300 ease-in-out active:scale-95 text-center w-[30%]"
-                style={{ borderRadius: "4px" }}
+                className="px-6 py-2 bg-white text-black font-medium rounded-md shadow-md hover:bg-gray-300 transition duration-300 active:scale-95 text-center w-full sm:w-auto"
               >
                 Watch Now
               </Link>
-              <div className="relative flex flex-col items-center group min-h-full">
-                {/* <span className="absolute w-max text-col -top-9 px-2 py-1 text-sm text-white bg-[#000000ab] rounded-[4px] bg-opacity-80 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  {added ? "Remove from Watchlist" : "Add to Watchlist"}
-                </span> */}
-                <WatchlistButton
-                  movie={movies[currentIndex]}
-                  movieId={movies[currentIndex]?.id}
-                  className='"relative flex items-center text-center min-h-full justify-center gap-2 px-4 py-2 text-white font-medium rounded-[4px] border border-blue-700 transition-all duration-300 ease-in-out shadow-md bg-blue-600 hover:bg-blue-700 active:scale-95 focus:outline-none focus:ring-2 focus:ring-blue-400 h-full"'
-                />
-              </div>
+
+              <WatchlistButton
+                movie={movies[currentIndex]}
+                movieId={movies[currentIndex]?.id}
+                className="w-full h-full sm:w-auto flex justify-center items-center px-4 py-2 text-white font-medium rounded-md border border-blue-700 shadow-md bg-blue-600 hover:bg-blue-700 transition-all duration-300 active:scale-95"
+              />
             </div>
           </div>
 
-          {/* Next & Previous Buttons */}
-          <div className="absolute bottom-40 items-end right-[17px] w-[56.6vw] h-[100px] flex justify-between z-10 ">
+          {/* Navigation Container */}
+          <div className="hidden lg:flex absolute bottom-32 right-14 items-end gap-0 z-10">
             {/* Left Button */}
             <button
               onClick={prevSlide}
-              style={{ height: currentIndex === 0 ? "89px" : "68px" }}
-              className="group relative w-10 flex items-center justify-center rounded-md bg-black/50 backdrop-blur-md transition-all duration-300 hover:bg-black/70 hover:scale-105 active:scale-95"
+              className="group relative w-10 h-[68px] flex items-center justify-center rounded-md bg-black/50 backdrop-blur-md transition-all duration-300 hover:bg-black/70 hover:scale-105 active:scale-95"
+              style={{
+                height: currentIndex === 0 ? "89px" : "68px",
+              }}
             >
               <FontAwesomeIcon icon={faAngleLeft} />
             </button>
 
+            {/* Thumbnails */}
+            <div className="flex gap-3">
+              {movies.map((movie, index) => (
+                <div
+                  key={index}
+                  className={`mt-auto relative cursor-pointer rounded-[4px] overflow-hidden transition-all duration-300 ${
+                    currentIndex === index
+                      ? "scale-110 origin-bottom border-2 border-white z-10 mx-2"
+                      : "scale-100 opacity-80"
+                  }`}
+                  style={{
+                    width: currentIndex === index ? "140px" : "120px",
+                    height: currentIndex === index ? "80px" : "68px",
+                  }}
+                  onClick={() => {
+                    setCurrentIndex(index);
+                    progressRef.current = 0;
+                    if (progressBarRef.current) {
+                      progressBarRef.current.style.width = "0%";
+                    }
+                  }}
+                >
+                  <Image
+                    src={
+                      movie.backdrop_path
+                        ? `https://image.tmdb.org/t/p/w1280${movie.backdrop_path}`
+                        : `/movie-placeholder.png`
+                    }
+                    alt={`${movie.title}`}
+                    fill
+                    priority
+                    placeholder="blur"
+                    blurDataURL={
+                      movie.backdrop_path
+                        ? `https://image.tmdb.org/t/p/w185${movie.backdrop_path}`
+                        : `/movie-placeholder.png`
+                    }
+                    className="object-cover"
+                  />
+
+                  {currentIndex !== index && (
+                    <div className="absolute inset-0 bg-[#00000068]"></div>
+                  )}
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#000000bc] to-transparent rounded-[4px] img"></div>
+                  <div className="absolute bottom-[10px] left-[10px] right-[10px] text-white">
+                    <div className="font-semibold text-[8px] truncate">
+                      {movie.title}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
             {/* Right Button */}
             <button
               onClick={nextSlide}
-              style={{ height: currentIndex === 4 ? "89px" : "68px" }}
-              className="group relative w-10 flex items-center justify-center rounded-md bg-black/50 backdrop-blur-md transition-all duration-300 hover:bg-black/70 hover:scale-105 active:scale-95"
+              className="group relative w-10 h-[68px] flex items-center justify-center rounded-md bg-black/50 backdrop-blur-md transition-all duration-300 hover:bg-black/70 hover:scale-105 active:scale-95"
+              style={{
+                height: currentIndex === 4 ? "89px" : "68px",
+              }}
             >
               <FontAwesomeIcon icon={faAngleRight} />
             </button>
           </div>
 
-          {/* Thumbnails */}
-          <div className="absolute bottom-40 right-14 flex gap-3 items-end z-10">
-            {movies.map((movie, index) => (
-              <div
-                key={index}
-                className={`relative cursor-pointer rounded-[4px] overflow-hidden transition-all duration-300 ${
-                  currentIndex === index
-                    ? "scale-110 origin-bottom border-2 border-white z-10 mx-2"
-                    : "scale-100 opacity-80"
-                }`}
-                style={{
-                  width: currentIndex === index ? "140px" : "120px",
-                  height: currentIndex === index ? "80px" : "68px",
-                }}
-                onClick={() => {
-                  setCurrentIndex(index);
-                  progressRef.current = 0;
-                  if (progressBarRef.current) {
-                    progressBarRef.current.style.width = "0%";
-                  }
-                }}
-              >
-                <Image
-                  src={
-                    movie.backdrop_path
-                      ? `https://image.tmdb.org/t/p/w1280${movie.backdrop_path}`
-                      : `/movie-placeholder.png`
-                  }
-                  alt={`${movie.title}`}
-                  fill
-                  priority
-                  placeholder="blur"
-                  blurDataURL={
-                    movie.backdrop_path
-                      ? `https://image.tmdb.org/t/p/w185${movie.backdrop_path}`
-                      : `/movie-placeholder.png`
-                  }
-                  className="object-cover"
-                />
-
-                {currentIndex !== index && (
-                  <div className="absolute inset-0 bg-[#00000068]"></div>
-                )}
-                <div className="absolute inset-0 bg-gradient-to-t from-[#000000bc] to-transparent rounded-[4px] img"></div>
-                <div className="absolute bottom-[10px] left-[10px] right-[10px] text-white">
-                  <div className="font-semibold text-[8px] truncate">
-                    {movie.title}
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
           <div className=" mt-[100vh] relative z-10">
             <div>
-              <span className=" font-bold text-xl">Curated Just For You</span>
-              <div className="flex gap-4 items-start my-5 w-full h-[180px]">
-                {movies.map((movie, index) => (
-                  <div key={index} className="flex flex-col items-center">
-                    <div
-                      className="relative cursor-pointer rounded-[4px] overflow-hidden transition-all duration-300 delay-100 ease-in-out group scale-100 hover:scale-150 w-[222px] h-[125px] hover:h-[180px] border-2 border-transparent hover:border-white hover:rounded-[6px] z-10 hover:z-50"
-                      onClick={() => {
-                        setCurrentIndex(index);
-                        progressRef.current = 0; // ✅ Use useRef to prevent re-render
-                        if (progressBarRef.current) {
-                          progressBarRef.current.style.width = "0%";
-                        }
-                        window.scrollTo({ top: 0, behavior: "smooth" });
-                      }}
-                      onMouseEnter={() => setHoveredIndex(index)}
-                      onMouseLeave={() => setHoveredIndex(null)}
-                    >
-                      {/* Image Container (Fixed at Top) */}
-                      <div className="w-full h-[125px] relative">
-                        <Image
-                          src={
-                            movie.backdrop_path
-                              ? `https://image.tmdb.org/t/p/w1280${movie.backdrop_path}`
-                              : `/movie-placeholder.png`
-                          }
-                          alt={`${movie.title}`}
-                          fill
-                          priority
-                          placeholder="blur"
-                          blurDataURL={
-                            movie.backdrop_path
-                              ? `https://image.tmdb.org/t/p/w185${movie.backdrop_path}`
-                              : `/movie-placeholder.png`
-                          }
-                          className="object-cover rounded-t-[4px]"
-                        />
-
-                        {/* Overlay Effect */}
-                        <div className="absolute inset-0 group-hover:bg-transparent bg-gradient-to-t from-[#000000bc] to-transparent rounded-t-[4px]"></div>
-                      </div>
-
-                      {/* Movie Title & Description */}
+              <span className="font-bold text-xl">Curated Just For You</span>
+              <div className="my-5 w-full lg:h-[180px] overflow-x-auto scrollbar-hide lg:overflow-visible">
+                <div className="flex gap-4 items-start min-w-fit lg:min-w-0">
+                  {movies.map((movie, index) => (
+                    <div key={index} className="flex flex-col items-center">
                       <div
-                        className={`absolute  left-[10px] right-[10px] text-white ${
-                          hoveredIndex === index
-                            ? "bottom-[38%]"
-                            : "bottom-[10px]"
-                        }`}
+                        className={`relative cursor-pointer rounded-[4px] overflow-hidden transition-all duration-300 delay-100 ease-in-out group w-[16.5vw] aspect-[222/125] border-2 border-transparent z-10              ${
+                          hoveredIndex === index ? "hover:z-50" : ""
+                        }              ${
+                          // Only apply hover effects on lg and above
+                          "lg:hover:scale-150 lg:hover:h-[180px] lg:hover:border-white lg:hover:rounded-[6px]"
+                        }
+            `}
+                        onClick={() => {
+                          setCurrentIndex(index);
+                          progressRef.current = 0;
+                          if (progressBarRef.current) {
+                            progressBarRef.current.style.width = "0%";
+                          }
+                          window.scrollTo({ top: 0, behavior: "smooth" });
+                        }}
+                        onMouseEnter={() =>
+                          window.innerWidth >= 1024 && setHoveredIndex(index)
+                        }
+                        onMouseLeave={() =>
+                          window.innerWidth >= 1024 && setHoveredIndex(null)
+                        }
                       >
-                        <div className="font-semibold text-sm truncate">
-                          {movie.title}
-                        </div>
-                      </div>
+                        {/* Image Container */}
+                        <div className="w-full h-[125px] relative">
+                          <Image
+                            src={
+                              movie.backdrop_path
+                                ? `https://image.tmdb.org/t/p/w1280${movie.backdrop_path}`
+                                : `/movie-placeholder.png`
+                            }
+                            alt={`${movie.title}`}
+                            fill
+                            priority
+                            placeholder="blur"
+                            blurDataURL={
+                              movie.backdrop_path
+                                ? `https://image.tmdb.org/t/p/w185${movie.backdrop_path}`
+                                : `/movie-placeholder.png`
+                            }
+                            className="object-cover rounded-t-[4px]"
+                          />
 
-                      {/* Additional Movie Details (Expands on hover, placed at the bottom) */}
-                      <div className="absolute bottom-0 left-0 right-0 bg-[linear-gradient(to_top,#000000_20%,#000000_75%,transparent_100%)] text-white text-[10px] p-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 h-0 group-hover:h-auto">
-                        <div className="text-[8px] line-clamp-2 leading-tight overflow-hidden text-ellipsis ml-1">
-                          {movie.overview}
+                          <div className="absolute inset-0 bg-gradient-to-t from-[#000000bc] to-transparent rounded-t-[4px] lg:group-hover:bg-transparent" />
                         </div>
-                        <div className=" flex gap-2 mt-1 ml-1 text-gray-300">
-                          <p>
-                            <strong>
-                              {movie.release_date
-                                ? movie.release_date.slice(0, 4)
-                                : "N/A"}
+
+                        {/* Movie Title */}
+                        <div
+                          className={`absolute left-[10px] right-[10px] text-white ${
+                            hoveredIndex === index
+                              ? "bottom-[38%]"
+                              : "bottom-[10px]"
+                          }`}
+                        >
+                          <div className="font-semibold text-sm truncate">
+                            {movie.title}
+                          </div>
+                        </div>
+
+                        {/* Hover Details (Only on lg and up) */}
+                        <div
+                          className="absolute bottom-0 left-0 right-0 text-white text-[10px] p-2 opacity-0 h-0 transition-all duration-300 
+              bg-[linear-gradient(to_top,#000000_20%,#000000_75%,transparent_100%)] 
+              lg:group-hover:opacity-100 lg:group-hover:h-auto
+            "
+                        >
+                          <div className="text-[8px] line-clamp-2 leading-tight overflow-hidden text-ellipsis ml-1">
+                            {movie.overview}
+                          </div>
+                          <div className="flex gap-2 mt-1 ml-1 text-gray-300">
+                            <p>
+                              <strong>
+                                {movie.release_date
+                                  ? movie.release_date.slice(0, 4)
+                                  : "N/A"}
+                              </strong>
+                            </p>
+                            <p>
+                              <strong>{convertMinutes(movie.runtime)}</strong>
+                            </p>
+                            <strong className="bg-neutral-600 px-1 mb-1 rounded-[2px]">
+                              {movie.adult ? "A" : "U/A"}
                             </strong>
-                          </p>
-
-                          <p>
-                            <strong>{convertMinutes(movie.runtime)}</strong>
-                          </p>
-                          <strong className="bg-neutral-600 px-1 mb-1 rounded-[2px]">
-                            {movie.adult ? "A" : "U/A"}
+                            <p>
+                              <strong>
+                                {movie.original_language === "en"
+                                  ? "English"
+                                  : movie.original_language === "hi"
+                                  ? "हिन्दी"
+                                  : movie.original_language.toUpperCase()}
+                              </strong>
+                            </p>
+                          </div>
+                          <strong className="mt-1 ml-1 text-green-500">
+                            {movies[currentIndex]?.genres &&
+                              getGenresById(
+                                movies[currentIndex].genres.map(
+                                  (genre) => genre.id
+                                )
+                              ).map((genre, index, array) => (
+                                <React.Fragment key={index}>
+                                  {genre}
+                                  {index < array.length - 1 && (
+                                    <span className="text-white"> • </span>
+                                  )}
+                                </React.Fragment>
+                              ))}
                           </strong>
-                          <p>
-                            <strong>
-                              {movie.original_language === "en"
-                                ? "English"
-                                : movie.original_language === "hi"
-                                ? "हिन्दी"
-                                : movie.original_language.toUpperCase()}
-                            </strong>
-                          </p>
                         </div>
-                        <strong className="mt-1 ml-1 text-green-500">
-                          {movies[currentIndex]?.genres &&
-                            getGenresById(
-                              movies[currentIndex].genres.map(
-                                (genre) => genre.id
-                              )
-                            )?.map((genre, index, array) => (
-                              <React.Fragment key={index}>
-                                {genre}
-                                {index < array.length - 1 && (
-                                  <span className="text-white"> • </span>
-                                )}
-                              </React.Fragment>
-                            ))}
-                        </strong>
                       </div>
                     </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
             </div>
 

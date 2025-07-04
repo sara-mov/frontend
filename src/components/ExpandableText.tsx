@@ -5,7 +5,7 @@ const ExpandableText = ({ text }: { text: string }) => {
 
   return (
     <div
-      className={`w-[50%] max-w-full text-justify cursor-pointer transition-all duration-300 ${
+      className={`w-full md:w-[50%] max-w-full text-justify cursor-pointer transition-all duration-300 ${
         isExpanded ? "" : "line-clamp-3 overflow-hidden"
       }`}
       onClick={() => setIsExpanded(!isExpanded)}

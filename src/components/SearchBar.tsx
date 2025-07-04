@@ -37,8 +37,6 @@ const SearchBar: React.FC<SearchBarProps> = ({
       );
       const data = await res.json();
 
-      console.log("data", data);
-
       if (data.movies) {
         // Save to localStorage
         localStorage.setItem("latestMovies", JSON.stringify(data.movies));
