@@ -249,7 +249,7 @@ export default function Home() {
               </div>
 
               <div className="discover-points-element flex-col lg:flex-row">
-                <div className="w-full">
+                <div className="w-full pt-7">
                   <div className="max-w-full">
                     <div className="h-full">
                       <div className="block text-center lg:text-left mb-4">
@@ -313,9 +313,10 @@ export default function Home() {
 
                         <p className="elementor-icon-box-description">
                           We celebrate all genres and styles of cinema, ensuring
-                          that everyone finds something they love. From indie
-                          films to major releases, our platform caters to all
-                          tastes.{" "}
+                          that everyone finds something they truly love and
+                          connect with. From indie films to major blockbuster
+                          releases, our platform caters to all tastes and
+                          preferences.{" "}
                         </p>
                       </div>
                     </div>

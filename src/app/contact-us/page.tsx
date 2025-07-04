@@ -56,95 +56,81 @@ const ContactUs = () => {
             <Navbar />
           </div>
 
-          <div className=" pt-20 flex items-center justify-center h-[75vh]">
-            <div className="block">
+          <div className="pt-20 flex items-center justify-center min-h-screen px-4 sm:px-6 lg:px-16">
+            <div className="w-full max-w-7xl">
               <div className="tailored-container">
-                <div className="flex flex-row w-full h-full">
-                  <div className=" max-w-full w-[33%]">
-                    <div className="h-full">
-                      <div className=" text-left block">
-                        <div className="mb-4">
-                          <span className="text-3xl">
-                            <FontAwesomeIcon
-                              icon={faEnvelope}
-                              className=" text-[#ff6f61]"
-                            />{" "}
-                          </span>
-                        </div>
-
-                        <div className="block">
-                          <h4 className="elementor-icon-box-title">
-                            <span>Email Us </span>
-                          </h4>
-
-                          <p className="elementor-icon-box-description">
-                            For any inquiries or support, feel free to reach out
-                            to us at{" "}
-                            <a
-                              href="mailto:contact.sara.team@gmail.com"
-                              className=" text-[#008080]"
-                            >
-                              contact.sara.team@gmail.com
-                            </a>
-                            . We are here to assist you with your movie
-                            recommendations and any questions you may have.{" "}
-                          </p>
-                        </div>
+                <div className="flex flex-col lg:flex-row w-full gap-10">
+                  {/* Email Us */}
+                  <div className="w-full lg:w-1/3">
+                    <div className="text-left space-y-4">
+                      <div className="text-3xl">
+                        <FontAwesomeIcon
+                          icon={faEnvelope}
+                          className="text-[#ff6f61]"
+                        />
+                      </div>
+                      <div>
+                        <h4 className="elementor-icon-box-title text-xl font-semibold mb-2">
+                          Email Us
+                        </h4>
+                        <p className="elementor-icon-box-description text-base">
+                          For any inquiries or support, feel free to reach out
+                          to us at{" "}
+                          <a
+                            href="mailto:contact.sara.team@gmail.com"
+                            className="text-[#008080] underline"
+                          >
+                            contact.sara.team@gmail.com
+                          </a>
+                          . We are here to assist you with your movie
+                          recommendations and any questions you may have.
+                        </p>
                       </div>
                     </div>
                   </div>
-                  <div className=" max-w-full w-[33%]">
-                    <div className="h-full">
-                      <div className=" text-left block">
-                        <div className="mb-4">
-                          <span className="text-3xl">
-                            <FontAwesomeIcon
-                              icon={faPhoneAlt}
-                              className=" text-[#ff6f61] rotate-90"
-                            />{" "}
-                          </span>
-                        </div>
 
-                        <div className="block">
-                          <h4 className="elementor-icon-box-title">
-                            <span>Call Us </span>
-                          </h4>
-
-                          <p className="elementor-icon-box-description">
-                            You can also contact us by phone at{" "}
-                            <strong>+91-12345-67890</strong>. Our team is
-                            available to help you during business hours.
-                            Don&apos;t hesitate to give us a call!{" "}
-                          </p>
-                        </div>
+                  {/* Call Us */}
+                  <div className="w-full lg:w-1/3">
+                    <div className="text-left space-y-4">
+                      <div className="text-3xl">
+                        <FontAwesomeIcon
+                          icon={faPhoneAlt}
+                          className="text-[#ff6f61] rotate-90"
+                        />
+                      </div>
+                      <div>
+                        <h4 className="elementor-icon-box-title text-xl font-semibold mb-2">
+                          Call Us
+                        </h4>
+                        <p className="elementor-icon-box-description text-base">
+                          You can also contact us by phone at{" "}
+                          <strong>+91-12345-67890</strong>. Our team is
+                          available to help you during business hours.
+                          Don&apos;t hesitate to give us a call!
+                        </p>
                       </div>
                     </div>
                   </div>
-                  <div className=" max-w-full w-[33%]">
-                    <div className="h-full">
-                      <div className=" text-left block">
-                        <div className="mb-4">
-                          <span className="text-3xl">
-                            <FontAwesomeIcon
-                              icon={faMapMarkerAlt}
-                              className=" text-[#ff6f61]"
-                            />{" "}
-                          </span>
-                        </div>
 
-                        <div className="block">
-                          <h4 className="elementor-icon-box-title">
-                            <span>Visit Us </span>
-                          </h4>
-
-                          <p className="elementor-icon-box-description">
-                            If you prefer to visit us, we are located at:
-                            <br />
-                            <strong>Pune, Maharashtra, India</strong>. We
-                            welcome film enthusiasts to stop by and share their
-                            thoughts!{" "}
-                          </p>
-                        </div>
+                  {/* Visit Us */}
+                  <div className="w-full lg:w-1/3">
+                    <div className="text-left space-y-4">
+                      <div className="text-3xl">
+                        <FontAwesomeIcon
+                          icon={faMapMarkerAlt}
+                          className="text-[#ff6f61]"
+                        />
+                      </div>
+                      <div>
+                        <h4 className="elementor-icon-box-title text-xl font-semibold mb-2">
+                          Visit Us
+                        </h4>
+                        <p className="elementor-icon-box-description text-base">
+                          If you prefer to visit us, we are located at:
+                          <br />
+                          <strong>Pune, Maharashtra, India</strong>. We welcome
+                          film enthusiasts to stop by and share their thoughts!
+                        </p>
                       </div>
                     </div>
                   </div>

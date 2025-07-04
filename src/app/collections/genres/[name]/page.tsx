@@ -90,8 +90,8 @@ const GenrePage = () => {
   return (
     <SplashScreen isLoading={loading}>
       <div className="bg-gradient-to-br transition duration-200 text-black dark:text-white from-neutral-100 dark:from-neutral-800 dark:to-neutral-900 to-neutral-200 min-h-screen">
-        <div className="mx-20 pt-32">
-          <div className="fixed top-0 left-0 w-full pt-5 px-16 mr-0 py-4 z-20">
+        <div className="mx-5 md:mx-20 pt-32">
+          <div className="fixed top-0 left-0 w-full pt-5 px-5 md:px-16 mr-0 py-4 z-20">
             {/* Default Background */}
 
             <div
@@ -187,7 +187,11 @@ const GenrePage = () => {
           </h2>
           <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 mb-10">
             {moviesByGenre.map((movie, index) => (
-              <div
+              <Link
+                href={`/movie/${movie.title
+                  .toLowerCase()
+                  .replace(/\s+/g, "-")
+                  .replace(/[^\w-]/g, "")}/${movie.id}`}
                 key={movie.id}
                 className="relative group cursor-pointer"
                 onMouseEnter={() => setHoveredMovie(movie.id)}
@@ -212,7 +216,7 @@ const GenrePage = () => {
                 </div>
                 {hoveredMovie === movie.id && (
                   <div
-                    className="absolute w-[320px] opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 transition-all duration-500 ease-out bg-[linear-gradient(to_top,#000000_20%,#000000_75%,transparent_100%)] bg-opacity-90 text-white rounded-[8px] shadow-lg overflow-hidden z-[999]"
+                    className="hidden md:block absolute w-[320px] opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 transition-all duration-500 ease-out bg-[linear-gradient(to_top,#000000_20%,#000000_75%,transparent_100%)] bg-opacity-90 text-white rounded-[8px] shadow-lg overflow-hidden z-[999]"
                     style={{
                       top: "-30%",
                       left: "0",
@@ -295,7 +299,7 @@ const GenrePage = () => {
                     </div>
                   </div>
                 )}
-              </div>
+              </Link>
             ))}
           </div>
           <Footer />
