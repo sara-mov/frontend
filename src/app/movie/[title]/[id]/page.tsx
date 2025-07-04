@@ -84,7 +84,9 @@ const MoviePage = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        fetch(`https://sara-mov.vercel.app/api/movies/detail/${id}`, { method: "GET" })
+        fetch(`https://sara-mov.vercel.app/api/movies/detail/${id}`, {
+          method: "GET",
+        })
           .then((res) => res.json())
           .then((data) => {
             // console.log(data);
@@ -137,9 +139,9 @@ const MoviePage = () => {
   return (
     <SplashScreen isLoading={loading}>
       <div className="bg-gradient-to-br transition-colors duration-500 text-black dark:text-white from-neutral-200 dark:from-neutral-900 dark:to-neutral-900 to-neutral-200">
-        <div className="mx-20">
+        <div className="mx-5 md:mx-20">
           {/* Header */}
-          <div className="fixed top-0 left-0 w-full pt-5 px-16 py-4 z-20">
+          <div className="fixed top-0 left-0 w-full pt-5 px-5 md:px-16 py-4 z-20">
             <div
               className={`-z-10 absolute inset-0 transition-opacity duration-1000 ease-in-out ${
                 isScrolled ? "opacity-100" : "opacity-0"
@@ -255,7 +257,7 @@ const MoviePage = () => {
                 >
                   <Image
                     src={`https://image.tmdb.org/t/p/w1280${movies[0].backdrop_path}`}
-                    alt={`${movies[0].title}`}
+                    alt={movies[0].title}
                     fill
                     priority
                     className="object-cover object-top image-layer transition-all duration-500"
@@ -263,7 +265,7 @@ const MoviePage = () => {
                 </div>
               </div>
 
-              <div className="absolute inset-0 flex flex-col justify-center px-20 text-white">
+              <div className="absolute inset-0 flex flex-col justify-end mb-[20vh] md:mb-0 md:justify-center px-4 sm:px-10 lg:px-20 text-white">
                 <div
                   className={`${
                     movies[0].genres?.some((genre) => genre.id === 27)
@@ -272,14 +274,15 @@ const MoviePage = () => {
                   }`}
                 >
                   <h1
-                    className={`text-left text-4xl font-bold leading-[120%] block my-4 title ${
+                    className={`text-left font-bold leading-tight my-4 title ${
                       movies[0].genres?.some((genre) => genre.id === 27)
-                        ? "text-5xl text-[#8B0000] font-bold drop-shadow-[4px_4px_0px_#400000]"
-                        : "text-4xl"
-                    } `}
+                        ? "text-3xl sm:text-4xl md:text-5xl text-[#8B0000] drop-shadow-[4px_4px_0px_#400000]"
+                        : "text-2xl sm:text-3xl md:text-4xl"
+                    }`}
                   >
                     {movies[0].title}
                   </h1>
+
                   <div
                     className={`${
                       movies[0].genres?.some((genre) => genre.id === 27)
@@ -289,7 +292,7 @@ const MoviePage = () => {
                   >
                     <ExpandableText text={movies[0].overview} />
 
-                    <div className={`flex gap-4 font-bold mt-2 info `}>
+                    <div className="flex flex-wrap gap-2 font-bold mt-2 info text-xs sm:text-sm">
                       <span>
                         {movies[0].production_companies[0]?.name || "Unknown"}
                       </span>
@@ -302,14 +305,12 @@ const MoviePage = () => {
                         {movies[0].adult ? "A" : "U/A"}
                       </span>
                       <span>{convertMinutes(movies[0].runtime)}</span>
-                      {moviesDetails[0]?.imdbRating === "N/A" ? (
-                        ""
-                      ) : (
+                      {moviesDetails[0]?.imdbRating !== "N/A" && (
                         <span>
                           <span className="bg-[#f3ce13] px-1 rounded-[2px] text-black mr-2">
                             IMDb
                           </span>
-                          {moviesDetails[0]?.imdbRating || " "}
+                          {moviesDetails[0]?.imdbRating}
                         </span>
                       )}
                       <span>
@@ -321,7 +322,7 @@ const MoviePage = () => {
                       </span>
                     </div>
 
-                    <div className={`flex font-bold mt-2 genres `}>
+                    <div className="flex flex-wrap font-bold mt-2 genres text-sm">
                       <span className="text-green-500">
                         {getGenresById(
                           movies[0].genres.map((genre) => genre.id)
@@ -337,33 +338,29 @@ const MoviePage = () => {
                     </div>
                   </div>
                 </div>
-                <div
-                  className={`buttton-container z-10 relative max-w-full w-[55%] buttons `}
-                  style={{ justifyContent: "flex-start", marginLeft: 0 }}
-                >
+
+                <div className="z-10 relative w-full sm:w-[90%] lg:w-[55%] mt-6 flex flex-row items-start gap-4">
                   <Link
                     href={`https://www.imdb.com/title/${movies[0].imdb_id}`}
                     target="_blank"
-                    className="px-6 py-2 bg-[#f3ce13] text-black border border-[#f3ce13] font-semibold rounded-lg shadow-md hover:bg-[#f3ce13ab] transition duration-300 ease-in-out active:scale-95 text-center"
-                    style={{ borderRadius: "4px" }}
+                    className="px-6 py-2 bg-[#f3ce13] text-black font-semibold rounded-md shadow-md hover:bg-[#f3ce13ab] transition duration-300 active:scale-95 text-center w-full sm:w-auto"
                   >
                     IMDb Page
                   </Link>
+
                   <Link
                     href={`https://www.google.com/search?q=${movies[0].title} Watch Online`}
                     target="_blank"
-                    className="px-6 py-2 bg-white text-black border font-medium rounded-lg shadow-md hover:bg-gray-300 transition duration-300 ease-in-out active:scale-95 text-center w-[30%]"
-                    style={{ borderRadius: "4px" }}
+                    className="px-6 py-2 bg-white text-black font-medium rounded-md shadow-md hover:bg-gray-300 transition duration-300 active:scale-95 text-center w-full sm:w-auto"
                   >
                     Watch Now
                   </Link>
-                  <div className="relative flex flex-col items-center group min-h-full">
-                    <WatchlistButton
-                      movie={movies[0]}
-                      movieId={movies[0].id}
-                      className='"relative flex items-center text-center min-h-full justify-center gap-2 px-4 py-2 text-white font-medium rounded-[4px] border border-blue-700 transition-all duration-300 ease-in-out shadow-md bg-blue-600 hover:bg-blue-700 active:scale-95 focus:outline-none focus:ring-2 focus:ring-blue-400 h-full"'
-                    />
-                  </div>
+
+                  <WatchlistButton
+                    movie={movies[0]}
+                    movieId={movies[0].id}
+                    className="w-full h-full sm:w-auto flex justify-center items-center px-4 py-2 text-white font-medium rounded-md border border-blue-700 shadow-md bg-blue-600 hover:bg-blue-700 transition-all duration-300 active:scale-95"
+                  />
                 </div>
               </div>
             </>
@@ -414,107 +411,95 @@ const MoviePage = () => {
                       "Nothing to see here..."
                     ) : (
                       <>
-                        {moviesDetails[0].Plot === "N/A" ? (
-                          ""
-                        ) : (
+                        {moviesDetails[0].Plot !== "N/A" && (
                           <>
-                            <p className="text-2xl font-bold mt-4">Plot</p>{" "}
-                            <p className="text-gray-900 dark:text-gray-300 text-lg text-justify w-[70%]">
+                            <p className="text-2xl font-bold mt-4">Plot</p>
+                            <p className="text-gray-900 dark:text-gray-300 text-lg text-justify w-full max-w-2xl">
                               {moviesDetails[0].Plot}
                             </p>
                           </>
-                        )}{" "}
-                        {moviesDetails[0].Director === "N/A" ? (
-                          ""
-                        ) : (
+                        )}
+
+                        {moviesDetails[0].Director !== "N/A" && (
                           <>
-                            <p className="text-2xl font-bold mt-4">Director</p>{" "}
-                            <p className="text-gray-900 dark:text-gray-300 text-lg w-[70%]">
+                            <p className="text-2xl font-bold mt-4">Director</p>
+                            <p className="text-gray-900 dark:text-gray-300 text-lg w-full max-w-2xl">
                               {moviesDetails[0].Director}
                             </p>
                           </>
-                        )}{" "}
-                        {moviesDetails[0].Actors === "N/A" ? (
-                          ""
-                        ) : (
+                        )}
+
+                        {moviesDetails[0].Actors !== "N/A" && (
                           <>
-                            <p className="text-2xl font-bold mt-4">Actors</p>{" "}
-                            <p className="text-gray-900 dark:text-gray-300 text-lg w-[70%]">
+                            <p className="text-2xl font-bold mt-4">Actors</p>
+                            <p className="text-gray-900 dark:text-gray-300 text-lg w-full max-w-2xl">
                               {moviesDetails[0].Actors}
                             </p>
                           </>
-                        )}{" "}
-                        {moviesDetails[0].Awards === "N/A" ? (
-                          ""
-                        ) : (
+                        )}
+
+                        {moviesDetails[0].Awards !== "N/A" && (
                           <>
-                            <p className="text-2xl font-bold mt-4">Awards</p>{" "}
-                            <p className="text-gray-900 dark:text-gray-300 text-lg w-[70%]">
+                            <p className="text-2xl font-bold mt-4">Awards</p>
+                            <p className="text-gray-900 dark:text-gray-300 text-lg w-full max-w-2xl">
                               {moviesDetails[0].Awards}
                             </p>
                           </>
-                        )}{" "}
-                        {moviesDetails[0].Country === "N/A" ? (
-                          ""
-                        ) : (
+                        )}
+
+                        {moviesDetails[0].Country !== "N/A" && (
                           <>
-                            <p className="text-2xl font-bold mt-4">Country</p>{" "}
-                            <p className="text-gray-900 dark:text-gray-300 text-lg w-[70%]">
+                            <p className="text-2xl font-bold mt-4">Country</p>
+                            <p className="text-gray-900 dark:text-gray-300 text-lg w-full max-w-2xl">
                               {moviesDetails[0].Country}
                             </p>
                           </>
-                        )}{" "}
-                        {moviesDetails[0].Ratings.length === 0 ? (
-                          ""
-                        ) : (
-                          <div className="mt-4">
-                            <p className="text-2xl font-bold ">Ratings</p>{" "}
+                        )}
+
+                        {moviesDetails[0].Ratings.length > 0 && (
+                          <div className="mt-4 w-full max-w-2xl">
+                            <p className="text-2xl font-bold">Ratings</p>
                             {moviesDetails[0].Ratings.map((rating, index) => (
                               <span
                                 key={index}
-                                className="text-gray-900 dark:text-gray-300"
+                                className="block text-gray-900 dark:text-gray-300"
                               >
                                 {rating.Source} - {rating.Value}
-                                {index <
-                                  moviesDetails[0].Ratings.length - 1 && <br />}
                               </span>
                             ))}
                           </div>
                         )}
-                        {moviesDetails[0].Rated === "N/A" ? (
-                          ""
-                        ) : (
+
+                        {moviesDetails[0].Rated !== "N/A" && (
                           <>
-                            <p className="text-2xl font-bold mt-4">Rated</p>{" "}
-                            <p className="text-gray-900 dark:text-gray-300 text-lg w-[70%]">
+                            <p className="text-2xl font-bold mt-4">Rated</p>
+                            <p className="text-gray-900 dark:text-gray-300 text-lg w-full max-w-2xl">
                               {moviesDetails[0].Rated}
                             </p>
                           </>
-                        )}{" "}
-                        {moviesDetails[0].imdbRating === "N/A" ? (
-                          ""
-                        ) : (
+                        )}
+
+                        {moviesDetails[0].imdbRating !== "N/A" && (
                           <>
                             <p className="text-2xl font-bold mt-4">
                               IMDb Rating
-                            </p>{" "}
-                            <p className="text-gray-900 dark:text-gray-300 text-lg w-[70%]">
+                            </p>
+                            <p className="text-gray-900 dark:text-gray-300 text-lg w-full max-w-2xl">
                               {moviesDetails[0].imdbRating}
                             </p>
                           </>
-                        )}{" "}
-                        {moviesDetails[0].imdbVotes === "N/A" ? (
-                          ""
-                        ) : (
+                        )}
+
+                        {moviesDetails[0].imdbVotes !== "N/A" && (
                           <>
                             <p className="text-2xl font-bold mt-4">
                               IMDb Votes
-                            </p>{" "}
-                            <p className="text-gray-900 dark:text-gray-300 text-lg w-[70%]">
+                            </p>
+                            <p className="text-gray-900 dark:text-gray-300 text-lg w-full max-w-2xl">
                               {moviesDetails[0].imdbVotes}
                             </p>
                           </>
-                        )}{" "}
+                        )}
                       </>
                     )}
                   </div>
