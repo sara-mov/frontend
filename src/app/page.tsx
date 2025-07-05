@@ -52,13 +52,25 @@ export default function Home() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const [margin, setMargin] = useState(80);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setMargin(window.innerWidth <= 768 ? 20 : 80);
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   return (
     <SplashScreen duration={2000}>
       <div className="bg-gradient-to-br transition duration-200 text-black dark:text-white from-neutral-100 dark:from-neutral-800 dark:to-neutral-900 to-neutral-200">
-        <div className="mx-16">
+        <div className="mx-5 md:mx-16">
           {/* Header */}
-
-          <div className="fixed top-0 left-0 w-full pt-5 px-16 mr-0 py-4 z-20">
+          <div className="fixed top-0 left-0 w-full pt-5 px-5 md:px-16 mr-0 py-4 z-20">
             {/* Default Background */}
 
             <div
@@ -458,9 +470,9 @@ export default function Home() {
           </div>
 
           {/* Section 4 */}
-          <div className="tailored-container px-4 -mx-16 lg:mx-0">
+          <div className="tailored-container px-4 -mx-5 md:-mx-16 lg:mx-0">
             <div className="discover-container-inner max-w-7xl mx-auto">
-              <div className="tailored-container-element bg-white dark:bg-black flex flex-col md:flex-row items-center gap-8 w-full">
+              <div className="tailored-container-element px-5 py-12 md:p-12 bg-white dark:bg-black flex flex-col md:flex-row items-center gap-8 w-full">
                 {/* Text Section */}
                 <div className="tailored-element-1 w-full md:w-1/2">
                   <div className="text-left w-full">
@@ -523,10 +535,10 @@ export default function Home() {
           </div>
 
           {/* Section 5 */}
-          <div className="tailored-container bg-black text-white dark:bg-white dark:text-black -mx-16">
+          <div className="tailored-container bg-black text-white dark:bg-white dark:text-black -mx-5 md:-mx-16">
             <div
               className="discover-container-inner lg:flex-row"
-              style={{ marginLeft: 80, marginRight: 80 }}
+              style={{ marginLeft: margin, marginRight: margin }}
             >
               <div className="relative max-w-full lg:w-[25%]">
                 <div className="h-full">

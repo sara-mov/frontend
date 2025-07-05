@@ -36,11 +36,10 @@ const HowItWorks = () => {
   return (
     <SplashScreen duration={2000}>
       <div className="bg-gradient-to-br transition duration-200 text-black dark:text-white from-neutral-100 dark:from-neutral-800 dark:to-neutral-900 to-neutral-200">
-        <div className="mx-16">
+        <div className="mx-5 md:mx-16">
           {/* Header */}
-          <div className="fixed top-0 left-0 w-full pt-5 px-16 mr-0 py-4 z-20">
+          <div className="fixed top-0 left-0 w-full pt-5 px-5 md:px-16 mr-0 py-4 z-20">
             {/* Default Background */}
-
             <div
               className={` -z-10 absolute inset-0 transition-opacity duration-1000 ease-in-out ${
                 isScrolled ? "opacity-100" : "opacity-0"
@@ -59,7 +58,7 @@ const HowItWorks = () => {
           </div>
 
           <div className="pt-20">
-            <div className="max-w-full px-4 sm:px-6 lg:px-16">
+            <div className="max-w-full px-0 sm:px-6 lg:px-16">
               <div className="discover-container-inner">
                 <div className="flex flex-col lg:flex-row items-start lg:items-center gap-8">
                   <div className="w-full lg:w-1/2 flex flex-col items-start gap-4">

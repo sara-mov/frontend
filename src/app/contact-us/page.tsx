@@ -34,9 +34,9 @@ const ContactUs = () => {
   return (
     <SplashScreen duration={2000}>
       <div className="bg-gradient-to-br transition duration-200 text-black dark:text-white from-neutral-100 dark:from-neutral-800 dark:to-neutral-900 to-neutral-200">
-        <div className="mx-16">
+        <div className="mx-5 md:mx-16">
           {/* Header */}
-          <div className="fixed top-0 left-0 w-full pt-5 px-16 mr-0 py-4 z-20">
+          <div className="fixed top-0 left-0 w-full pt-5 px-5 md:px-16 mr-0 py-4 z-20">
             {/* Default Background */}
 
             <div
@@ -56,7 +56,7 @@ const ContactUs = () => {
             <Navbar />
           </div>
 
-          <div className="pt-20 flex items-center justify-center min-h-screen px-4 sm:px-6 lg:px-16">
+          <div className="pt-20 flex items-center justify-center min-h-screen px-0 sm:px-6 lg:px-12">
             <div className="w-full max-w-7xl">
               <div className="tailored-container">
                 <div className="flex flex-col lg:flex-row w-full gap-10">

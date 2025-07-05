@@ -28,9 +28,9 @@ const PrivacyPolicy = () => {
   return (
     <SplashScreen duration={2000}>
       <div className="bg-gradient-to-br transition duration-200 text-black dark:text-white from-neutral-100 dark:from-neutral-800 dark:to-neutral-900 to-neutral-200">
-        <div className="mx-16">
+        <div className="mx-5 md:mx-16">
           {/* Header */}
-          <div className="fixed top-0 left-0 w-full pt-5 px-16 mr-0 py-4 z-20">
+          <div className="fixed top-0 left-0 w-full pt-5 px-5 md:px-16 mr-0 py-4 z-20">
             {/* Default Background */}
 
             <div
